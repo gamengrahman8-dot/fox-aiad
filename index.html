@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0b0b0b">
+<title>FOX AI</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --bg:#070707;
+    --bg2:#101010;
+    --card:rgba(25,25,25,.72);
+    --border:rgba(255,115,0,.18);
+    --orange:#ff7300;
+    --orange2:#ff8c32;
+    --text:#f5f5f5;
+    --muted:#999;
+    --danger:#ff4d4d;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% -10%,rgba(255,115,0,.13),transparent 38%),
+        var(--bg);
+    color:var(--text);
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+}
+
+button,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    border:0;
+    outline:none;
+    cursor:pointer;
+}
+
+.app{
+    width:100%;
+    max-width:700px;
+    height:100dvh;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(180deg,rgba(255,255,255,.018),transparent 30%),
+        var(--bg);
+}
+
+/* Splash */
+
+.splash{
+    position:absolute;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:#070707;
+    transition:.5s ease;
+}
+
+.splash.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+.fox-logo{
+    width:95px;
+    height:95px;
+    border-radius:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--orange);
+    font-size:42px;
+    font-weight:900;
+    border:1px solid rgba(255,115,0,.35);
+    background:
+        radial-gradient(circle,rgba(255,115,0,.20),rgba(255,115,0,.03));
+    box-shadow:
+        0 0 45px rgba(255,115,0,.16),
+        inset 0 0 30px rgba(255,115,0,.05);
+    animation:foxPulse 1.5s infinite;
+}
+
+.splash-title{
+    margin-top:20px;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:3px;
+    color:#fff;
+}
+
+.splash-title span{
+    color:var(--orange);
+}
+
+.splash-line{
+    width:80px;
+    height:3px;
+    margin-top:15px;
+    border-radius:10px;
+    background:var(--orange);
+    box-shadow:0 0 15px rgba(255,115,0,.7);
+}
+
+@keyframes foxPulse{
+    50%{
+        transform:scale(1.06);
+        box-shadow:0 0 65px rgba(255,115,0,.24);
+    }
+}
+
+/* Header */
+
+.header{
+    height:64px;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 13px;
+    background:rgba(7,7,7,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.055);
+}
+
+.header-side{
+    width:45px;
+    display:flex;
+    align-items:center;
+}
+
+.header-side.right{
+    justify-content:flex-start;
+}
+
+.header-side.left{
+    justify-content:flex-end;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.07);
+    color:#fff;
+    font-size:25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.18s;
+}
+
+.icon-btn:active{
+    transform:scale(.91);
+    background:rgba(255,115,0,.15);
+    border-color:rgba(255,115,0,.35);
+}
+
+.plus{
+    color:var(--orange);
+    font-size:28px;
+}
+
+.menu-lines{
+    width:20px;
+    height:15px;
+    position:relative;
+}
+
+.menu-lines span{
+    position:absolute;
+    right:0;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#fff;
+}
+
+.menu-lines span:nth-child(1){top:0}
+.menu-lines span:nth-child(2){top:6px}
+.menu-lines span:nth-child(3){top:12px}
+
+.brand{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:18px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.brand span{
+    color:var(--orange);
+}
+
+/* Chat */
+
+.chat{
+    position:absolute;
+    top:64px;
+    bottom:83px;
+    left:0;
+    right:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding:18px 13px 25px;
+    scroll-behavior:smooth;
+}
+
+.chat::-webkit-scrollbar{
+    width:4px;
+}
+
+.chat::-webkit-scrollbar-thumb{
+    background:rgba(255,115,0,.3);
+    border-radius:10px;
+}
+
+.welcome{
+    min-height:calc(100% - 10px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    flex-direction:column;
+    padding:25px;
+}
+
+.welcome-logo{
+    width:70px;
+    height:70px;
+    border-radius:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--orange);
+    font-size:30px;
+    font-weight:900;
+    border:1px solid rgba(255,115,0,.25);
+    background:rgba(255,115,0,.06);
+}
+
+.welcome h1{
+    margin-top:18px;
+    font-size:25px;
+}
+
+.welcome h1 span{
+    color:var(--orange);
+}
+
+.welcome p{
+    margin-top:10px;
+    color:#888;
+    font-size:13px;
+    line-height:1.9;
+    max-width:330px;
+}
+
+.message{
+    width:100%;
+    display:flex;
+    margin:0 0 18px;
+    animation:messageIn .2s ease;
+}
+
+.message.user{
+    justify-content:flex-start;
+}
+
+.message.ai{
+    justify-content:flex-end;
+}
+
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translateY(7px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.bubble{
+    max-width:88%;
+    padding:12px 15px;
+    line-height:1.9;
+    font-size:15px;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.user .bubble{
+    background:
+        linear-gradient(135deg,rgba(255,115,0,.20),rgba(255,115,0,.07));
+    border:1px solid rgba(255,115,0,.18);
+    border-radius:18px 18px 4px 18px;
+}
+
+.ai .bubble{
+    max-width:94%;
+    padding:8px 3px;
+    background:transparent;
+    border:none;
+    text-align:right;
+}
+
+.ai .bubble.error{
+    color:#ff7777;
+}
+
+.typing{
+    display:inline-flex;
+    gap:5px;
+    align-items:center;
+    padding:8px 0;
+}
+
+.typing span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--orange);
+    animation:typing 1s infinite;
+}
+
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
+
+@keyframes typing{
+    0%,60%,100%{opacity:.25;transform:translateY(0)}
+    30%{opacity:1;transform:translateY(-4px)}
+}
+
+/* Code */
+
+.code-wrap{
+    margin:12px 0;
+    direction:ltr;
+    text-align:left;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:13px;
+    overflow:hidden;
+    background:#050505;
+}
+
+.code-head{
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 9px;
+    background:#111;
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.code-head span{
+    color:#888;
+    font-size:11px;
+}
+
+.copy-code{
+    color:var(--orange);
+    background:transparent;
+    font-size:11px;
+}
+
+.code-body{
+    overflow-x:auto;
+    padding:13px;
+    margin:0;
+    color:#eee;
+    font:12px/1.7 Consolas,monospace;
+}
+
+/* Composer */
+
+.composer{
+    position:absolute;
+    left:10px;
+    right:10px;
+    bottom:10px;
+    min-height:61px;
+    z-index:25;
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    padding:8px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    background:rgba(20,20,20,.88);
+    backdrop-filter:blur(20px);
+    box-shadow:0 12px 35px rgba(0,0,0,.45);
+}
+
+.input{
+    flex:1;
+    max-height:130px;
+    min-height:43px;
+    resize:none;
+    outline:none;
+    border:0;
+    color:#fff;
+    background:transparent;
+    padding:11px 8px;
+    line-height:1.6;
+    font-size:15px;
+}
+
+.input::placeholder{
+    color:#666;
+}
+
+.send{
+    flex:0 0 43px;
+    width:43px;
+    height:43px;
+    border-radius:14px;
+    color:#000;
+    background:var(--orange);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:bold;
+    transition:.18s;
+}
+
+.send:active{
+    transform:scale(.9);
+}
+
+.send:disabled{
+    opacity:.35;
+}
+
+/* Side menu */
+
+.overlay{
+    position:absolute;
+    inset:0;
+    z-index:50;
+    background:rgba(0,0,0,.58);
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+}
+
+.overlay.open{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.drawer{
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    width:min(86%,350px);
+    z-index:60;
+    background:
+        linear-gradient(180deg,rgba(255,115,0,.055),transparent 30%),
+        #0c0c0c;
+    border-left:1px solid rgba(255,115,0,.15);
+    transform:translateX(105%);
+    transition:.28s cubic-bezier(.2,.8,.2,1);
+    display:flex;
+    flex-direction:column;
+}
+
+.drawer.open{
+    transform:translateX(0);
+}
+
+.drawer-head{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 15px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.drawer-title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.close{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    color:#fff;
+    background:rgba(255,255,255,.05);
+    font-size:20px;
+}
+
+.drawer-body{
+    flex:1;
+    overflow-y:auto;
+    padding:12px;
+}
+
+.new-chat{
+    width:100%;
+    height:47px;
+    border-radius:14px;
+    color:#fff;
+    background:rgba(255,115,0,.11);
+    border:1px solid rgba(255,115,0,.2);
+    margin-bottom:13px;
+    font-size:14px;
+}
+
+.history-title{
+    color:#777;
+    font-size:11px;
+    margin:12px 5px 8px;
+}
+
+.history-item{
+    position:relative;
+    width:100%;
+    min-height:50px;
+    padding:9px 11px;
+    margin-bottom:7px;
+    border-radius:13px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.045);
+    color:#ddd;
+    text-align:right;
+    cursor:pointer;
+}
+
+.history-item.active{
+    border-color:rgba(255,115,0,.25);
+    background:rgba(255,115,0,.07);
+}
+
+.history-text{
+    display:block;
+    padding-left:30px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-size:12px;
+}
+
+.delete-history{
+    position:absolute;
+    left:8px;
+    top:50%;
+    transform:translateY(-50%);
+    width:27px;
+    height:27px;
+    border-radius:8px;
+    background:rgba(255,70,70,.08);
+    color:#ff7777;
+}
+
+.drawer-footer{
+    padding:12px;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.clear-history{
+    width:100%;
+    height:44px;
+    border-radius:13px;
+    color:#ff7777;
+    background:rgba(255,60,60,.07);
+    border:1px solid rgba(255,60,60,.10);
+}
+
+/* Small toast */
+
+.toast{
+    position:absolute;
+    z-index:100;
+    left:50%;
+    bottom:90px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    padding:10px 15px;
+    border-radius:12px;
+    background:#191919;
+    border:1px solid rgba(255,115,0,.2);
+    color:#ddd;
+    font-size:12px;
+    transition:.25s;
+    white-space:nowrap;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+@media(max-width:380px){
+    .bubble{
+        font-size:14px;
+    }
+
+    .brand{
+        font-size:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="splash" id="splash">
+        <div class="fox-logo">F</div>
+        <div class="splash-title">FOX <span>AI</span></div>
+        <div class="splash-line"></div>
+    </div>
+
+    <header class="header">
+
+        <div class="header-side right">
+            <button class="icon-btn" id="menuBtn" aria-label="منو">
+                <div class="menu-lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+
+        <div class="brand">
+            FOX <span>AI</span>
+        </div>
+
+        <div class="header-side left">
+            <button class="icon-btn plus" id="newChatBtn" aria-label="چت جدید">+</button>
+        </div>
+
+    </header>
+
+    <main class="chat" id="chat">
+        <div class="welcome" id="welcome">
+            <div class="welcome-logo">F</div>
+            <h1>به <span>FOX AI</span> خوش آمدید</h1>
+            <p>
+                سوالت را بنویس و ارسال کن.<br>
+                پاسخ با سرعت بالای Groq دریافت می‌شود.
+            </p>
+        </div>
+    </main>
+
+    <div class="composer">
+        <textarea
+            id="input"
+            class="input"
+            rows="1"
+            placeholder="پیامت را بنویس..."
+            autocomplete="off"
+            spellcheck="false"
+        ></textarea>
+
+        <button class="send" id="sendBtn" aria-label="ارسال">↑</button>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="drawer" id="drawer">
+
+        <div class="drawer-head">
+            <div class="drawer-title">تاریخچه چت</div>
+            <button class="close" id="closeMenu">×</button>
+        </div>
+
+        <div class="drawer-body">
+
+            <button class="new-chat" id="drawerNewChat">
+                + چت جدید
+            </button>
+
+            <div class="history-title">گفتگوهای قبلی</div>
+
+            <div id="historyList"></div>
+
+        </div>
+
+        <div class="drawer-footer">
+            <button class="clear-history" id="clearHistory">
+                پاک کردن همه تاریخچه
+            </button>
+        </div>
+
+    </aside>
+
+    <div class="toast" id="toast"></div>
+
+</div>
+
+<script>
+/* =========================================================
+   FOX AI - GROQ CONFIG
+   ========================================================= */
+
+/*
+   کلید Groq خودت را فقط در همین قسمت قرار بده.
+*/
+const GROQ_API_KEY = "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";
+
+/*
+   مدل سریع Groq
+*/
+const MODEL = "openai/gpt-oss-20b";
+
+const API_URL =
+    "https://api.groq.com/openai/v1/chat/completions";
+
+const STORAGE_KEY = "fox_ai_history_v2";
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const splash = document.getElementById("splash");
+const chat = document.getElementById("chat");
+const welcome = document.getElementById("welcome");
+
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("sendBtn");
+
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const overlay = document.getElementById("overlay");
+const drawer = document.getElementById("drawer");
+
+const newChatBtn = document.getElementById("newChatBtn");
+const drawerNewChat = document.getElementById("drawerNewChat");
+
+const historyList = document.getElementById("historyList");
+const clearHistory = document.getElementById("clearHistory");
+
+const toast = document.getElementById("toast");
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let conversations = loadHistory();
+
+let currentChat = {
+    id: Date.now().toString(),
+    title: "چت جدید",
+    messages: []
+};
+
+let isGenerating = false;
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+setTimeout(() => {
+    splash.classList.add("hide");
+}, 1600);
+
+renderHistory();
+
+input.focus();
+
+
+/* =========================================================
+   LOCAL STORAGE
+   ========================================================= */
+
+function loadHistory(){
+
+    try{
+
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if(!saved) return [];
+
+        const parsed = JSON.parse(saved);
+
+        return Array.isArray(parsed) ? parsed : [];
+
+    }catch(error){
+
+        console.error(error);
+
+        return [];
+    }
+}
+
+
+function saveHistory(){
+
+    try{
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(conversations)
+        );
+
+    }catch(error){
+
+        console.error(error);
+    }
+}
+
+
+/* =========================================================
+   DRAWER
+   ========================================================= */
+
+function openDrawer(){
+
+    renderHistory();
+
+    drawer.classList.add("open");
+    overlay.classList.add("open");
+}
+
+
+function closeDrawer(){
+
+    drawer.classList.remove("open");
+    overlay.classList.remove("open");
+}
+
+
+menuBtn.addEventListener("click", openDrawer);
+
+closeMenu.addEventListener("click", closeDrawer);
+
+overlay.addEventListener("click", closeDrawer);
+
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+function renderHistory(){
+
+    historyList.innerHTML = "";
+
+    if(conversations.length === 0){
+
+        historyList.innerHTML = `
+            <div style="
+                text-align:center;
+                color:#666;
+                padding:30px 10px;
+                font-size:12px;
+            ">
+                هنوز گفتگویی ذخیره نشده است
+            </div>
+        `;
+
+        return;
+    }
+
+    [...conversations]
+        .reverse()
+        .forEach(item => {
+
+            const row = document.createElement("div");
+
+            row.className =
+                "history-item" +
+                (item.id === currentChat.id ? " active" : "");
+
+            const title = document.createElement("span");
+
+            title.className = "history-text";
+
+            title.textContent =
+                item.title || "گفتگوی بدون عنوان";
+
+            const del = document.createElement("button");
+
+            del.className = "delete-history";
+
+            del.textContent = "×";
+
+            del.addEventListener("click", event => {
+
+                event.stopPropagation();
+
+                deleteConversation(item.id);
+
+            });
+
+            row.appendChild(title);
+            row.appendChild(del);
+
+            row.addEventListener("click", () => {
+
+                loadConversation(item.id);
+
+            });
+
+            historyList.appendChild(row);
+        });
+}
+
+
+function deleteConversation(id){
+
+    conversations =
+        conversations.filter(item => item.id !== id);
+
+    saveHistory();
+
+    if(currentChat.id === id){
+
+        createNewChat();
+
+    }
+
+    renderHistory();
+}
+
+
+function loadConversation(id){
+
+    const found =
+        conversations.find(item => item.id === id);
+
+    if(!found) return;
+
+    currentChat = JSON.parse(JSON.stringify(found));
+
+    renderMessages();
+
+    closeDrawer();
+
+    showToast("گفتگو باز شد");
+}
+
+
+function saveCurrentConversation(){
+
+    if(currentChat.messages.length === 0) return;
+
+    const index =
+        conversations.findIndex(
+            item => item.id === currentChat.id
+        );
+
+    const copy =
+        JSON.parse(JSON.stringify(currentChat));
+
+    if(index >= 0){
+
+        conversations[index] = copy;
+
+    }else{
+
+        conversations.push(copy);
+
+    }
+
+    saveHistory();
+
+    renderHistory();
+}
+
+
+/* =========================================================
+   NEW CHAT
+   ========================================================= */
+
+function createNewChat(){
+
+    currentChat = {
+        id: Date.now().toString(),
+        title: "چت جدید",
+        messages: []
+    };
+
+    renderMessages();
+
+    closeDrawer();
+
+    input.value = "";
+
+    autoResize();
+
+    input.focus();
+
+    renderHistory();
+}
+
+
+newChatBtn.addEventListener("click", createNewChat);
+
+drawerNewChat.addEventListener("click", createNewChat);
+
+
+/* =========================================================
+   CLEAR HISTORY
+   ========================================================= */
+
+clearHistory.addEventListener("click", () => {
+
+    if(conversations.length === 0){
+
+        showToast("تاریخچه خالی است");
+
+        return;
+    }
+
+    const ok =
+        confirm("همه تاریخچه چت پاک شود؟");
+
+    if(!ok) return;
+
+    conversations = [];
+
+    saveHistory();
+
+    createNewChat();
+
+    showToast("تاریخچه پاک شد");
+});
+
+
+/* =========================================================
+   RENDER MESSAGES
+   ========================================================= */
+
+function renderMessages(){
+
+    chat.innerHTML = "";
+
+    if(currentChat.messages.length === 0){
+
+        chat.appendChild(welcome);
+
+        welcome.style.display = "flex";
+
+        return;
+    }
+
+    welcome.style.display = "none";
+
+    currentChat.messages.forEach(message => {
+
+        addMessageToUI(
+            message.role,
+            message.content,
+            false
+        );
+
+    });
+
+    scrollBottom();
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+   ========================================================= */
+
+function addMessageToUI(role, text, scroll = true){
+
+    if(welcome.parentElement === chat){
+
+        welcome.style.display = "none";
+    }
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "message " +
+        (role === "user" ? "user" : "ai");
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className = "bubble";
+
+    if(role === "assistant"){
+
+        bubble.innerHTML = formatAIText(text);
+
+    }else{
+
+        bubble.textContent = text;
+    }
+
+    wrapper.appendChild(bubble);
+
+    chat.appendChild(wrapper);
+
+    if(scroll){
+
+        scrollBottom();
+    }
+
+    return bubble;
+}
+
+
+/* =========================================================
+   FORMAT AI TEXT
+   ========================================================= */
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function formatAIText(text){
+
+    if(!text) return "";
+
+    const codeBlocks = [];
+
+    let safe = text.replace(
+        /```([a-zA-Z0-9_-]*)\n?([\s\S]*?)```/g,
+        function(match, lang, code){
+
+            const index = codeBlocks.length;
+
+            codeBlocks.push({
+                lang: lang || "code",
+                code: code.trim()
+            });
+
+            return `___FOX_CODE_${index}___`;
+        }
+    );
+
+    safe = escapeHTML(safe);
+
+    safe = safe.replace(
+        /___FOX_CODE_(\d+)___/g,
+        function(match,index){
+
+            const item = codeBlocks[index];
+
+            const code =
+                escapeHTML(item.code);
+
+            return `
+                <div class="code-wrap">
+                    <div class="code-head">
+                        <span>${escapeHTML(item.lang)}</span>
+                        <button
+                            class="copy-code"
+                            onclick="copyCode(this)"
+                            data-code="${encodeURIComponent(item.code)}"
+                        >
+                            کپی
+                        </button>
+                    </div>
+                    <pre class="code-body">${code}</pre>
+                </div>
+            `;
+        }
+    );
+
+    return safe;
+}
+
+
+/* =========================================================
+   COPY CODE
+   ========================================================= */
+
+window.copyCode = async function(button){
+
+    try{
+
+        const code =
+            decodeURIComponent(
+                button.dataset.code
+            );
+
+        await navigator.clipboard.writeText(code);
+
+        button.textContent = "کپی شد";
+
+        setTimeout(() => {
+
+            button.textContent = "کپی";
+
+        },1500);
+
+    }catch(error){
+
+        showToast("کپی انجام نشد");
+    }
+};
+
+
+/* =========================================================
+   SEND
+   ========================================================= */
+
+async function sendMessage(){
+
+    if(isGenerating) return;
+
+    const text =
+        input.value.trim();
+
+    if(!text) return;
+
+    if(
+        !GROQ_API_KEY ||
+        GROQ_API_KEY === "کلید_GROQ_خودت_اینجا"
+    ){
+
+        showToast("اول کلید Groq را داخل کد قرار بده");
+
+        return;
+    }
+
+    input.value = "";
+
+    autoResize();
+
+    currentChat.messages.push({
+        role:"user",
+        content:text
+    });
+
+    if(
+        currentChat.title === "چت جدید"
+    ){
+
+        currentChat.title =
+            text.substring(0,45);
+    }
+
+    addMessageToUI(
+        "user",
+        text
+    );
+
+    saveCurrentConversation();
+
+    await askGroq();
+
+}
+
+
+sendBtn.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
+
+input.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendMessage();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTO RESIZE
+   ========================================================= */
+
+input.addEventListener(
+    "input",
+    autoResize
+);
+
+
+function autoResize(){
+
+    input.style.height = "auto";
+
+    input.style.height =
+        Math.min(
+            input.scrollHeight,
+            130
+        ) + "px";
+}
+
+
+/* =========================================================
+   GROQ
+   ========================================================= */
+
+async function askGroq(){
+
+    isGenerating = true;
+
+    sendBtn.disabled = true;
+
+    const typingBubble =
+        addMessageToUI(
+            "assistant",
+            "",
+            true
+        );
+
+    typingBubble.innerHTML = `
+        <div class="typing">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    `;
+
+    try{
+
+        const messages = [
+
+            {
+                role:"system",
+                content:
+                "You are FOX AI, a helpful, fast and friendly AI assistant. Answer clearly and accurately. The user may speak Persian. If the user writes Persian, answer in Persian. Do not use emojis unless specifically requested."
+            },
+
+            ...currentChat.messages
+
+        ];
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer " +
+                            GROQ_API_KEY
+                    },
+
+                    body:JSON.stringify({
+
+                        model:MODEL,
+
+                        messages:messages,
+
+                        temperature:0.6,
+
+                        max_tokens:2048,
+
+                        stream:true
+                    })
+                }
+            );
+
+
+        if(!response.ok){
+
+            let errorText =
+                "خطا در اتصال به Groq";
+
+            try{
+
+                const errorData =
+                    await response.json();
+
+                if(
+                    errorData?.error?.message
+                ){
+
+                    errorText =
+                        errorData.error.message;
+                }
+
+            }catch(e){}
+
+            throw new Error(errorText);
+        }
+
+
+        if(!response.body){
+
+            throw new Error(
+                "مرورگر از Stream پشتیبانی نمی‌کند"
+            );
+        }
+
+
+        const reader =
+            response.body.getReader();
+
+        const decoder =
+            new TextDecoder("utf-8");
+
+        let fullText = "";
+
+        let buffer = "";
+
+
+        typingBubble.innerHTML = "";
+
+        while(true){
+
+            const {
+                value,
+                done
+            } = await reader.read();
+
+            if(done) break;
+
+            buffer +=
+                decoder.decode(
+                    value,
+                    {stream:true}
+                );
+
+            const lines =
+                buffer.split("\n");
+
+            buffer =
+                lines.pop() || "";
+
+
+            for(
+                const line of lines
+            ){
+
+                const trimmed =
+                    line.trim();
+
+                if(
+                    !trimmed ||
+                    trimmed === "data: [DONE]"
+                ){
+
+                    continue;
+                }
+
+
+                if(
+                    !trimmed.startsWith("data:")
+                ){
+
+                    continue;
+                }
+
+
+                const data =
+                    trimmed.substring(5).trim();
+
+
+                try{
+
+                    const json =
+                        JSON.parse(data);
+
+                    const delta =
+                        json?.choices?.[0]?.delta?.content;
+
+                    if(delta){
+
+                        fullText += delta;
+
+                        typingBubble.innerHTML =
+                            formatAIText(fullText);
+
+                        scrollBottom();
+                    }
+
+                }catch(error){
+
+                    // بعضی قطعات Stream ممکن است ناقص باشند.
+                }
+
+            }
+
+        }
+
+
+        if(!fullText){
+
+            fullText =
+                "پاسخی از مدل دریافت نشد.";
+        }
+
+
+        currentChat.messages.push({
+
+            role:"assistant",
+
+            content:fullText
+
+        });
+
+        saveCurrentConversation();
+
+        renderHistory();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        typingBubble.classList.add("error");
+
+        typingBubble.textContent =
+            "خطا: " +
+            (error.message ||
+            "اتصال به Groq برقرار نشد.");
+
+    }finally{
+
+        isGenerating = false;
+
+        sendBtn.disabled = false;
+
+        input.focus();
+
+    }
+
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+function scrollBottom(){
+
+    requestAnimationFrame(() => {
+
+        chat.scrollTop =
+            chat.scrollHeight;
+
+    });
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },2200);
+}
+
+
+/* =========================================================
+   START CLEAN
+   ========================================================= */
+
+renderMessages();
+
+</script>
+
+</body>
+</html>
