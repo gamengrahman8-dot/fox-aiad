@@ -2,192 +2,181 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-
-<meta name="google-site-verification" content="7dSyAPhRTNbIrgEL7VG1c0g1xkrs78xNnhKJmNCJfVM" />
-
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="theme-color" content="#070707">
 <title>FOX AI</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
+box-sizing:border-box;
+margin:0;
+padding:0;
+-webkit-tap-highlight-color:transparent;
 }
 
 :root{
-    --bg:#070707;
-    --orange:#ff7300;
-    --text:#f5f5f5;
+--bg:#070707;
+--orange:#ff7300;
+--text:#f5f5f5;
 }
 
 html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#070707;
-    color:var(--text);
-    font-family:Tahoma,Arial,sans-serif;
+width:100%;
+height:100%;
+overflow:hidden;
+background:#070707;
+color:var(--text);
+font-family:Tahoma,Arial,sans-serif;
 }
 
 body{
-    display:flex;
-    justify-content:center;
+display:flex;
+justify-content:center;
 }
 
-button,
-textarea,
-input{
-    font-family:inherit;
+button,textarea,input{
+font-family:inherit;
 }
 
 button{
-    border:0;
-    outline:none;
-    cursor:pointer;
+border:0;
+outline:none;
+cursor:pointer;
 }
 
 .app{
-    width:100%;
-    max-width:700px;
-    height:100dvh;
-    position:relative;
-    overflow:hidden;
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(255,115,0,.13),
-            transparent 38%
-        ),
-        #070707;
+width:100%;
+max-width:700px;
+height:100dvh;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at 50% -10%,rgba(255,115,0,.13),transparent 38%),
+#070707;
 }
 
+/* SPLASH */
+
 .splash{
-    position:absolute;
-    inset:0;
-    z-index:100;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    background:#070707;
-    transition:.5s ease;
+position:absolute;
+inset:0;
+z-index:100;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+background:#070707;
+transition:.5s ease;
 }
 
 .splash.hide{
-    opacity:0;
-    pointer-events:none;
+opacity:0;
+pointer-events:none;
 }
 
 .fox-logo{
-    width:95px;
-    height:95px;
-    border-radius:30px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--orange);
-    font-size:42px;
-    font-weight:900;
-    border:1px solid rgba(255,115,0,.35);
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,115,0,.20),
-            rgba(255,115,0,.03)
-        );
-    box-shadow:
-        0 0 45px rgba(255,115,0,.16);
-    animation:foxPulse 1.5s infinite;
+width:95px;
+height:95px;
+border-radius:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:var(--orange);
+font-size:42px;
+font-weight:900;
+border:1px solid rgba(255,115,0,.35);
+background:radial-gradient(circle,rgba(255,115,0,.20),rgba(255,115,0,.03));
+box-shadow:0 0 45px rgba(255,115,0,.16);
+animation:foxPulse 1.5s infinite;
 }
 
 .splash-title{
-    margin-top:20px;
-    font-size:27px;
-    font-weight:900;
-    letter-spacing:3px;
+margin-top:20px;
+font-size:27px;
+font-weight:900;
+letter-spacing:3px;
 }
 
-.splash-title span{
-    color:var(--orange);
+.splash-title span,
+.brand span,
+.welcome h1 span{
+color:var(--orange);
 }
 
 .splash-line{
-    width:80px;
-    height:3px;
-    margin-top:15px;
-    border-radius:10px;
-    background:var(--orange);
+width:80px;
+height:3px;
+margin-top:15px;
+border-radius:10px;
+background:var(--orange);
 }
 
 @keyframes foxPulse{
-    50%{
-        transform:scale(1.06);
-    }
+50%{transform:scale(1.06);}
 }
 
+/* HEADER */
+
 .header{
-    height:64px;
-    position:absolute;
-    left:0;
-    right:0;
-    top:0;
-    z-index:20;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 13px;
-    background:rgba(7,7,7,.84);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.055);
+height:64px;
+position:absolute;
+left:0;
+right:0;
+top:0;
+z-index:20;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 13px;
+background:rgba(7,7,7,.84);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.055);
 }
 
 .header-side{
-    width:45px;
-    display:flex;
-    align-items:center;
+width:45px;
+display:flex;
+align-items:center;
 }
 
 .header-side.right{
-    justify-content:flex-start;
+justify-content:flex-start;
 }
 
 .header-side.left{
-    justify-content:flex-end;
+justify-content:flex-end;
 }
 
 .icon-btn{
-    width:42px;
-    height:42px;
-    border-radius:14px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.07);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+width:42px;
+height:42px;
+border-radius:14px;
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.07);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .plus{
-    color:var(--orange);
-    font-size:28px;
+color:var(--orange);
+font-size:28px;
 }
 
 .menu-lines{
-    width:20px;
-    height:15px;
-    position:relative;
+width:20px;
+height:15px;
+position:relative;
 }
 
 .menu-lines span{
-    position:absolute;
-    right:0;
-    width:20px;
-    height:2px;
-    border-radius:10px;
-    background:#fff;
+position:absolute;
+right:0;
+width:20px;
+height:2px;
+border-radius:10px;
+background:#fff;
 }
 
 .menu-lines span:nth-child(1){top:0}
@@ -195,578 +184,601 @@ button{
 .menu-lines span:nth-child(3){top:12px}
 
 .brand{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:18px;
-    font-weight:900;
-    letter-spacing:2px;
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+font-size:18px;
+font-weight:900;
+letter-spacing:2px;
 }
 
-.brand span{
-    color:var(--orange);
-}
+/* CHAT */
 
 .chat{
-    position:absolute;
-    top:64px;
-    bottom:92px;
-    left:0;
-    right:0;
-    overflow-y:auto;
-    overflow-x:hidden;
-    padding:18px 13px 25px;
-    scroll-behavior:smooth;
+position:absolute;
+top:64px;
+bottom:92px;
+left:0;
+right:0;
+overflow-y:auto;
+overflow-x:hidden;
+padding:18px 13px 25px;
+scroll-behavior:smooth;
 }
 
 .chat::-webkit-scrollbar{
-    width:4px;
+width:4px;
 }
 
 .chat::-webkit-scrollbar-thumb{
-    background:rgba(255,115,0,.3);
-    border-radius:10px;
+background:rgba(255,115,0,.3);
+border-radius:10px;
 }
 
 .welcome{
-    min-height:calc(100% - 10px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    flex-direction:column;
-    padding:25px;
+min-height:calc(100% - 10px);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+flex-direction:column;
+padding:25px;
 }
 
 .welcome-logo{
-    width:70px;
-    height:70px;
-    border-radius:24px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--orange);
-    font-size:30px;
-    font-weight:900;
-    border:1px solid rgba(255,115,0,.25);
-    background:rgba(255,115,0,.06);
+width:70px;
+height:70px;
+border-radius:24px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:var(--orange);
+font-size:30px;
+font-weight:900;
+border:1px solid rgba(255,115,0,.25);
+background:rgba(255,115,0,.06);
 }
 
 .welcome h1{
-    margin-top:18px;
-    font-size:25px;
-}
-
-.welcome h1 span{
-    color:var(--orange);
+margin-top:18px;
+font-size:25px;
 }
 
 .welcome p{
-    margin-top:10px;
-    color:#888;
-    font-size:13px;
-    line-height:1.9;
+margin-top:10px;
+color:#888;
+font-size:13px;
+line-height:1.9;
 }
 
 .message{
-    width:100%;
-    display:flex;
-    margin:0 0 18px;
-    animation:messageIn .2s ease;
+width:100%;
+display:flex;
+margin:0 0 18px;
+animation:messageIn .2s ease;
 }
 
 .message.user{
-    justify-content:flex-start;
+justify-content:flex-start;
 }
 
 .message.ai{
-    justify-content:flex-end;
+justify-content:flex-end;
 }
 
 @keyframes messageIn{
-    from{
-        opacity:0;
-        transform:translateY(7px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+from{
+opacity:0;
+transform:translateY(7px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .bubble{
-    max-width:88%;
-    padding:12px 15px;
-    line-height:1.9;
-    font-size:15px;
-    white-space:pre-wrap;
-    word-break:break-word;
+max-width:88%;
+padding:12px 15px;
+line-height:1.9;
+font-size:15px;
+white-space:pre-wrap;
+word-break:break-word;
 }
 
 .user .bubble{
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,115,0,.20),
-            rgba(255,115,0,.07)
-        );
-    border:1px solid rgba(255,115,0,.18);
-    border-radius:18px 18px 4px 18px;
+background:linear-gradient(135deg,rgba(255,115,0,.20),rgba(255,115,0,.07));
+border:1px solid rgba(255,115,0,.18);
+border-radius:18px 18px 4px 18px;
 }
 
 .ai .bubble{
-    max-width:94%;
-    padding:8px 3px;
-    background:transparent;
-    border:none;
-    text-align:right;
+max-width:94%;
+padding:8px 3px;
+background:transparent;
+border:none;
+text-align:right;
 }
 
 .ai .bubble.error{
-    color:#ff7777;
+color:#ff7777;
 }
 
+/* TYPING */
+
 .typing{
-    display:inline-flex;
-    gap:5px;
-    align-items:center;
-    padding:8px 0;
+display:inline-flex;
+gap:5px;
+align-items:center;
+padding:8px 0;
 }
 
 .typing span{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--orange);
-    animation:typing 1s infinite;
+width:6px;
+height:6px;
+border-radius:50%;
+background:var(--orange);
+animation:typing 1s infinite;
 }
 
 .typing span:nth-child(2){
-    animation-delay:.15s;
+animation-delay:.15s;
 }
 
 .typing span:nth-child(3){
-    animation-delay:.3s;
+animation-delay:.3s;
 }
 
 @keyframes typing{
-    0%,60%,100%{
-        opacity:.25;
-        transform:translateY(0);
-    }
-    30%{
-        opacity:1;
-        transform:translateY(-4px);
-    }
+0%,60%,100%{
+opacity:.25;
+transform:translateY(0);
+}
+30%{
+opacity:1;
+transform:translateY(-4px);
+}
 }
 
+/* CODE */
+
 .code-wrap{
-    margin:12px 0;
-    direction:ltr;
-    text-align:left;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:13px;
-    overflow:hidden;
-    background:#050505;
+margin:12px 0;
+direction:ltr;
+text-align:left;
+border:1px solid rgba(255,255,255,.08);
+border-radius:13px;
+overflow:hidden;
+background:#050505;
 }
 
 .code-head{
-    height:36px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 9px;
-    background:#111;
-    border-bottom:1px solid rgba(255,255,255,.07);
+height:36px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 9px;
+background:#111;
+border-bottom:1px solid rgba(255,255,255,.07);
 }
 
 .code-head span{
-    color:#888;
-    font-size:11px;
+color:#888;
+font-size:11px;
 }
 
 .copy-code{
-    color:var(--orange);
-    background:transparent;
-    font-size:11px;
+color:var(--orange);
+background:transparent;
+font-size:11px;
 }
 
 .code-body{
-    overflow-x:auto;
-    padding:13px;
-    margin:0;
-    color:#eee;
-    font:12px/1.7 Consolas,monospace;
+overflow-x:auto;
+padding:13px;
+margin:0;
+color:#eee;
+font:12px/1.7 Consolas,monospace;
 }
 
+/* COMPOSER */
+
 .file-input{
-    display:none;
+display:none;
 }
 
 .composer{
-    position:absolute;
-    left:10px;
-    right:10px;
-    bottom:10px;
-    min-height:61px;
-    z-index:25;
-    display:flex;
-    align-items:flex-end;
-    gap:7px;
-    padding:8px;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    background:rgba(20,20,20,.94);
-    backdrop-filter:blur(20px);
-    box-shadow:0 12px 35px rgba(0,0,0,.45);
+position:absolute;
+left:10px;
+right:10px;
+bottom:10px;
+min-height:61px;
+z-index:25;
+display:flex;
+align-items:flex-end;
+gap:7px;
+padding:8px;
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+background:rgba(20,20,20,.94);
+backdrop-filter:blur(20px);
+box-shadow:0 12px 35px rgba(0,0,0,.45);
 }
 
 .attach-btn{
-    flex:0 0 43px;
-    width:43px;
-    height:43px;
-    border-radius:14px;
-    color:#ddd;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.07);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-}
-
-.attach-btn:active{
-    transform:scale(.9);
+flex:0 0 43px;
+width:43px;
+height:43px;
+border-radius:14px;
+color:#ddd;
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.07);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
 }
 
 .clip{
-    width:17px;
-    height:23px;
-    border:2px solid #bbb;
-    border-radius:9px;
-    transform:rotate(45deg);
-    position:relative;
+width:17px;
+height:23px;
+border:2px solid #bbb;
+border-radius:9px;
+transform:rotate(45deg);
+position:relative;
 }
 
 .clip:after{
-    content:"";
-    position:absolute;
-    width:7px;
-    height:13px;
-    left:3px;
-    top:3px;
-    border:2px solid #bbb;
-    border-radius:6px;
+content:"";
+position:absolute;
+width:7px;
+height:13px;
+left:3px;
+top:3px;
+border:2px solid #bbb;
+border-radius:6px;
 }
 
 .input{
-    flex:1;
-    max-height:130px;
-    min-height:43px;
-    resize:none;
-    outline:none;
-    border:0;
-    color:#fff;
-    background:transparent;
-    padding:11px 5px;
-    line-height:1.6;
-    font-size:15px;
+flex:1;
+max-height:130px;
+min-height:43px;
+resize:none;
+outline:none;
+border:0;
+color:#fff;
+background:transparent;
+padding:11px 5px;
+line-height:1.6;
+font-size:15px;
 }
 
 .input::placeholder{
-    color:#666;
+color:#666;
 }
 
 .send{
-    flex:0 0 43px;
-    width:43px;
-    height:43px;
-    border-radius:14px;
-    color:#000;
-    background:var(--orange);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    font-weight:bold;
-    cursor:pointer;
-    touch-action:manipulation;
-}
-
-.send:active{
-    transform:scale(.9);
+flex:0 0 43px;
+width:43px;
+height:43px;
+border-radius:14px;
+color:#000;
+background:var(--orange);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+touch-action:manipulation;
 }
 
 .send:disabled{
-    opacity:.35;
+opacity:.35;
 }
 
+/* FILE PREVIEW */
+
 .selected-files{
-    position:absolute;
-    left:10px;
-    right:10px;
-    bottom:76px;
-    z-index:24;
-    display:none;
-    gap:8px;
-    overflow-x:auto;
-    padding:7px 2px;
+position:absolute;
+left:10px;
+right:10px;
+bottom:76px;
+z-index:24;
+display:none;
+gap:8px;
+overflow-x:auto;
+padding:7px 2px;
 }
 
 .selected-files.show{
-    display:flex;
+display:flex;
 }
 
 .selected-file{
-    position:relative;
-    flex:0 0 auto;
-    width:75px;
-    height:75px;
-    border-radius:13px;
-    overflow:hidden;
-    background:#151515;
-    border:1px solid rgba(255,115,0,.25);
+position:relative;
+flex:0 0 auto;
+width:75px;
+height:75px;
+border-radius:13px;
+overflow:hidden;
+background:#151515;
+border:1px solid rgba(255,115,0,.25);
 }
 
 .selected-file img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 .selected-file-doc{
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:5px;
-    color:#ddd;
-    font-size:10px;
-    padding:5px;
-    text-align:center;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:5px;
+color:#ddd;
+font-size:10px;
+padding:5px;
+text-align:center;
 }
 
 .selected-file-doc strong{
-    color:var(--orange);
-    font-size:12px;
+color:var(--orange);
+font-size:12px;
 }
 
 .remove-file{
-    position:absolute;
-    top:4px;
-    left:4px;
-    width:23px;
-    height:23px;
-    border-radius:50%;
-    background:rgba(0,0,0,.8);
-    color:#fff;
-    font-size:15px;
-    z-index:2;
+position:absolute;
+top:4px;
+left:4px;
+width:23px;
+height:23px;
+border-radius:50%;
+background:rgba(0,0,0,.8);
+color:#fff;
+font-size:15px;
+z-index:2;
 }
 
+/* MESSAGE FILE */
+
 .attachments-message{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    margin-bottom:8px;
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-bottom:8px;
 }
 
 .message-file{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    min-width:170px;
-    max-width:270px;
-    padding:9px 11px;
-    border-radius:13px;
-    background:rgba(0,0,0,.25);
-    border:1px solid rgba(255,255,255,.08);
+display:flex;
+align-items:center;
+gap:9px;
+min-width:170px;
+max-width:270px;
+padding:9px 11px;
+border-radius:13px;
+background:rgba(0,0,0,.25);
+border:1px solid rgba(255,255,255,.08);
 }
 
 .message-file-icon{
-    width:35px;
-    height:35px;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(255,115,0,.12);
-    color:var(--orange);
-    font-size:10px;
-    font-weight:bold;
+width:35px;
+height:35px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,115,0,.12);
+color:var(--orange);
+font-size:10px;
+font-weight:bold;
 }
 
 .message-file-name{
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    font-size:12px;
-    color:#ddd;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+font-size:12px;
+color:#ddd;
 }
 
 .chat-image{
-    display:block;
-    max-width:230px;
-    max-height:250px;
-    border-radius:15px;
-    border:1px solid rgba(255,115,0,.18);
-    object-fit:cover;
+display:block;
+max-width:230px;
+max-height:250px;
+border-radius:15px;
+border:1px solid rgba(255,115,0,.18);
+object-fit:cover;
 }
 
+/* DRAWER */
+
 .overlay{
-    position:absolute;
-    inset:0;
-    z-index:50;
-    background:rgba(0,0,0,.58);
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
+position:absolute;
+inset:0;
+z-index:50;
+background:rgba(0,0,0,.58);
+opacity:0;
+pointer-events:none;
+transition:.25s;
 }
 
 .overlay.open{
-    opacity:1;
-    pointer-events:auto;
+opacity:1;
+pointer-events:auto;
 }
 
 .drawer{
-    position:absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    width:min(86%,350px);
-    z-index:60;
-    background:#0c0c0c;
-    border-left:1px solid rgba(255,115,0,.15);
-    transform:translateX(105%);
-    transition:.28s;
-    display:flex;
-    flex-direction:column;
+position:absolute;
+top:0;
+bottom:0;
+right:0;
+width:min(86%,350px);
+z-index:60;
+background:#0c0c0c;
+border-left:1px solid rgba(255,115,0,.15);
+transform:translateX(105%);
+transition:.28s;
+display:flex;
+flex-direction:column;
 }
 
 .drawer.open{
-    transform:translateX(0);
+transform:translateX(0);
 }
 
 .drawer-head{
-    height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 15px;
-    border-bottom:1px solid rgba(255,255,255,.06);
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 15px;
+border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .drawer-title{
-    font-size:18px;
-    font-weight:bold;
+font-size:18px;
+font-weight:bold;
 }
 
 .close{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    color:#fff;
-    background:rgba(255,255,255,.05);
-    font-size:20px;
+width:40px;
+height:40px;
+border-radius:12px;
+color:#fff;
+background:rgba(255,255,255,.05);
+font-size:20px;
 }
 
 .drawer-body{
-    flex:1;
-    overflow-y:auto;
-    padding:12px;
+flex:1;
+overflow-y:auto;
+padding:12px;
 }
 
 .new-chat{
-    width:100%;
-    height:47px;
-    border-radius:14px;
-    color:#fff;
-    background:rgba(255,115,0,.11);
-    border:1px solid rgba(255,115,0,.2);
-    margin-bottom:13px;
-    font-size:14px;
+width:100%;
+height:47px;
+border-radius:14px;
+color:#fff;
+background:rgba(255,115,0,.11);
+border:1px solid rgba(255,115,0,.2);
+margin-bottom:13px;
+font-size:14px;
 }
 
 .history-title{
-    color:#777;
-    font-size:11px;
-    margin:12px 5px 8px;
+color:#777;
+font-size:11px;
+margin:12px 5px 8px;
 }
 
 .history-item{
-    position:relative;
-    width:100%;
-    min-height:50px;
-    padding:9px 11px;
-    margin-bottom:7px;
-    border-radius:13px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.045);
-    color:#ddd;
-    text-align:right;
+position:relative;
+width:100%;
+min-height:50px;
+padding:9px 11px;
+margin-bottom:7px;
+border-radius:13px;
+background:rgba(255,255,255,.035);
+border:1px solid rgba(255,255,255,.045);
+color:#ddd;
+text-align:right;
 }
 
 .history-item.active{
-    border-color:rgba(255,115,0,.25);
-    background:rgba(255,115,0,.07);
+border-color:rgba(255,115,0,.25);
+background:rgba(255,115,0,.07);
 }
 
 .history-text{
-    display:block;
-    padding-left:30px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    font-size:12px;
+display:block;
+padding-left:30px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+font-size:12px;
 }
 
 .delete-history{
-    position:absolute;
-    left:8px;
-    top:50%;
-    transform:translateY(-50%);
-    width:27px;
-    height:27px;
-    border-radius:8px;
-    background:rgba(255,70,70,.08);
-    color:#ff7777;
+position:absolute;
+left:8px;
+top:50%;
+transform:translateY(-50%);
+width:27px;
+height:27px;
+border-radius:8px;
+background:rgba(255,70,70,.08);
+color:#ff7777;
 }
 
 .drawer-footer{
-    padding:12px;
-    border-top:1px solid rgba(255,255,255,.06);
+padding:12px;
+border-top:1px solid rgba(255,255,255,.06);
 }
 
 .clear-history{
-    width:100%;
-    height:44px;
-    border-radius:13px;
-    color:#ff7777;
-    background:rgba(255,60,60,.07);
+width:100%;
+height:44px;
+border-radius:13px;
+color:#ff7777;
+background:rgba(255,60,60,.07);
 }
 
+/* SUPPORT */
+
+.support-btn{
+width:100%;
+height:47px;
+margin-top:9px;
+border-radius:14px;
+color:#fff;
+background:rgba(255,115,0,.08);
+border:1px solid rgba(255,115,0,.18);
+font-size:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+.support-btn:active{
+transform:scale(.98);
+}
+
+.support-dot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:var(--orange);
+box-shadow:0 0 10px rgba(255,115,0,.5);
+}
+
+/* TOAST */
+
 .toast{
-    position:absolute;
-    z-index:100;
-    left:50%;
-    bottom:90px;
-    transform:translate(-50%,20px);
-    opacity:0;
-    pointer-events:none;
-    padding:10px 15px;
-    border-radius:12px;
-    background:#191919;
-    border:1px solid rgba(255,115,0,.2);
-    color:#ddd;
-    font-size:12px;
-    transition:.25s;
-    white-space:nowrap;
+position:absolute;
+z-index:100;
+left:50%;
+bottom:90px;
+transform:translate(-50%,20px);
+opacity:0;
+pointer-events:none;
+padding:10px 15px;
+border-radius:12px;
+background:#191919;
+border:1px solid rgba(255,115,0,.2);
+color:#ddd;
+font-size:12px;
+transition:.25s;
+white-space:nowrap;
 }
 
 .toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
+opacity:1;
+transform:translate(-50%,0);
 }
 </style>
 </head>
@@ -777,30 +789,20 @@ button{
 
 <div class="splash" id="splash">
 <div class="fox-logo">F</div>
-<div class="splash-title">
-FOX <span>AI</span>
-</div>
+<div class="splash-title">FOX <span>AI</span></div>
 <div class="splash-line"></div>
 </div>
 
 <header class="header">
 
 <div class="header-side right">
-
-<button
-class="icon-btn"
-id="menuBtn"
-type="button"
->
-
+<button class="icon-btn" id="menuBtn" type="button">
 <div class="menu-lines">
 <span></span>
 <span></span>
 <span></span>
 </div>
-
 </button>
-
 </div>
 
 <div class="brand">
@@ -808,29 +810,16 @@ FOX <span>AI</span>
 </div>
 
 <div class="header-side left">
-
-<button
-class="icon-btn plus"
-id="newChatBtn"
-type="button"
->
-+
-</button>
-
+<button class="icon-btn plus" id="newChatBtn" type="button">+</button>
 </div>
 
 </header>
 
 <main class="chat" id="chat">
 
-<div
-class="welcome"
-id="welcome"
->
+<div class="welcome" id="welcome">
 
-<div class="welcome-logo">
-F
-</div>
+<div class="welcome-logo">F</div>
 
 <h1>
 به <span>FOX AI</span> خوش آمدید
@@ -845,19 +834,11 @@ F
 
 </main>
 
-<div
-class="selected-files"
-id="selectedFiles"
-></div>
+<div class="selected-files" id="selectedFiles"></div>
 
 <div class="composer">
 
-<button
-class="attach-btn"
-id="attachBtn"
-type="button"
-aria-label="انتخاب فایل"
->
+<button class="attach-btn" id="attachBtn" type="button">
 <div class="clip"></div>
 </button>
 
@@ -866,26 +847,7 @@ type="file"
 id="fileInput"
 class="file-input"
 multiple
-accept="
-image/*,
-application/pdf,
-text/*,
-.txt,
-.csv,
-.json,
-.html,
-.htm,
-.css,
-.js,
-.md,
-.xml,
-.log,
-.py,
-.java,
-.cpp,
-.c,
-.php
-"
+accept="image/*,application/pdf,text/*,.txt,.csv,.json,.html,.htm,.css,.js,.md,.xml,.log,.py,.java,.cpp,.c,.php"
 >
 
 <textarea
@@ -897,26 +859,13 @@ autocomplete="off"
 spellcheck="false"
 ></textarea>
 
-<button
-class="send"
-id="sendBtn"
-type="button"
-aria-label="ارسال"
->
-↑
-</button>
+<button class="send" id="sendBtn" type="button">↑</button>
 
 </div>
 
-<div
-class="overlay"
-id="overlay"
-></div>
+<div class="overlay" id="overlay"></div>
 
-<aside
-class="drawer"
-id="drawer"
->
+<aside class="drawer" id="drawer">
 
 <div class="drawer-head">
 
@@ -924,23 +873,13 @@ id="drawer"
 تاریخچه چت
 </div>
 
-<button
-class="close"
-id="closeMenu"
-type="button"
->
-×
-</button>
+<button class="close" id="closeMenu" type="button">×</button>
 
 </div>
 
 <div class="drawer-body">
 
-<button
-class="new-chat"
-id="drawerNewChat"
-type="button"
->
+<button class="new-chat" id="drawerNewChat" type="button">
 + چت جدید
 </button>
 
@@ -950,15 +889,16 @@ type="button"
 
 <div id="historyList"></div>
 
+<button class="support-btn" id="supportBtn" type="button">
+<span class="support-dot"></span>
+پشتیبانی FOX AI
+</button>
+
 </div>
 
 <div class="drawer-footer">
 
-<button
-class="clear-history"
-id="clearHistory"
-type="button"
->
+<button class="clear-history" id="clearHistory" type="button">
 پاک کردن همه تاریخچه
 </button>
 
@@ -966,14 +906,13 @@ type="button"
 
 </aside>
 
-<div
-class="toast"
-id="toast"
-></div>
+<div class="toast" id="toast"></div>
 
 </div>
 
 <script>
+
+/* CONFIG */
 
 const GROQ_API_KEY =
 "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";
@@ -990,105 +929,74 @@ const API_URL =
 const STORAGE_KEY =
 "fox_ai_history_final";
 
-const splash =
-document.getElementById("splash");
+/* ELEMENTS */
 
-const chat =
-document.getElementById("chat");
+const splash=document.getElementById("splash");
+const chat=document.getElementById("chat");
+const welcome=document.getElementById("welcome");
+const input=document.getElementById("input");
+const sendBtn=document.getElementById("sendBtn");
+const attachBtn=document.getElementById("attachBtn");
+const fileInput=document.getElementById("fileInput");
+const selectedFiles=document.getElementById("selectedFiles");
+const menuBtn=document.getElementById("menuBtn");
+const closeMenu=document.getElementById("closeMenu");
+const overlay=document.getElementById("overlay");
+const drawer=document.getElementById("drawer");
+const newChatBtn=document.getElementById("newChatBtn");
+const drawerNewChat=document.getElementById("drawerNewChat");
+const historyList=document.getElementById("historyList");
+const clearHistory=document.getElementById("clearHistory");
+const supportBtn=document.getElementById("supportBtn");
+const toast=document.getElementById("toast");
 
-const welcome =
-document.getElementById("welcome");
+/* STATE */
 
-const input =
-document.getElementById("input");
+let conversations=loadHistory();
 
-const sendBtn =
-document.getElementById("sendBtn");
-
-const attachBtn =
-document.getElementById("attachBtn");
-
-const fileInput =
-document.getElementById("fileInput");
-
-const selectedFiles =
-document.getElementById("selectedFiles");
-
-const menuBtn =
-document.getElementById("menuBtn");
-
-const closeMenu =
-document.getElementById("closeMenu");
-
-const overlay =
-document.getElementById("overlay");
-
-const drawer =
-document.getElementById("drawer");
-
-const newChatBtn =
-document.getElementById("newChatBtn");
-
-const drawerNewChat =
-document.getElementById("drawerNewChat");
-
-const historyList =
-document.getElementById("historyList");
-
-const clearHistory =
-document.getElementById("clearHistory");
-
-const toast =
-document.getElementById("toast");
-
-let conversations =
-loadHistory();
-
-let currentChat = {
-
+let currentChat={
 id:String(Date.now()),
-
 title:"چت جدید",
-
 messages:[]
-
 };
 
-let pendingFiles = [];
-
-let isGenerating = false;
-
+let pendingFiles=[];
+let isGenerating=false;
 let toastTimer;
 
+/* START */
+
 setTimeout(function(){
-
 splash.classList.add("hide");
-
 },1600);
 
 renderHistory();
-
 renderMessages();
+
+/* SUPPORT */
+
+supportBtn.addEventListener("click",function(){
+
+window.open(
+"https://rubika.ir/joinc/FGDHBIBD0IEERYNDETREVTMGYKRCNYXZ",
+"_blank"
+);
+
+});
+
+/* LOCAL STORAGE */
 
 function loadHistory(){
 
 try{
 
-const data =
-localStorage.getItem(
-STORAGE_KEY
-);
+const data=localStorage.getItem(STORAGE_KEY);
 
-if(!data){
-return [];
-}
+if(!data)return [];
 
-const parsed =
-JSON.parse(data);
+const parsed=JSON.parse(data);
 
-return Array.isArray(parsed)
-? parsed
-: [];
+return Array.isArray(parsed)?parsed:[];
 
 }catch(error){
 
@@ -1104,9 +1012,7 @@ try{
 
 localStorage.setItem(
 STORAGE_KEY,
-JSON.stringify(
-conversations
-)
+JSON.stringify(conversations)
 );
 
 }catch(error){
@@ -1117,54 +1023,36 @@ console.error(error);
 
 }
 
-menuBtn.addEventListener(
-"click",
-function(){
+/* DRAWER */
+
+menuBtn.addEventListener("click",function(){
 
 renderHistory();
 
-drawer.classList.add(
-"open"
-);
+drawer.classList.add("open");
+overlay.classList.add("open");
 
-overlay.classList.add(
-"open"
-);
-
-}
-);
+});
 
 function closeDrawer(){
 
-drawer.classList.remove(
-"open"
-);
-
-overlay.classList.remove(
-"open"
-);
+drawer.classList.remove("open");
+overlay.classList.remove("open");
 
 }
 
-closeMenu.addEventListener(
-"click",
-closeDrawer
-);
+closeMenu.addEventListener("click",closeDrawer);
+overlay.addEventListener("click",closeDrawer);
 
-overlay.addEventListener(
-"click",
-closeDrawer
-);
+/* HISTORY */
 
 function renderHistory(){
 
-historyList.innerHTML = "";
+historyList.innerHTML="";
 
-if(
-conversations.length === 0
-){
+if(conversations.length===0){
 
-historyList.innerHTML = `
+historyList.innerHTML=`
 <div style="
 text-align:center;
 color:#666;
@@ -1179,79 +1067,45 @@ return;
 
 }
 
-[...conversations]
-.reverse()
-.forEach(function(item){
+[...conversations].reverse().forEach(function(item){
 
-const row =
-document.createElement(
-"div"
-);
+const row=document.createElement("div");
 
-row.className =
-"history-item" +
-(
-item.id ===
-currentChat.id
-? " active"
-: ""
-);
+row.className=
+"history-item"+
+(item.id===currentChat.id?" active":"");
 
-const title =
-document.createElement(
-"span"
-);
+const title=document.createElement("span");
 
-title.className =
-"history-text";
+title.className="history-text";
 
-title.textContent =
-item.title ||
-"گفتگوی بدون عنوان";
+title.textContent=
+item.title||"گفتگوی بدون عنوان";
 
-const del =
-document.createElement(
-"button"
-);
+const del=document.createElement("button");
 
-del.className =
-"delete-history";
+del.className="delete-history";
+del.type="button";
+del.textContent="×";
 
-del.type = "button";
-
-del.textContent = "×";
-
-del.addEventListener(
-"click",
-function(event){
+del.addEventListener("click",function(event){
 
 event.stopPropagation();
 
-deleteConversation(
-item.id
-);
+deleteConversation(item.id);
 
-}
-);
+});
 
 row.appendChild(title);
-
 row.appendChild(del);
 
-row.addEventListener(
-"click",
-function(){
+row.addEventListener("click",function(){
 
-loadConversation(
-item.id
-);
+loadConversation(item.id);
 
-}
-);
+});
 
-historyList.appendChild(
-row
-);
+historyList.appendChild(row);
 
 });
 
@@ -1259,104 +1113,68 @@ row
 
 function saveCurrentConversation(){
 
-if(
-currentChat.messages.length === 0
-){
+if(currentChat.messages.length===0)return;
 
-return;
-
-}
-
-const copy =
-JSON.parse(
-JSON.stringify(
-currentChat
-)
+const copy=JSON.parse(
+JSON.stringify(currentChat)
 );
 
-const index =
-conversations.findIndex(
-function(item){
+const index=conversations.findIndex(function(item){
 
-return (
-item.id ===
-currentChat.id
-);
+return item.id===currentChat.id;
 
-}
-);
+});
 
-if(index >= 0){
+if(index>=0){
 
-conversations[index] =
-copy;
+conversations[index]=copy;
 
 }else{
 
-conversations.push(
-copy
-);
+conversations.push(copy);
 
 }
 
 saveHistory();
-
 renderHistory();
 
 }
 
 function loadConversation(id){
 
-const found =
-conversations.find(
-function(item){
+const found=conversations.find(function(item){
 
-return item.id === id;
+return item.id===id;
 
-}
-);
+});
 
-if(!found){
+if(!found)return;
 
-return;
-
-}
-
-currentChat =
-JSON.parse(
+currentChat=JSON.parse(
 JSON.stringify(found)
 );
 
-pendingFiles = [];
+pendingFiles=[];
 
 renderSelectedFiles();
-
 renderMessages();
-
 closeDrawer();
 
-showToast(
-"گفتگو باز شد"
-);
+showToast("گفتگو باز شد");
 
 }
 
 function deleteConversation(id){
 
-conversations =
-conversations.filter(
-function(item){
+conversations=conversations.filter(function(item){
 
-return item.id !== id;
+return item.id!==id;
 
-}
-);
+});
 
 saveHistory();
 
-if(
-currentChat.id === id
-){
+if(currentChat.id===id){
 
 createNewChat();
 
@@ -1366,26 +1184,22 @@ renderHistory();
 
 }
 
+/* NEW CHAT */
+
 function createNewChat(){
 
-currentChat = {
-
+currentChat={
 id:String(Date.now()),
-
 title:"چت جدید",
-
 messages:[]
-
 };
 
-pendingFiles = [];
+pendingFiles=[];
 
 renderSelectedFiles();
-
 renderMessages();
 
-input.value = "";
-
+input.value="";
 autoResize();
 
 closeDrawer();
@@ -1396,278 +1210,149 @@ input.focus();
 
 }
 
-newChatBtn.addEventListener(
-"click",
-createNewChat
-);
+newChatBtn.addEventListener("click",createNewChat);
+drawerNewChat.addEventListener("click",createNewChat);
 
-drawerNewChat.addEventListener(
-"click",
-createNewChat
-);
+/* CLEAR HISTORY */
 
-clearHistory.addEventListener(
-"click",
-function(){
+clearHistory.addEventListener("click",function(){
 
-if(
-conversations.length === 0
-){
+if(conversations.length===0){
 
-showToast(
-"تاریخچه خالی است"
-);
-
+showToast("تاریخچه خالی است");
 return;
 
 }
 
-if(
-!confirm(
-"همه تاریخچه چت پاک شود؟"
-)
-){
+if(!confirm("همه تاریخچه چت پاک شود؟"))return;
 
-return;
-
-}
-
-conversations = [];
-
+conversations=[];
 saveHistory();
 
 createNewChat();
 
-showToast(
-"تاریخچه پاک شد"
-);
+showToast("تاریخچه پاک شد");
 
-}
-);
+});
 
-attachBtn.addEventListener(
-"click",
-function(){
+/* FILE SELECT */
 
-if(isGenerating){
+attachBtn.addEventListener("click",function(){
 
-return;
-
-}
+if(isGenerating)return;
 
 fileInput.click();
 
-}
-);
+});
 
-fileInput.addEventListener(
-"change",
-function(){
+fileInput.addEventListener("change",function(){
 
-const files =
-Array.from(
-fileInput.files || []
-);
+const files=Array.from(fileInput.files||[]);
 
-files.forEach(
-function(file){
+files.forEach(function(file){
 
-if(
-!isAllowedFile(file)
-){
+if(!isAllowedFile(file)){
 
-showToast(
-"نوع فایل پشتیبانی نمی‌شود"
-);
-
+showToast("نوع فایل پشتیبانی نمی‌شود");
 return;
 
 }
 
-if(
-file.size >
-20 * 1024 * 1024
-){
+if(file.size>20*1024*1024){
 
-showToast(
-file.name +
-" بیشتر از 20MB است"
-);
-
+showToast(file.name+" بیشتر از 20MB است");
 return;
 
 }
 
-pendingFiles.push(
-file
-);
+pendingFiles.push(file);
 
-}
-);
+});
 
 renderSelectedFiles();
 
-fileInput.value = "";
+fileInput.value="";
 
-}
-);
+});
 
 function isAllowedFile(file){
 
-if(
-file.type &&
-file.type.startsWith(
-"image/"
-)
-){
+if(file.type&&file.type.startsWith("image/"))return true;
 
-return true;
+if(file.type==="application/pdf")return true;
 
-}
+const name=file.name.toLowerCase();
 
-if(
-file.type ===
-"application/pdf"
-){
-
-return true;
-
-}
-
-const name =
-file.name.toLowerCase();
-
-const extensions = [
-
-".txt",
-".csv",
-".json",
-".html",
-".htm",
-".css",
-".js",
-".md",
-".xml",
-".log",
-".py",
-".java",
-".cpp",
-".c",
-".php"
-
+const extensions=[
+".txt",".csv",".json",".html",".htm",".css",
+".js",".md",".xml",".log",".py",".java",
+".cpp",".c",".php",".pdf"
 ];
 
-return extensions.some(
-function(ext){
+return extensions.some(function(ext){
 
 return name.endsWith(ext);
 
-}
-);
+});
 
 }
+
+/* FILE PREVIEW */
 
 function renderSelectedFiles(){
 
-selectedFiles.innerHTML = "";
+selectedFiles.innerHTML="";
 
-if(
-pendingFiles.length === 0
-){
+if(pendingFiles.length===0){
 
-selectedFiles.classList.remove(
-"show"
-);
-
+selectedFiles.classList.remove("show");
 return;
 
 }
 
-selectedFiles.classList.add(
-"show"
-);
+selectedFiles.classList.add("show");
 
-pendingFiles.forEach(
-function(file,index){
+pendingFiles.forEach(function(file,index){
 
-const box =
-document.createElement(
-"div"
-);
+const box=document.createElement("div");
 
-box.className =
-"selected-file";
+box.className="selected-file";
 
-const remove =
-document.createElement(
-"button"
-);
+const remove=document.createElement("button");
 
-remove.type = "button";
+remove.type="button";
+remove.className="remove-file";
+remove.textContent="×";
 
-remove.className =
-"remove-file";
+remove.addEventListener("click",function(){
 
-remove.textContent = "×";
-
-remove.addEventListener(
-"click",
-function(){
-
-pendingFiles.splice(
-index,
-1
-);
-
+pendingFiles.splice(index,1);
 renderSelectedFiles();
 
-}
-);
+});
 
 box.appendChild(remove);
 
-if(
-file.type.startsWith(
-"image/"
-)
-){
+if(file.type.startsWith("image/")){
 
-const img =
-document.createElement(
-"img"
-);
+const img=document.createElement("img");
 
-img.src =
-URL.createObjectURL(
-file
-);
+img.src=URL.createObjectURL(file);
 
 box.appendChild(img);
 
 }else{
 
-const doc =
-document.createElement(
-"div"
-);
+const doc=document.createElement("div");
 
-doc.className =
-"selected-file-doc";
+doc.className="selected-file-doc";
 
-doc.innerHTML = `
+doc.innerHTML=`
 <strong>
-${escapeHTML(
-getExtension(
-file.name
-)
-)}
+${escapeHTML(getExtension(file.name))}
 </strong>
 <span>
-${escapeHTML(
-shortName(
-file.name
-)
-)}
+${escapeHTML(shortName(file.name))}
 </span>
 `;
 
@@ -1675,178 +1360,115 @@ box.appendChild(doc);
 
 }
 
-selectedFiles.appendChild(
-box
-);
+selectedFiles.appendChild(box);
+
+});
 
 }
-);
 
-}
+/* FILE HELPERS */
 
 function getExtension(name){
 
-const parts =
-name.split(".");
+const parts=name.split(".");
 
-if(
-parts.length < 2
-){
+if(parts.length<2)return"FILE";
 
-return "FILE";
-
-}
-
-return (
-parts.pop() ||
-"FILE"
-).toUpperCase();
+return(parts.pop()||"FILE").toUpperCase();
 
 }
 
 function shortName(name){
 
-if(
-name.length <= 14
-){
+if(name.length<=14)return name;
 
-return name;
+return name.substring(0,11)+"...";
 
 }
 
-return (
-name.substring(
-0,
-11
-) +
-"..."
-);
-
-}
+/* READ TEXT */
 
 function readTextFile(file){
 
-return new Promise(
-function(resolve,reject){
+return new Promise(function(resolve,reject){
 
-const reader =
-new FileReader();
+const reader=new FileReader();
 
-reader.onload =
-function(){
+reader.onload=function(){
 
-resolve(
-reader.result ||
-""
-);
+resolve(reader.result||"");
 
 };
 
-reader.onerror =
-function(){
+reader.onerror=function(){
 
 reject(
-new Error(
-"خواندن فایل ناموفق بود"
-)
+new Error("خواندن فایل ناموفق بود")
 );
 
 };
 
-reader.readAsText(
-file,
-"UTF-8"
-);
+reader.readAsText(file,"UTF-8");
 
-}
-);
+});
 
 }
 
-let pdfReady = null;
+/* PDF */
+
+let pdfReady=null;
 
 function loadPDFJS(){
 
-if(pdfReady){
+if(pdfReady)return pdfReady;
 
-return pdfReady;
+pdfReady=new Promise(function(resolve,reject){
 
-}
+if(window.pdfjsLib){
 
-pdfReady =
-new Promise(
-function(resolve,reject){
-
-if(
-window.pdfjsLib
-){
-
-resolve(
-window.pdfjsLib
-);
-
+resolve(window.pdfjsLib);
 return;
 
 }
 
-const script =
-document.createElement(
-"script"
-);
+const script=document.createElement("script");
 
-script.src =
+script.src=
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
 
-script.type =
-"module";
+script.type="module";
 
-script.onload =
-function(){
+script.onload=function(){
 
-setTimeout(
-function(){
+setTimeout(function(){
 
-if(
-window.pdfjsLib
-){
+if(window.pdfjsLib){
 
-resolve(
-window.pdfjsLib
-);
+resolve(window.pdfjsLib);
 
 }else{
 
 reject(
-new Error(
-"PDF.js در مرورگر آماده نشد"
-)
+new Error("PDF.js در مرورگر آماده نشد")
 );
 
 }
 
-},
-500
-);
+},500);
 
 };
 
-script.onerror =
-function(){
+script.onerror=function(){
 
 reject(
-new Error(
-"PDF.js بارگذاری نشد"
-)
+new Error("PDF.js بارگذاری نشد")
 );
 
 };
 
-document.head.appendChild(
-script
-);
+document.head.appendChild(script);
 
-}
-);
+});
 
 return pdfReady;
 
@@ -1856,62 +1478,38 @@ async function readPDF(file){
 
 try{
 
-const pdfjs =
-await loadPDFJS();
+const pdfjs=await loadPDFJS();
 
-if(
-!pdfjs ||
-!pdfjs.getDocument
-){
+if(!pdfjs||!pdfjs.getDocument){
 
-throw new Error(
-"PDF engine unavailable"
-);
+throw new Error("PDF engine unavailable");
 
 }
 
-const buffer =
-await file.arrayBuffer();
+const buffer=await file.arrayBuffer();
 
-const pdf =
-await pdfjs
-.getDocument({
+const pdf=await pdfjs.getDocument({
 data:buffer
-})
-.promise;
+}).promise;
 
-let result = "";
+let result="";
 
-for(
-let page = 1;
-page <= pdf.numPages;
-page++
-){
+for(let page=1;page<=pdf.numPages;page++){
 
-const pdfPage =
-await pdf.getPage(
-page
-);
+const pdfPage=await pdf.getPage(page);
 
-const content =
-await pdfPage
-.getTextContent();
+const content=await pdfPage.getTextContent();
 
-const text =
-content.items
-.map(
-function(item){
+const text=content.items.map(function(item){
 
 return item.str;
 
-}
-)
-.join(" ");
+}).join(" ");
 
-result +=
-"\n\n--- صفحه " +
-page +
-" ---\n" +
+result+=
+"\n\n--- صفحه "+
+page+
+" ---\n"+
 text;
 
 }
@@ -1920,86 +1518,61 @@ return result;
 
 }catch(error){
 
-console.error(
-"PDF error:",
-error
-);
+console.error("PDF error:",error);
 
-return (
-"این فایل PDF انتخاب شده است، " +
-"اما متن آن از داخل مرورگر قابل استخراج نبود."
+return(
+"این فایل PDF انتخاب شده است، اما متن آن از داخل مرورگر قابل استخراج نبود."
 );
 
 }
 
 }
+
+/* DATA URL */
 
 function fileToDataURL(file){
 
-return new Promise(
-function(resolve,reject){
+return new Promise(function(resolve,reject){
 
-const reader =
-new FileReader();
+const reader=new FileReader();
 
-reader.onload =
-function(){
+reader.onload=function(){
 
-resolve(
-reader.result
-);
+resolve(reader.result);
 
 };
 
-reader.onerror =
-function(){
+reader.onerror=function(){
 
 reject(
-new Error(
-"تصویر خوانده نشد"
-)
+new Error("تصویر خوانده نشد")
 );
 
 };
 
-reader.readAsDataURL(
-file
-);
+reader.readAsDataURL(file);
+
+});
 
 }
-);
 
-}
+/* PROCESS FILES */
 
 async function processFiles(files){
 
-const result = [];
+const result=[];
 
-for(
-const file of files
-){
+for(const file of files){
 
-if(
-file.type.startsWith(
-"image/"
-)
-){
+if(file.type.startsWith("image/")){
 
-const dataURL =
-await fileToDataURL(
-file
-);
+const dataURL=await fileToDataURL(file);
 
 result.push({
-
 type:"image",
-
 name:file.name,
-
 mime:file.type,
-
 dataURL:dataURL
-
 });
 
 continue;
@@ -2007,51 +1580,30 @@ continue;
 }
 
 if(
-file.type ===
-"application/pdf" ||
-file.name
-.toLowerCase()
-.endsWith(".pdf")
+file.type==="application/pdf"||
+file.name.toLowerCase().endsWith(".pdf")
 ){
 
-const text =
-await readPDF(
-file
-);
+const text=await readPDF(file);
 
 result.push({
-
 type:"text",
-
 name:file.name,
-
 mime:"application/pdf",
-
 text:text
-
 });
 
 continue;
 
 }
 
-const text =
-await readTextFile(
-file
-);
+const text=await readTextFile(file);
 
 result.push({
-
 type:"text",
-
 name:file.name,
-
-mime:
-file.type ||
-"text/plain",
-
+mime:file.type||"text/plain",
 text:text
-
 });
 
 }
@@ -2060,44 +1612,40 @@ return result;
 
 }
 
+/* RENDER */
+
 function renderMessages(){
 
-chat.innerHTML = "";
+chat.innerHTML="";
 
-if(
-currentChat.messages.length === 0
-){
+if(currentChat.messages.length===0){
 
-chat.appendChild(
-welcome
-);
+chat.appendChild(welcome);
 
-welcome.style.display =
-"flex";
+welcome.style.display="flex";
 
 return;
 
 }
 
-welcome.style.display =
-"none";
+welcome.style.display="none";
 
-currentChat.messages.forEach(
-function(message){
+currentChat.messages.forEach(function(message){
 
 addMessageToUI(
 message.role,
-message.content || "",
-message.attachments || [],
+message.content||"",
+message.attachments||[],
 false
 );
 
-}
-);
+});
 
 scrollBottom();
 
 }
+
+/* ADD MESSAGE */
 
 function addMessageToUI(
 role,
@@ -2106,120 +1654,66 @@ attachments,
 scroll
 ){
 
-if(
-welcome.parentElement === chat
-){
+if(welcome.parentElement===chat){
 
-welcome.style.display =
-"none";
+welcome.style.display="none";
 
 }
 
-const wrapper =
-document.createElement(
-"div"
-);
+const wrapper=document.createElement("div");
 
-wrapper.className =
-"message " +
-(
-role === "user"
-? "user"
-: "ai"
-);
+wrapper.className=
+"message "+
+(role==="user"?"user":"ai");
 
-const bubble =
-document.createElement(
-"div"
-);
+const bubble=document.createElement("div");
 
-bubble.className =
-"bubble";
+bubble.className="bubble";
 
-if(
-role === "assistant"
-){
+if(role==="assistant"){
 
-bubble.innerHTML =
-formatAIText(
-text
-);
+bubble.innerHTML=formatAIText(text);
 
 }else{
 
-if(
-attachments &&
-attachments.length
-){
+if(attachments&&attachments.length){
 
-const box =
-document.createElement(
-"div"
-);
+const box=document.createElement("div");
 
-box.className =
-"attachments-message";
+box.className="attachments-message";
 
-attachments.forEach(
-function(file){
+attachments.forEach(function(file){
 
-if(
-file.type ===
-"image"
-){
+if(file.type==="image"){
 
-const img =
-document.createElement(
-"img"
-);
+const img=document.createElement("img");
 
-img.className =
-"chat-image";
+img.className="chat-image";
+img.src=file.dataURL;
+img.alt=file.name;
 
-img.src =
-file.dataURL;
-
-img.alt =
-file.name;
-
-box.appendChild(
-img
-);
+box.appendChild(img);
 
 }else{
 
-const item =
-document.createElement(
-"div"
-);
+const item=document.createElement("div");
 
-item.className =
-"message-file";
+item.className="message-file";
 
-item.innerHTML = `
+item.innerHTML=`
 <div class="message-file-icon">
-${escapeHTML(
-getExtension(
-file.name
-)
-)}
+${escapeHTML(getExtension(file.name))}
 </div>
-
 <div class="message-file-name">
-${escapeHTML(
-file.name
-)}
+${escapeHTML(file.name)}
 </div>
 `;
 
-box.appendChild(
-item
-);
+box.appendChild(item);
 
 }
 
-}
-);
+});
 
 bubble.appendChild(box);
 
@@ -2227,124 +1721,82 @@ bubble.appendChild(box);
 
 if(text){
 
-const textNode =
-document.createElement(
-"div"
-);
+const textNode=document.createElement("div");
 
-textNode.textContent =
-text;
+textNode.textContent=text;
 
-bubble.appendChild(
-textNode
-);
+bubble.appendChild(textNode);
 
 }
 
 }
 
-wrapper.appendChild(
-bubble
-);
+wrapper.appendChild(bubble);
 
-chat.appendChild(
-wrapper
-);
+chat.appendChild(wrapper);
 
-if(scroll){
-
-scrollBottom();
-
-}
+if(scroll)scrollBottom();
 
 return bubble;
 
 }
 
-sendBtn.addEventListener(
-"click",
-function(event){
+/* SEND */
+
+sendBtn.addEventListener("click",function(event){
 
 event.preventDefault();
 
-if(isGenerating){
-
-return;
-
-}
+if(isGenerating)return;
 
 sendMessage();
 
-}
-);
+});
 
 async function sendMessage(){
 
-if(isGenerating){
+if(isGenerating)return;
 
-return;
+const text=input.value.trim();
 
-}
+if(!text&&pendingFiles.length===0){
 
-const text =
-input.value.trim();
-
-if(
-!text &&
-pendingFiles.length === 0
-){
-
-showToast(
-"پیام یا فایل را وارد کن"
-);
-
+showToast("پیام یا فایل را وارد کن");
 return;
 
 }
 
 if(
-!GROQ_API_KEY ||
-GROQ_API_KEY ===
-"کلید_GROQ_خودت_اینجا"
+!GROQ_API_KEY||
+GROQ_API_KEY==="کلید_GROQ_خودت_اینجا"
 ){
 
-showToast(
-"کلید Groq را داخل کد قرار بده"
-);
-
+showToast("کلید Groq را داخل کد قرار بده");
 return;
 
 }
 
-isGenerating = true;
+isGenerating=true;
+sendBtn.disabled=true;
 
-sendBtn.disabled = true;
+const files=[...pendingFiles];
 
-const files =
-[...pendingFiles];
-
-pendingFiles = [];
+pendingFiles=[];
 
 renderSelectedFiles();
 
-input.value = "";
-
+input.value="";
 autoResize();
 
-let processed = [];
+let processed=[];
 
 try{
 
 if(files.length){
 
-showToast(
-"در حال آماده‌سازی فایل..."
-);
+showToast("در حال آماده‌سازی فایل...");
 
-processed =
-await processFiles(
-files
-);
+processed=await processFiles(files);
 
 }
 
@@ -2352,66 +1804,37 @@ files
 
 console.error(error);
 
-showToast(
-"خطا در آماده‌سازی فایل"
-);
+showToast("خطا در آماده‌سازی فایل");
 
 }
 
-const historyAttachments =
-processed.map(
-function(file){
+const historyAttachments=processed.map(function(file){
 
-return {
+return{
 
 type:file.type,
-
 name:file.name,
-
 mime:file.mime,
-
-dataURL:
-file.type === "image"
-? file.dataURL
-: undefined,
-
-text:
-file.type === "text"
-? file.text
-: undefined
+dataURL:file.type==="image"?file.dataURL:undefined,
+text:file.type==="text"?file.text:undefined
 
 };
 
-}
-);
+});
 
 currentChat.messages.push({
 
 role:"user",
-
 content:text,
-
-attachments:
-historyAttachments
+attachments:historyAttachments
 
 });
 
-if(
-currentChat.title ===
-"چت جدید"
-){
+if(currentChat.title==="چت جدید"){
 
-currentChat.title =
-text
-? text.substring(
-0,
-45
-)
-: (
-files[0]
-? files[0].name
-: "چت جدید"
-);
+currentChat.title=text
+?text.substring(0,45)
+:(files[0]?files[0].name:"چت جدید");
 
 }
 
@@ -2424,19 +1847,16 @@ true
 
 saveCurrentConversation();
 
-await askGroq(
-text,
-processed
-);
+await askGroq(text,processed);
 
 }
 
-input.addEventListener(
-"keydown",
-function(event){
+/* ENTER */
+
+input.addEventListener("keydown",function(event){
 
 if(
-event.key === "Enter" &&
+event.key==="Enter"&&
 !event.shiftKey
 ){
 
@@ -2450,41 +1870,33 @@ sendMessage();
 
 }
 
-}
-);
+});
 
-input.addEventListener(
-"input",
-autoResize
-);
+/* RESIZE */
+
+input.addEventListener("input",autoResize);
 
 function autoResize(){
 
-input.style.height =
-"auto";
+input.style.height="auto";
 
-input.style.height =
-Math.min(
-input.scrollHeight,
-130
-) + "px";
+input.style.height=
+Math.min(input.scrollHeight,130)+"px";
 
 }
 
-async function askGroq(
-userText,
-files
-){
+/* GROQ */
 
-const typing =
-addMessageToUI(
+async function askGroq(userText,files){
+
+const typing=addMessageToUI(
 "assistant",
 "",
 [],
 true
 );
 
-typing.innerHTML = `
+typing.innerHTML=`
 <div class="typing">
 <span></span>
 <span></span>
@@ -2494,157 +1906,121 @@ typing.innerHTML = `
 
 try{
 
-const images =
-files.filter(
-function(file){
+const images=files.filter(function(file){
 
-return file.type === "image";
+return file.type==="image";
 
-}
-);
+});
 
-const textFiles =
-files.filter(
-function(file){
+const textFiles=files.filter(function(file){
 
-return file.type === "text";
+return file.type==="text";
 
-}
-);
+});
 
-let imageText = "";
+let imageText="";
 
 if(images.length){
 
-imageText =
-await analyzeImages(
+imageText=await analyzeImages(
 images,
 userText
 );
 
 }
 
-let fileText = "";
+let fileText="";
 
-textFiles.forEach(
-function(file){
+textFiles.forEach(function(file){
 
-const content =
-String(
-file.text || ""
-).substring(
-0,
-120000
-);
+const content=String(file.text||"")
+.substring(0,120000);
 
-fileText +=
-"\n\n===== " +
-file.name +
-" =====\n" +
+fileText+=
+"\n\n===== "+
+file.name+
+" =====\n"+
 content;
 
-}
-);
+});
 
-let finalText =
-userText || "";
+let finalText=userText||"";
 
 if(imageText){
 
-finalText +=
-"\n\nنتیجه بررسی تصویر:\n" +
+finalText+=
+"\n\nنتیجه بررسی تصویر:\n"+
 imageText;
 
 }
 
 if(fileText){
 
-finalText +=
-"\n\nمحتوای فایل:\n" +
+finalText+=
+"\n\nمحتوای فایل:\n"+
 fileText;
 
 }
 
 if(!finalText.trim()){
 
-finalText =
+finalText=
 "فایل پیوست‌شده را بررسی کن و نتیجه را توضیح بده.";
 
 }
 
-const messages = [
+const messages=[
 
 {
-
 role:"system",
-
 content:
-"You are FOX AI, a helpful, fast and accurate AI assistant. " +
-"If the user writes Persian, answer in Persian. " +
-"Analyze attached file contents carefully. " +
+"You are FOX AI, a helpful, fast and accurate AI assistant. "+
+"If the user writes Persian, answer in Persian. "+
+"Analyze attached file contents carefully. "+
 "Do not use emojis unless specifically requested."
-
 }
 
 ];
 
-currentChat.messages
-.slice(0,-1)
-.forEach(
-function(message){
+currentChat.messages.slice(0,-1).forEach(function(message){
 
 messages.push({
 
 role:
-message.role ===
-"assistant"
-? "assistant"
-: "user",
+message.role==="assistant"
+?"assistant"
+:"user",
 
-content:
-message.content || ""
+content:message.content||""
 
 });
 
-}
-);
+});
 
 messages.push({
 
 role:"user",
-
 content:finalText
 
 });
 
-const response =
-await fetch(
+const response=await fetch(
 API_URL,
 {
 
 method:"POST",
 
 headers:{
-
-"Content-Type":
-"application/json",
-
-"Authorization":
-"Bearer " +
-GROQ_API_KEY
-
+"Content-Type":"application/json",
+"Authorization":"Bearer "+GROQ_API_KEY
 },
 
 body:JSON.stringify({
 
 model:MODEL,
-
 messages:messages,
-
 temperature:.6,
-
 max_completion_tokens:4096,
-
 stream:true
 
 })
@@ -2654,30 +2030,21 @@ stream:true
 
 if(!response.ok){
 
-let errorMessage =
-"خطا در اتصال به Groq";
+let errorMessage="خطا در اتصال به Groq";
 
 try{
 
-const data =
-await response.json();
+const data=await response.json();
 
-if(
-data &&
-data.error &&
-data.error.message
-){
+if(data?.error?.message){
 
-errorMessage =
-data.error.message;
+errorMessage=data.error.message;
 
 }
 
 }catch(error){}
 
-throw new Error(
-errorMessage
-);
+throw new Error(errorMessage);
 
 }
 
@@ -2689,99 +2056,61 @@ throw new Error(
 
 }
 
-const reader =
-response.body.getReader();
+const reader=response.body.getReader();
 
-const decoder =
-new TextDecoder(
-"utf-8"
-);
+const decoder=new TextDecoder("utf-8");
 
-let buffer = "";
+let buffer="";
+let answer="";
 
-let answer = "";
-
-typing.innerHTML = "";
+typing.innerHTML="";
 
 while(true){
 
-const result =
-await reader.read();
+const result=await reader.read();
 
-if(result.done){
+if(result.done)break;
 
-break;
-
-}
-
-buffer +=
-decoder.decode(
+buffer+=decoder.decode(
 result.value,
-{
-stream:true
-}
+{stream:true}
 );
 
-const lines =
-buffer.split("\n");
+const lines=buffer.split("\n");
 
-buffer =
-lines.pop() || "";
+buffer=lines.pop()||"";
 
-for(
-const line of lines
-){
+for(const line of lines){
 
-const trimmed =
-line.trim();
+const trimmed=line.trim();
 
 if(
-!trimmed ||
-trimmed ===
-"data: [DONE]"
+!trimmed||
+trimmed==="data: [DONE]"
 ){
 
 continue;
 
 }
 
-if(
-!trimmed.startsWith(
-"data:"
-)
-){
+if(!trimmed.startsWith("data:"))continue;
 
-continue;
-
-}
-
-const jsonText =
-trimmed
-.substring(5)
-.trim();
+const jsonText=
+trimmed.substring(5).trim();
 
 try{
 
-const data =
-JSON.parse(
-jsonText
-);
+const data=JSON.parse(jsonText);
 
-const delta =
-data
-?.choices?.[0]
-?.delta
-?.content;
+const delta=
+data?.choices?.[0]?.delta?.content;
 
 if(delta){
 
-answer +=
-delta;
+answer+=delta;
 
-typing.innerHTML =
-formatAIText(
-answer
-);
+typing.innerHTML=
+formatAIText(answer);
 
 scrollBottom();
 
@@ -2795,23 +2124,19 @@ scrollBottom();
 
 if(!answer){
 
-answer =
-"پاسخی از مدل دریافت نشد.";
+answer="پاسخی از مدل دریافت نشد.";
 
 }
 
 currentChat.messages.push({
 
 role:"assistant",
-
 content:answer,
-
 attachments:[]
 
 });
 
 saveCurrentConversation();
-
 renderHistory();
 
 }catch(error){
@@ -2821,87 +2146,60 @@ console.error(
 error
 );
 
-typing.classList.add(
-"error"
-);
+typing.classList.add("error");
 
-typing.textContent =
-"خطا: " +
-(
-error.message ||
-"اتصال به Groq برقرار نشد."
-);
+typing.textContent=
+"خطا: "+
+(error.message||"اتصال به Groq برقرار نشد.");
 
 }
 
-isGenerating = false;
-
-sendBtn.disabled = false;
-
+isGenerating=false;
+sendBtn.disabled=false;
 input.focus();
 
 }
 
-async function analyzeImages(
-images,
-question
-){
+/* IMAGE */
 
-const selected =
-images.slice(
-0,
-3
-);
+async function analyzeImages(images,question){
 
-const content = [
+const selected=images.slice(0,3);
+
+const content=[
 
 {
-
 type:"text",
-
 text:
-question ||
+question||
 "این تصویر را بررسی کن و محتوای مهم آن را توضیح بده."
-
 }
 
 ];
 
-selected.forEach(
-function(image){
+selected.forEach(function(image){
 
 content.push({
 
 type:"image_url",
 
 image_url:{
-
-url:
-image.dataURL
-
+url:image.dataURL
 }
 
 });
 
-}
-);
+});
 
-const response =
-await fetch(
+const response=await fetch(
 API_URL,
 {
 
 method:"POST",
 
 headers:{
-
-"Content-Type":
-"application/json",
-
-"Authorization":
-"Bearer " +
-GROQ_API_KEY
-
+"Content-Type":"application/json",
+"Authorization":"Bearer "+GROQ_API_KEY
 },
 
 body:JSON.stringify({
@@ -2909,21 +2207,14 @@ body:JSON.stringify({
 model:IMAGE_MODEL,
 
 messages:[
-
 {
-
 role:"user",
-
 content:content
-
 }
-
 ],
 
 temperature:.2,
-
 max_completion_tokens:1500,
-
 stream:false
 
 })
@@ -2933,130 +2224,79 @@ stream:false
 
 if(!response.ok){
 
-let message =
-"تحلیل عکس انجام نشد";
+let message="تحلیل عکس انجام نشد";
 
 try{
 
-const data =
-await response.json();
+const data=await response.json();
 
-if(
-data?.error?.message
-){
+if(data?.error?.message){
 
-message =
-data.error.message;
+message=data.error.message;
 
 }
 
 }catch(error){}
 
-throw new Error(
-message
-);
+throw new Error(message);
 
 }
 
-const data =
-await response.json();
+const data=await response.json();
 
-return (
-data
-?.choices?.[0]
-?.message
-?.content ||
+return(
+data?.choices?.[0]?.message?.content||
 ""
 );
 
 }
 
+/* FORMAT */
+
 function formatAIText(text){
 
-if(!text){
+if(!text)return"";
 
-return "";
+const blocks=[];
 
-}
-
-const blocks = [];
-
-let safe =
-text.replace(
+let safe=text.replace(
 /```([a-zA-Z0-9_-]*)\n?([\s\S]*?)```/g,
-function(
-match,
-language,
-code
-){
+function(match,language,code){
 
-const index =
-blocks.length;
+const index=blocks.length;
 
 blocks.push({
-
-language:
-language ||
-"code",
-
-code:
-code.trim()
-
+language:language||"code",
+code:code.trim()
 });
 
-return (
-"___FOX_CODE_" +
-index +
-"___"
-);
+return"___FOX_CODE_"+index+"___";
 
 }
 );
 
-safe =
-escapeHTML(
-safe
-);
+safe=escapeHTML(safe);
 
-safe =
-safe.replace(
+safe=safe.replace(
 /___FOX_CODE_(\d+)___/g,
-function(
-match,
-index
-){
+function(match,index){
 
-const block =
-blocks[index];
+const block=blocks[index];
 
-return `
+return`
 <div class="code-wrap">
-
 <div class="code-head">
-
-<span>
-${escapeHTML(
-block.language
-)}
-</span>
-
+<span>${escapeHTML(block.language)}</span>
 <button
 class="copy-code"
 type="button"
 onclick="copyCode(this)"
-data-code="${encodeURIComponent(
-block.code
-)}"
+data-code="${encodeURIComponent(block.code)}"
 >
 کپی
 </button>
-
 </div>
-
-<pre class="code-body">${escapeHTML(
-block.code
-)}</pre>
-
+<pre class="code-body">${escapeHTML(block.code)}</pre>
 </div>
 `;
 
@@ -3067,106 +2307,75 @@ return safe;
 
 }
 
-window.copyCode =
-async function(button){
+/* COPY */
+
+window.copyCode=async function(button){
 
 try{
 
-const code =
+const code=
 decodeURIComponent(
 button.dataset.code
 );
 
-await navigator.clipboard.writeText(
-code
-);
+await navigator.clipboard.writeText(code);
 
-button.textContent =
-"کپی شد";
+button.textContent="کپی شد";
 
-setTimeout(
-function(){
+setTimeout(function(){
 
-button.textContent =
-"کپی";
+button.textContent="کپی";
 
-},
-1500
-);
+},1500);
 
 }catch(error){
 
-showToast(
-"کپی انجام نشد"
-);
+showToast("کپی انجام نشد");
 
 }
 
 };
 
+/* ESCAPE */
+
 function escapeHTML(text){
 
 return String(text)
-.replace(
-/&/g,
-"&amp;"
-)
-.replace(
-/</g,
-"&lt;"
-)
-.replace(
-/>/g,
-"&gt;"
-)
-.replace(
-/"/g,
-"&quot;"
-)
-.replace(
-/'/g,
-"&#039;"
-);
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
+
+/* SCROLL */
 
 function scrollBottom(){
 
-requestAnimationFrame(
-function(){
+requestAnimationFrame(function(){
 
-chat.scrollTop =
-chat.scrollHeight;
+chat.scrollTop=chat.scrollHeight;
 
-}
-);
+});
 
 }
+
+/* TOAST */
 
 function showToast(message){
 
-toast.textContent =
-message;
+toast.textContent=message;
 
-toast.classList.add(
-"show"
-);
+toast.classList.add("show");
 
-clearTimeout(
-toastTimer
-);
+clearTimeout(toastTimer);
 
-toastTimer =
-setTimeout(
-function(){
+toastTimer=setTimeout(function(){
 
-toast.classList.remove(
-"show"
-);
+toast.classList.remove("show");
 
-},
-2200
-);
+},2200);
 
 }
 
