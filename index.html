@@ -266,6 +266,22 @@ justify-content:flex-start;
 justify-content:flex-end;
 }
 
+.message-content{
+max-width:94%;
+display:flex;
+flex-direction:column;
+}
+
+.user .message-content{
+align-items:flex-start;
+max-width:88%;
+}
+
+.ai .message-content{
+align-items:flex-end;
+max-width:94%;
+}
+
 @keyframes messageIn{
 from{
 opacity:0;
@@ -278,7 +294,7 @@ transform:translateY(0);
 }
 
 .bubble{
-max-width:88%;
+max-width:100%;
 padding:12px 15px;
 line-height:1.9;
 font-size:15px;
@@ -293,7 +309,7 @@ border-radius:18px 18px 4px 18px;
 }
 
 .ai .bubble{
-max-width:94%;
+max-width:100%;
 padding:8px 3px;
 background:transparent;
 border:none;
@@ -302,6 +318,63 @@ text-align:right;
 
 .ai .bubble.error{
 color:#ff7777;
+}
+
+/* MESSAGE ACTIONS */
+
+.message-actions{
+display:flex;
+align-items:center;
+gap:5px;
+margin-top:6px;
+direction:rtl;
+opacity:.88;
+}
+
+.user .message-actions{
+align-self:flex-start;
+}
+
+.ai .message-actions{
+align-self:flex-end;
+}
+
+.message-action{
+height:30px;
+padding:0 9px;
+border-radius:9px;
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.07);
+color:#aaa;
+font-size:11px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:4px;
+transition:.15s ease;
+}
+
+.message-action:active{
+transform:scale(.94);
+background:rgba(255,115,0,.10);
+color:var(--orange);
+}
+
+.message-action:hover{
+color:#fff;
+border-color:rgba(255,115,0,.20);
+}
+
+.message-action.copy-action{
+color:#ccc;
+}
+
+.message-action.edit-action{
+color:#aaa;
+}
+
+.message-action.share-action{
+color:#aaa;
 }
 
 /* TYPING */
@@ -1630,13 +1703,14 @@ return;
 
 welcome.style.display="none";
 
-currentChat.messages.forEach(function(message){
+currentChat.messages.forEach(function(message,index){
 
 addMessageToUI(
 message.role,
 message.content||"",
 message.attachments||[],
-false
+false,
+index
 );
 
 });
@@ -1651,7 +1725,9 @@ function addMessageToUI(
 role,
 text,
 attachments,
-scroll
+scroll,
+messageIndex=-1,
+showActions=true
 ){
 
 if(welcome.parentElement===chat){
@@ -1665,6 +1741,12 @@ const wrapper=document.createElement("div");
 wrapper.className=
 "message "+
 (role==="user"?"user":"ai");
+
+wrapper.dataset.index=messageIndex;
+
+const content=document.createElement("div");
+
+content.className="message-content";
 
 const bubble=document.createElement("div");
 
@@ -1731,13 +1813,187 @@ bubble.appendChild(textNode);
 
 }
 
-wrapper.appendChild(bubble);
+content.appendChild(bubble);
+
+if(showActions && text){
+
+const actions=document.createElement("div");
+
+actions.className="message-actions";
+
+const copyBtn=document.createElement("button");
+
+copyBtn.type="button";
+copyBtn.className="message-action copy-action";
+copyBtn.textContent="کپی";
+
+copyBtn.addEventListener("click",function(){
+
+copyMessage(text,copyBtn);
+
+});
+
+actions.appendChild(copyBtn);
+
+if(role==="user"){
+
+const editBtn=document.createElement("button");
+
+editBtn.type="button";
+editBtn.className="message-action edit-action";
+editBtn.textContent="ویرایش";
+
+editBtn.addEventListener("click",function(){
+
+editMessage(messageIndex);
+
+});
+
+actions.appendChild(editBtn);
+
+}
+
+const shareBtn=document.createElement("button");
+
+shareBtn.type="button";
+shareBtn.className="message-action share-action";
+shareBtn.textContent="اشتراک‌گذاری";
+
+shareBtn.addEventListener("click",function(){
+
+shareMessage(text);
+
+});
+
+actions.appendChild(shareBtn);
+
+content.appendChild(actions);
+
+}
+
+wrapper.appendChild(content);
 
 chat.appendChild(wrapper);
 
 if(scroll)scrollBottom();
 
 return bubble;
+
+}
+
+/* COPY MESSAGE */
+
+async function copyMessage(text,button){
+
+try{
+
+if(navigator.clipboard){
+
+await navigator.clipboard.writeText(text);
+
+}else{
+
+const area=document.createElement("textarea");
+
+area.value=text;
+
+document.body.appendChild(area);
+
+area.select();
+
+document.execCommand("copy");
+
+area.remove();
+
+}
+
+const old=button.textContent;
+
+button.textContent="کپی شد";
+
+setTimeout(function(){
+
+button.textContent=old;
+
+},1400);
+
+}catch(error){
+
+showToast("کپی انجام نشد");
+
+}
+
+}
+
+/* SHARE MESSAGE */
+
+async function shareMessage(text){
+
+try{
+
+if(navigator.share){
+
+await navigator.share({
+
+title:"FOX AI",
+text:text
+
+});
+
+}else{
+
+await navigator.clipboard.writeText(text);
+
+showToast("متن برای اشتراک‌گذاری کپی شد");
+
+}
+
+}catch(error){
+
+if(error&&error.name==="AbortError")return;
+
+try{
+
+await navigator.clipboard.writeText(text);
+
+showToast("متن کپی شد");
+
+}catch(e){
+
+showToast("اشتراک‌گذاری انجام نشد");
+
+}
+
+}
+
+}
+
+/* EDIT USER MESSAGE */
+
+function editMessage(index){
+
+if(index<0||index>=currentChat.messages.length)return;
+
+const message=currentChat.messages[index];
+
+if(message.role!=="user")return;
+
+input.value=message.content||"";
+
+currentChat.messages=
+currentChat.messages.slice(0,index);
+
+pendingFiles=[];
+
+renderSelectedFiles();
+
+saveCurrentConversation();
+renderMessages();
+
+autoResize();
+input.focus();
+
+showToast("پیام را ویرایش کن و دوباره ارسال کن");
 
 }
 
@@ -1842,6 +2098,8 @@ addMessageToUI(
 "user",
 text,
 processed,
+true,
+currentChat.messages.length-1,
 true
 );
 
@@ -1893,7 +2151,9 @@ const typing=addMessageToUI(
 "assistant",
 "",
 [],
-true
+true,
+-1,
+false
 );
 
 typing.innerHTML=`
@@ -2065,6 +2325,12 @@ let answer="";
 
 typing.innerHTML="";
 
+/*
+استریم سریع:
+هر قطعه‌ای که از Groq برسد بلافاصله
+داخل پاسخ نمایش داده می‌شود.
+*/
+
 while(true){
 
 const result=await reader.read();
@@ -2128,6 +2394,13 @@ answer="پاسخی از مدل دریافت نشد.";
 
 }
 
+/*
+پاسخ نهایی را با دکمه‌های
+کپی و اشتراک‌گذاری جایگزین می‌کنیم.
+*/
+
+const aiIndex=currentChat.messages.length;
+
 currentChat.messages.push({
 
 role:"assistant",
@@ -2135,6 +2408,23 @@ content:answer,
 attachments:[]
 
 });
+
+const parent=typing.closest(".message");
+
+if(parent){
+
+parent.remove();
+
+}
+
+addMessageToUI(
+"assistant",
+answer,
+[],
+true,
+aiIndex,
+true
+);
 
 saveCurrentConversation();
 renderHistory();
@@ -2307,7 +2597,7 @@ return safe;
 
 }
 
-/* COPY */
+/* COPY CODE */
 
 window.copyCode=async function(button){
 
