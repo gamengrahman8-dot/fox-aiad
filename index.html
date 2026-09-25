@@ -829,6 +829,114 @@ background:var(--orange);
 box-shadow:0 0 10px rgba(255,115,0,.5);
 }
 
+/* SUPPORT MODAL */
+
+.support-modal{
+position:absolute;
+inset:0;
+z-index:90;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:rgba(0,0,0,.68);
+backdrop-filter:blur(8px);
+opacity:0;
+pointer-events:none;
+transition:.25s;
+}
+
+.support-modal.open{
+opacity:1;
+pointer-events:auto;
+}
+
+.support-box{
+width:100%;
+max-width:360px;
+padding:22px;
+border-radius:24px;
+background:rgba(20,20,20,.96);
+border:1px solid rgba(255,115,0,.18);
+box-shadow:0 20px 60px rgba(0,0,0,.55);
+text-align:center;
+transform:translateY(15px) scale(.96);
+transition:.25s;
+}
+
+.support-modal.open .support-box{
+transform:translateY(0) scale(1);
+}
+
+.support-box h2{
+font-size:20px;
+margin-bottom:7px;
+}
+
+.support-box p{
+font-size:12px;
+color:#888;
+margin-bottom:20px;
+}
+
+.social-options{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.social-btn{
+height:105px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:9px;
+color:#fff;
+font-size:13px;
+font-weight:bold;
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.08);
+transition:.18s;
+}
+
+.social-btn:active{
+transform:scale(.95);
+}
+
+.social-icon{
+width:48px;
+height:48px;
+border-radius:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:900;
+}
+
+.rubika-icon{
+background:#1787e8;
+color:#fff;
+}
+
+.instagram-icon{
+background:linear-gradient(135deg,#feda75,#d62976,#962fbf,#4f5bd5);
+color:#fff;
+}
+
+.support-close{
+width:100%;
+height:44px;
+margin-top:14px;
+border-radius:14px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.07);
+color:#aaa;
+font-size:13px;
+}
+
 /* TOAST */
 
 .toast{
@@ -946,7 +1054,9 @@ spellcheck="false"
 تاریخچه چت
 </div>
 
-<button class="close" id="closeMenu" type="button">×</button>
+<button class="close" id="closeMenu" type="button">
+×
+</button>
 
 </div>
 
@@ -978,6 +1088,40 @@ spellcheck="false"
 </div>
 
 </aside>
+
+<!-- SUPPORT MODAL -->
+
+<div class="support-modal" id="supportModal">
+
+<div class="support-box">
+
+<h2>پشتیبانی FOX AI</h2>
+
+<p>
+برای ارتباط با ما یکی از شبکه‌های اجتماعی زیر را انتخاب کنید.
+</p>
+
+<div class="social-options">
+
+<button class="social-btn" id="rubikaBtn" type="button">
+<div class="social-icon rubika-icon">R</div>
+<span>روبیکا</span>
+</button>
+
+<button class="social-btn" id="instagramBtn" type="button">
+<div class="social-icon instagram-icon">◎</div>
+<span>اینستاگرام</span>
+</button>
+
+</div>
+
+<button class="support-close" id="supportClose" type="button">
+بستن
+</button>
+
+</div>
+
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1023,6 +1167,11 @@ const clearHistory=document.getElementById("clearHistory");
 const supportBtn=document.getElementById("supportBtn");
 const toast=document.getElementById("toast");
 
+const supportModal=document.getElementById("supportModal");
+const supportClose=document.getElementById("supportClose");
+const rubikaBtn=document.getElementById("rubikaBtn");
+const instagramBtn=document.getElementById("instagramBtn");
+
 /* STATE */
 
 let conversations=loadHistory();
@@ -1049,12 +1198,31 @@ renderMessages();
 /* SUPPORT */
 
 supportBtn.addEventListener("click",function(){
+supportModal.classList.add("open");
+});
 
-window.open(
-"https://rubika.ir/joinc/FGDHBIBD0IEERYNDETREVTMGYKRCNYXZ",
-"_blank"
-);
+supportClose.addEventListener("click",function(){
+supportModal.classList.remove("open");
+});
 
+supportModal.addEventListener("click",function(event){
+if(event.target===supportModal){
+supportModal.classList.remove("open");
+}
+});
+
+/* RUBIKA */
+
+rubikaBtn.addEventListener("click",function(){
+window.location.href=
+"https://rubika.ir/joinc/FGDHBIBD0IEERYNDETREVTMGYKRCNYXZ";
+});
+
+/* INSTAGRAM */
+
+instagramBtn.addEventListener("click",function(){
+window.location.href=
+"https://www.instagram.com/fox__aiad?stkn=MXN1a3h2OWswbDlzbg==";
 });
 
 /* LOCAL STORAGE */
@@ -2290,7 +2458,7 @@ stream:true
 
 if(!response.ok){
 
-let errorMessage="خطا در اتصال به Groq";
+let errorMessage="اتصال به سرویس هوش مصنوعی برقرار نشد";
 
 try{
 
@@ -2304,14 +2472,16 @@ errorMessage=data.error.message;
 
 }catch(error){}
 
-throw new Error(errorMessage);
+throw new Error(
+"SERVER_ERROR:"+errorMessage
+);
 
 }
 
 if(!response.body){
 
 throw new Error(
-"Stream در این مرورگر پشتیبانی نمی‌شود"
+"SERVER_ERROR:اتصال به سرویس هوش مصنوعی برقرار نشد"
 );
 
 }
@@ -2324,12 +2494,6 @@ let buffer="";
 let answer="";
 
 typing.innerHTML="";
-
-/*
-استریم سریع:
-هر قطعه‌ای که از Groq برسد بلافاصله
-داخل پاسخ نمایش داده می‌شود.
-*/
 
 while(true){
 
@@ -2394,11 +2558,6 @@ answer="پاسخی از مدل دریافت نشد.";
 
 }
 
-/*
-پاسخ نهایی را با دکمه‌های
-کپی و اشتراک‌گذاری جایگزین می‌کنیم.
-*/
-
 const aiIndex=currentChat.messages.length;
 
 currentChat.messages.push({
@@ -2436,11 +2595,25 @@ console.error(
 error
 );
 
-typing.classList.add("error");
+const parent=typing.closest(".message");
 
-typing.textContent=
-"خطا: "+
-(error.message||"اتصال به Groq برقرار نشد.");
+if(parent){
+
+parent.remove();
+
+}
+
+const connectionMessage=
+"اینترنت یا VPN شما خاموش است. لطفاً آن را روشن کرده و سپس دوباره تلاش کنید.";
+
+addMessageToUI(
+"assistant",
+connectionMessage,
+[],
+true,
+-1,
+true
+);
 
 }
 
@@ -2514,21 +2687,7 @@ stream:false
 
 if(!response.ok){
 
-let message="تحلیل عکس انجام نشد";
-
-try{
-
-const data=await response.json();
-
-if(data?.error?.message){
-
-message=data.error.message;
-
-}
-
-}catch(error){}
-
-throw new Error(message);
+throw new Error("IMAGE_CONNECTION_ERROR");
 
 }
 
