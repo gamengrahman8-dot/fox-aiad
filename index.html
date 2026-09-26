@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -81,8 +81,7 @@ border-bottom-color:rgba(0,0,0,.08);
 
 body.light .icon-btn,
 body.light .attach-btn,
-body.light .voice-btn,
-body.light .images-btn{
+body.light .voice-btn{
 background:rgba(0,0,0,.045);
 border-color:rgba(0,0,0,.08);
 color:#222;
@@ -117,8 +116,7 @@ color:#222;
 }
 
 body.light .support-box,
-body.light .settings-box,
-body.light .gallery-box{
+body.light .settings-box{
 background:rgba(255,255,255,.97);
 }
 
@@ -544,8 +542,7 @@ box-shadow:0 12px 35px rgba(0,0,0,.45);
 }
 
 .attach-btn,
-.voice-btn,
-.images-btn{
+.voice-btn{
 flex:0 0 43px;
 width:43px;
 height:43px;
@@ -556,51 +553,6 @@ border:1px solid rgba(255,255,255,.07);
 display:flex;
 align-items:center;
 justify-content:center;
-}
-
-.images-btn{
-flex:0 0 67px;
-width:67px;
-font-size:11px;
-font-weight:bold;
-color:var(--orange);
-}
-
-.images-btn:active{
-transform:scale(.95);
-background:rgba(255,115,0,.10);
-}
-
-.images-icon{
-width:18px;
-height:15px;
-border:2px solid currentColor;
-border-radius:4px;
-position:relative;
-margin-left:4px;
-}
-
-.images-icon:before{
-content:"";
-position:absolute;
-width:5px;
-height:5px;
-border-radius:50%;
-background:currentColor;
-top:2px;
-right:2px;
-}
-
-.images-icon:after{
-content:"";
-position:absolute;
-width:9px;
-height:6px;
-border-left:2px solid currentColor;
-border-top:2px solid currentColor;
-transform:rotate(45deg);
-left:2px;
-bottom:1px;
 }
 
 .voice-btn{
@@ -978,55 +930,48 @@ color:var(--orange);
 /* MODALS */
 
 .support-modal,
-.settings-modal,
-.gallery-modal{
+.settings-modal{
 position:absolute;
 inset:0;
 z-index:90;
 display:flex;
 align-items:center;
 justify-content:center;
-padding:12px;
-background:rgba(0,0,0,.72);
-backdrop-filter:blur(9px);
+padding:20px;
+background:rgba(0,0,0,.68);
+backdrop-filter:blur(8px);
 opacity:0;
 pointer-events:none;
 transition:.25s;
 }
 
 .support-modal.open,
-.settings-modal.open,
-.gallery-modal.open{
+.settings-modal.open{
 opacity:1;
 pointer-events:auto;
 }
 
 .support-box,
-.settings-box,
-.gallery-box{
+.settings-box{
 width:100%;
-max-width:430px;
-max-height:94dvh;
-padding:20px;
+max-width:360px;
+padding:22px;
 border-radius:24px;
-background:rgba(20,20,20,.97);
+background:rgba(20,20,20,.96);
 border:1px solid rgba(255,115,0,.18);
 box-shadow:0 20px 60px rgba(0,0,0,.55);
 text-align:center;
 transform:translateY(15px) scale(.96);
 transition:.25s;
-overflow:hidden;
 }
 
 .support-modal.open .support-box,
-.settings-modal.open .settings-box,
-.gallery-modal.open .gallery-box{
+.settings-modal.open .settings-box{
 transform:translateY(0) scale(1);
 }
 
 .support-box h2,
-.settings-box h2,
-.gallery-box h2{
+.settings-box h2{
 font-size:20px;
 margin-bottom:7px;
 }
@@ -1148,122 +1093,6 @@ font-size:18px;
 font-weight:bold;
 }
 
-/* =========================
-   GALLERY
-========================= */
-
-.gallery-box{
-padding:16px;
-text-align:right;
-}
-
-.gallery-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:13px;
-}
-
-.gallery-header h2{
-margin:0;
-}
-
-.gallery-close{
-width:38px;
-height:38px;
-border-radius:12px;
-background:rgba(255,255,255,.06);
-color:#fff;
-font-size:21px;
-}
-
-.gallery-tabs{
-display:flex;
-gap:7px;
-overflow-x:auto;
-padding-bottom:9px;
-margin-bottom:8px;
-scrollbar-width:none;
-}
-
-.gallery-tabs::-webkit-scrollbar{
-display:none;
-}
-
-.gallery-tab{
-flex:0 0 auto;
-height:38px;
-padding:0 13px;
-border-radius:12px;
-background:rgba(255,255,255,.045);
-border:1px solid rgba(255,255,255,.07);
-color:#aaa;
-font-size:11px;
-}
-
-.gallery-tab.active{
-background:rgba(255,115,0,.12);
-border-color:rgba(255,115,0,.30);
-color:var(--orange);
-}
-
-.gallery-grid{
-max-height:68dvh;
-overflow-y:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-padding:3px;
-}
-
-.gallery-card{
-overflow:hidden;
-border-radius:16px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.07);
-}
-
-.gallery-image{
-width:100%;
-height:145px;
-object-fit:cover;
-display:block;
-background:#111;
-}
-
-.gallery-card-bottom{
-padding:8px;
-}
-
-.gallery-name{
-font-size:10px;
-color:#aaa;
-margin-bottom:7px;
-}
-
-.save-gallery{
-width:100%;
-height:34px;
-border-radius:10px;
-background:rgba(255,115,0,.12);
-border:1px solid rgba(255,115,0,.20);
-color:var(--orange);
-font-size:10px;
-font-weight:bold;
-}
-
-.save-gallery:active{
-transform:scale(.96);
-}
-
-.gallery-loading{
-padding:35px 10px;
-text-align:center;
-color:#888;
-font-size:12px;
-grid-column:1/-1;
-}
-
 /* TOAST */
 
 .toast{
@@ -1287,48 +1116,6 @@ white-space:nowrap;
 .toast.show{
 opacity:1;
 transform:translate(-50%,0);
-}
-
-@keyframes spin{
-to{
-transform:rotate(360deg);
-}
-}
-
-@media(max-width:420px){
-
-.composer{
-gap:5px;
-padding:7px;
-}
-
-.attach-btn,
-.voice-btn,
-.images-btn,
-.send{
-height:42px;
-}
-
-.attach-btn,
-.voice-btn,
-.send{
-flex-basis:42px;
-width:42px;
-}
-
-.images-btn{
-flex-basis:62px;
-width:62px;
-}
-
-.input{
-font-size:14px;
-}
-
-.gallery-image{
-height:125px;
-}
-
 }
 </style>
 </head>
@@ -1402,12 +1189,6 @@ FOX <span>AI</span>
 <div class="mic"></div>
 </button>
 
-<!-- دکمه جدید تصاویر -->
-<button class="images-btn" id="imagesBtn" type="button">
-<div class="images-icon"></div>
-<span>تصاویر</span>
-</button>
-
 <input
 type="file"
 id="fileInput"
@@ -1426,62 +1207,6 @@ spellcheck="false"
 ></textarea>
 
 <button class="send" id="sendBtn" type="button">↑</button>
-
-</div>
-
-<!-- =========================
-     IMAGE GALLERY MODAL
-========================= -->
-
-<div class="gallery-modal" id="galleryModal">
-
-<div class="gallery-box">
-
-<div class="gallery-header">
-
-<h2>تصاویر</h2>
-
-<button
-class="gallery-close"
-id="galleryClose"
-type="button"
->
-×
-</button>
-
-</div>
-
-<div class="gallery-tabs">
-
-<button class="gallery-tab active" data-category="general">
-عمومی
-</button>
-
-<button class="gallery-tab" data-category="model">
-مدلینگ
-</button>
-
-<button class="gallery-tab" data-category="anime">
-انیمه
-</button>
-
-<button class="gallery-tab" data-category="nature">
-طبیعت
-</button>
-
-<button class="gallery-tab" data-category="cars">
-خودرو
-</button>
-
-<button class="gallery-tab" data-category="animals">
-حیوانات
-</button>
-
-</div>
-
-<div class="gallery-grid" id="galleryGrid"></div>
-
-</div>
 
 </div>
 
@@ -1661,176 +1386,6 @@ const SETTINGS_KEY =
 "fox_ai_settings";
 
 /* =========================
-   GALLERY DATA
-========================= */
-
-const galleryData={
-
-general:[
-{
-name:"تصویر عمومی ۱",
-url:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"تصویر عمومی ۲",
-url:"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"تصویر عمومی ۳",
-url:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"تصویر عمومی ۴",
-url:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"تصویر عمومی ۵",
-url:"https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"تصویر عمومی ۶",
-url:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85"
-}
-],
-
-model:[
-{
-name:"مدلینگ ۱",
-url:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"مدلینگ ۲",
-url:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"مدلینگ ۳",
-url:"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"مدلینگ ۴",
-url:"https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"مدلینگ ۵",
-url:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"مدلینگ ۶",
-url:"https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=85"
-}
-],
-
-anime:[
-{
-name:"انیمه ۱",
-url:"https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"انیمه ۲",
-url:"https://images.unsplash.com/photo-1613376023733-0a73315d9b06?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"انیمه ۳",
-url:"https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"انیمه ۴",
-url:"https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"انیمه ۵",
-url:"https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"انیمه ۶",
-url:"https://images.unsplash.com/photo-1614583224978-fb17a5d3f5c7?auto=format&fit=crop&w=900&q=85"
-}
-],
-
-nature:[
-{
-name:"طبیعت ۱",
-url:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"طبیعت ۲",
-url:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"طبیعت ۳",
-url:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"طبیعت ۴",
-url:"https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"طبیعت ۵",
-url:"https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"طبیعت ۶",
-url:"https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=85"
-}
-],
-
-cars:[
-{
-name:"خودرو ۱",
-url:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"خودرو ۲",
-url:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"خودرو ۳",
-url:"https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"خودرو ۴",
-url:"https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"خودرو ۵",
-url:"https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"خودرو ۶",
-url:"https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=85"
-}
-],
-
-animals:[
-{
-name:"حیوانات ۱",
-url:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"حیوانات ۲",
-url:"https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"حیوانات ۳",
-url:"https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"حیوانات ۴",
-url:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"حیوانات ۵",
-url:"https://images.unsplash.com/photo-1425082661705-1834bfd09dca?auto=format&fit=crop&w=900&q=85"
-},
-{
-name:"حیوانات ۶",
-url:"https://images.unsplash.com/photo-1425322601162-1c27bdbb8519?auto=format&fit=crop&w=900&q=85"
-}
-]
-
-};
-
-/* =========================
    ELEMENTS
 ========================= */
 
@@ -1841,16 +1396,10 @@ const input=document.getElementById("input");
 const sendBtn=document.getElementById("sendBtn");
 const attachBtn=document.getElementById("attachBtn");
 const voiceBtn=document.getElementById("voiceBtn");
-const imagesBtn=document.getElementById("imagesBtn");
 const voiceStatus=document.getElementById("voiceStatus");
 const voiceStatusText=document.getElementById("voiceStatusText");
 const fileInput=document.getElementById("fileInput");
 const selectedFiles=document.getElementById("selectedFiles");
-
-const galleryModal=document.getElementById("galleryModal");
-const galleryClose=document.getElementById("galleryClose");
-const galleryGrid=document.getElementById("galleryGrid");
-const galleryTabs=document.querySelectorAll(".gallery-tab");
 
 const menuBtn=document.getElementById("menuBtn");
 const closeMenu=document.getElementById("closeMenu");
@@ -1899,6 +1448,8 @@ messages:[]
 let pendingFiles=[];
 let isGenerating=false;
 let toastTimer;
+
+/* VOICE STATE */
 
 let recognition=null;
 let isListening=false;
@@ -1977,9 +1528,7 @@ voiceStop:"توقف ضبط صدا",
 voiceUnsupported:"مرورگر شما از تبدیل صدا به متن پشتیبانی نمی‌کند.",
 voicePermission:"اجازه استفاده از میکروفون داده نشد.",
 voiceEmpty:"صدایی تشخیص داده نشد.",
-voiceDone:"متن ویس آماده شد",
-gallerySaved:"تصویر برای ذخیره آماده شد",
-galleryError:"ذخیره تصویر انجام نشد"
+voiceDone:"متن ویس آماده شد"
 },
 
 en:{
@@ -2029,19 +1578,12 @@ codeCopy:"Copy",
 codeCopied:"Copied",
 fileReadError:"Failed to read the file",
 imageReadError:"Failed to read the image",
-imageCreating:"Creating image...",
-imageCreated:"Image created",
-imageError:"Image generation failed. Try again.",
-download:"Save Image",
-openImage:"Open Image",
 voiceStart:"Listening...",
 voiceStop:"Stop recording",
 voiceUnsupported:"Your browser does not support speech recognition.",
 voicePermission:"Microphone permission was denied.",
 voiceEmpty:"No speech was detected.",
-voiceDone:"Voice text is ready",
-gallerySaved:"Image is ready to save",
-galleryError:"Image could not be saved"
+voiceDone:"Voice text is ready"
 }
 
 };
@@ -2053,176 +1595,6 @@ translations.fa[key]||
 key;
 
 }
-
-/* =========================
-   GALLERY
-========================= */
-
-function openGallery(){
-
-galleryModal.classList.add("open");
-
-renderGallery("general");
-
-}
-
-function closeGallery(){
-
-galleryModal.classList.remove("open");
-
-}
-
-function renderGallery(category){
-
-galleryGrid.innerHTML="";
-
-const images=galleryData[category]||[];
-
-if(!images.length){
-
-galleryGrid.innerHTML=`
-<div class="gallery-loading">
-تصویری موجود نیست
-</div>
-`;
-
-return;
-
-}
-
-images.forEach(function(item){
-
-const card=document.createElement("div");
-
-card.className="gallery-card";
-
-const img=document.createElement("img");
-
-img.className="gallery-image";
-img.loading="lazy";
-img.src=item.url;
-img.alt=item.name;
-
-img.onerror=function(){
-this.style.opacity=".25";
-};
-
-const bottom=document.createElement("div");
-
-bottom.className="gallery-card-bottom";
-
-const name=document.createElement("div");
-
-name.className="gallery-name";
-name.textContent=item.name;
-
-const save=document.createElement("button");
-
-save.className="save-gallery";
-save.type="button";
-save.textContent="ذخیره در گالری";
-
-save.addEventListener("click",function(){
-
-saveImageToGallery(item.url,item.name);
-
-});
-
-bottom.appendChild(name);
-bottom.appendChild(save);
-
-card.appendChild(img);
-card.appendChild(bottom);
-
-galleryGrid.appendChild(card);
-
-});
-
-}
-
-async function saveImageToGallery(url,name){
-
-const fileName=
-"FOX-AI-"+name.replace(/\s+/g,"-")+".jpg";
-
-try{
-
-const response=await fetch(url,{
-mode:"cors"
-});
-
-if(!response.ok){
-throw new Error("download");
-}
-
-const blob=await response.blob();
-
-const objectURL=
-URL.createObjectURL(blob);
-
-const link=document.createElement("a");
-
-link.href=objectURL;
-link.download=fileName;
-link.style.display="none";
-
-document.body.appendChild(link);
-
-link.click();
-
-link.remove();
-
-setTimeout(function(){
-URL.revokeObjectURL(objectURL);
-},3000);
-
-showToast(t("gallerySaved"));
-
-}catch(error){
-
-/*
-اگر مرورگر اجازه دانلود مستقیم ندهد،
-تصویر در تب جدید باز می‌شود تا کاربر
-بتواند آن را از مرورگر ذخیره کند.
-*/
-
-window.open(url,"_blank");
-
-showToast(t("gallerySaved"));
-
-}
-
-}
-
-imagesBtn.addEventListener("click",openGallery);
-
-galleryClose.addEventListener("click",closeGallery);
-
-galleryModal.addEventListener("click",function(event){
-
-if(event.target===galleryModal){
-closeGallery();
-}
-
-});
-
-galleryTabs.forEach(function(tab){
-
-tab.addEventListener("click",function(){
-
-galleryTabs.forEach(function(item){
-item.classList.remove("active");
-});
-
-tab.classList.add("active");
-
-renderGallery(
-tab.dataset.category
-);
-
-});
-
-});
 
 /* =========================
    SETTINGS
@@ -2365,7 +1737,7 @@ splash.classList.add("hide");
 },1600);
 
 /* =========================
-   VOICE
+   VOICE TO TEXT
 ========================= */
 
 function setupSpeechRecognition(){
@@ -2377,7 +1749,9 @@ window.webkitSpeechRecognition;
 if(!SpeechRecognition){
 
 voiceBtn.addEventListener("click",function(){
+
 showToast(t("voiceUnsupported"));
+
 });
 
 return;
@@ -2448,6 +1822,11 @@ autoResize();
 
 recognition.onerror=function(event){
 
+console.error(
+"Speech Recognition:",
+event.error
+);
+
 if(
 event.error==="not-allowed"||
 event.error==="service-not-allowed"
@@ -2468,7 +1847,9 @@ if(isListening){
 stopVoice(false);
 
 if(input.value.trim()){
+
 showToast(t("voiceDone"));
+
 }
 
 }
@@ -2520,7 +1901,11 @@ finalTranscript+=" ";
 
 recognition.start();
 
-}catch(error){}
+}catch(error){
+
+console.error(error);
+
+}
 
 }
 
@@ -2535,7 +1920,9 @@ voiceBtn.classList.remove("recording");
 voiceStatus.classList.remove("show");
 
 try{
+
 recognition.stop();
+
 }catch(error){}
 
 if(
@@ -2550,6 +1937,11 @@ showToast(t("voiceEmpty"));
 autoResize();
 
 }
+
+/*
+اگر کاربر زبان برنامه را عوض کند،
+زبان تشخیص صدا هم تغییر می‌کند.
+*/
 
 const originalSetLanguage=setLanguage;
 
