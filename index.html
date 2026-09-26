@@ -79,7 +79,9 @@ background:rgba(255,255,255,.88);
 border-bottom-color:rgba(0,0,0,.08);
 }
 
-body.light .icon-btn{
+body.light .icon-btn,
+body.light .attach-btn,
+body.light .voice-btn{
 background:rgba(0,0,0,.045);
 border-color:rgba(0,0,0,.08);
 color:#222;
@@ -130,38 +132,6 @@ color:#222;
 body.light .toast{
 background:#fff;
 color:#222;
-}
-
-body.light .code-wrap{
-background:#f7f7f7;
-border-color:rgba(0,0,0,.10);
-}
-
-body.light .code-head{
-background:#eaeaea;
-}
-
-body.light .code-body{
-color:#222;
-}
-
-body.light .selected-file{
-background:#eee;
-}
-
-body.light .message-file{
-background:rgba(0,0,0,.04);
-border-color:rgba(0,0,0,.08);
-}
-
-body.light .message-file-name{
-color:#333;
-}
-
-body.light .message-action{
-background:rgba(0,0,0,.04);
-border-color:rgba(0,0,0,.08);
-color:#666;
 }
 
 /* SPLASH */
@@ -547,91 +517,6 @@ color:#eee;
 font:12px/1.7 Consolas,monospace;
 }
 
-/* IMAGE GENERATION */
-
-.generated-image-wrap{
-width:min(100%,420px);
-margin-top:8px;
-border-radius:20px;
-overflow:hidden;
-border:1px solid rgba(255,115,0,.22);
-background:rgba(255,255,255,.025);
-box-shadow:0 15px 45px rgba(0,0,0,.30);
-}
-
-.generated-image{
-display:block;
-width:100%;
-height:auto;
-min-height:180px;
-object-fit:cover;
-background:#111;
-}
-
-.image-caption{
-padding:10px 12px;
-font-size:11px;
-color:#999;
-line-height:1.7;
-}
-
-.image-actions{
-display:flex;
-gap:7px;
-padding:0 10px 10px;
-}
-
-.image-action{
-flex:1;
-height:38px;
-border-radius:11px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.07);
-color:#ddd;
-font-size:11px;
-}
-
-.image-action.primary{
-background:rgba(255,115,0,.12);
-border-color:rgba(255,115,0,.25);
-color:var(--orange);
-}
-
-.image-loading{
-width:min(100%,420px);
-min-height:180px;
-border-radius:20px;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-gap:13px;
-background:linear-gradient(
-135deg,
-rgba(255,115,0,.08),
-rgba(255,255,255,.025)
-);
-border:1px solid rgba(255,115,0,.16);
-}
-
-.image-loader{
-width:36px;
-height:36px;
-border:3px solid rgba(255,115,0,.18);
-border-top-color:var(--orange);
-border-radius:50%;
-animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-to{transform:rotate(360deg);}
-}
-
-.image-loading-text{
-font-size:12px;
-color:#999;
-}
-
 /* COMPOSER */
 
 .file-input{
@@ -656,7 +541,8 @@ backdrop-filter:blur(20px);
 box-shadow:0 12px 35px rgba(0,0,0,.45);
 }
 
-.attach-btn{
+.attach-btn,
+.voice-btn{
 flex:0 0 43px;
 width:43px;
 height:43px;
@@ -667,6 +553,55 @@ border:1px solid rgba(255,255,255,.07);
 display:flex;
 align-items:center;
 justify-content:center;
+}
+
+.voice-btn{
+transition:.2s;
+}
+
+.voice-btn.recording{
+background:rgba(255,55,55,.15);
+border-color:rgba(255,70,70,.45);
+color:#ff5555;
+animation:voicePulse 1s infinite;
+}
+
+@keyframes voicePulse{
+50%{
+transform:scale(1.06);
+box-shadow:0 0 0 7px rgba(255,70,70,.08);
+}
+}
+
+.mic{
+width:14px;
+height:21px;
+border:2px solid currentColor;
+border-radius:9px;
+position:relative;
+}
+
+.mic:before{
+content:"";
+position:absolute;
+width:6px;
+height:10px;
+left:2px;
+bottom:-8px;
+border:2px solid currentColor;
+border-top:0;
+border-radius:0 0 8px 8px;
+}
+
+.mic:after{
+content:"";
+position:absolute;
+width:16px;
+height:7px;
+left:-3px;
+bottom:-10px;
+border-bottom:2px solid currentColor;
+border-radius:0 0 10px 10px;
 }
 
 .clip{
@@ -723,6 +658,44 @@ font-weight:bold;
 
 .send:disabled{
 opacity:.35;
+}
+
+/* VOICE STATUS */
+
+.voice-status{
+position:absolute;
+left:15px;
+right:15px;
+bottom:78px;
+z-index:24;
+display:none;
+align-items:center;
+justify-content:center;
+gap:9px;
+height:40px;
+border-radius:13px;
+background:rgba(20,20,20,.96);
+border:1px solid rgba(255,115,0,.18);
+color:#ddd;
+font-size:12px;
+backdrop-filter:blur(15px);
+}
+
+.voice-status.show{
+display:flex;
+}
+
+.voice-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:#ff4d4d;
+box-shadow:0 0 12px rgba(255,60,60,.7);
+animation:voiceDot 1s infinite;
+}
+
+@keyframes voiceDot{
+50%{opacity:.3}
 }
 
 /* FILE PREVIEW */
@@ -789,57 +762,6 @@ background:rgba(0,0,0,.8);
 color:#fff;
 font-size:15px;
 z-index:2;
-}
-
-/* MESSAGE FILE */
-
-.attachments-message{
-display:flex;
-flex-direction:column;
-gap:8px;
-margin-bottom:8px;
-}
-
-.message-file{
-display:flex;
-align-items:center;
-gap:9px;
-min-width:170px;
-max-width:270px;
-padding:9px 11px;
-border-radius:13px;
-background:rgba(0,0,0,.25);
-border:1px solid rgba(255,255,255,.08);
-}
-
-.message-file-icon{
-width:35px;
-height:35px;
-border-radius:10px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(255,115,0,.12);
-color:var(--orange);
-font-size:10px;
-font-weight:bold;
-}
-
-.message-file-name{
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-font-size:12px;
-color:#ddd;
-}
-
-.chat-image{
-display:block;
-max-width:230px;
-max-height:250px;
-border-radius:15px;
-border:1px solid rgba(255,115,0,.18);
-object-fit:cover;
 }
 
 /* DRAWER */
@@ -1243,12 +1165,17 @@ FOX <span>AI</span>
 <p id="welcomeText">
 سوالت را بنویس و ارسال کن.<br>
 عکس، PDF و فایل متنی هم می‌توانی ارسال کنی.<br>
-برای ساخت تصویر، درخواستت را بنویس.
+برای صحبت کردن روی میکروفون بزن.
 </p>
 
 </div>
 
 </main>
+
+<div class="voice-status" id="voiceStatus">
+<span class="voice-dot"></span>
+<span id="voiceStatusText">در حال گوش دادن...</span>
+</div>
 
 <div class="selected-files" id="selectedFiles"></div>
 
@@ -1256,6 +1183,10 @@ FOX <span>AI</span>
 
 <button class="attach-btn" id="attachBtn" type="button">
 <div class="clip"></div>
+</button>
+
+<button class="voice-btn" id="voiceBtn" type="button" title="تبدیل صدا به متن">
+<div class="mic"></div>
 </button>
 
 <input
@@ -1289,7 +1220,9 @@ spellcheck="false"
 تاریخچه چت
 </div>
 
-<button class="close" id="closeMenu" type="button">×</button>
+<button class="close" id="closeMenu" type="button">
+×
+</button>
 
 </div>
 
@@ -1443,10 +1376,6 @@ const IMAGE_MODEL =
 const API_URL =
 "https://api.groq.com/openai/v1/chat/completions";
 
-/*
-  سرویس عمومی ساخت تصویر
-  برای تولید تصویر کلید جداگانه لازم نیست.
-*/
 const IMAGE_GENERATION_URL =
 "https://image.pollinations.ai/prompt/";
 
@@ -1466,6 +1395,9 @@ const welcome=document.getElementById("welcome");
 const input=document.getElementById("input");
 const sendBtn=document.getElementById("sendBtn");
 const attachBtn=document.getElementById("attachBtn");
+const voiceBtn=document.getElementById("voiceBtn");
+const voiceStatus=document.getElementById("voiceStatus");
+const voiceStatusText=document.getElementById("voiceStatusText");
 const fileInput=document.getElementById("fileInput");
 const selectedFiles=document.getElementById("selectedFiles");
 
@@ -1517,6 +1449,12 @@ let pendingFiles=[];
 let isGenerating=false;
 let toastTimer;
 
+/* VOICE STATE */
+
+let recognition=null;
+let isListening=false;
+let finalTranscript="";
+
 let settings=loadSettings();
 
 if(!settings.language){
@@ -1543,7 +1481,7 @@ support:"پشتیبانی FOX AI",
 settings:"تنظیمات",
 clearHistory:"پاک کردن همه تاریخچه",
 welcomeTitle:'به <span>FOX AI</span> خوش آمدید',
-welcomeText:"سوالت را بنویس و ارسال کن.<br>عکس، PDF و فایل متنی هم می‌توانی ارسال کنی.<br>برای ساخت تصویر، درخواستت را بنویس.",
+welcomeText:"سوالت را بنویس و ارسال کن.<br>عکس، PDF و فایل متنی هم می‌توانی ارسال کنی.<br>برای صحبت کردن روی میکروفون بزن.",
 placeholder:"پیامت را بنویس...",
 supportTitle:"پشتیبانی FOX AI",
 supportDescription:"برای ارتباط با ما یکی از شبکه‌های اجتماعی زیر را انتخاب کنید.",
@@ -1585,7 +1523,12 @@ imageCreated:"تصویر ساخته شد",
 imageError:"ساخت تصویر انجام نشد. دوباره تلاش کنید.",
 download:"ذخیره تصویر",
 openImage:"باز کردن تصویر",
-imagePrompt:"ساخت تصویر"
+voiceStart:"در حال گوش دادن...",
+voiceStop:"توقف ضبط صدا",
+voiceUnsupported:"مرورگر شما از تبدیل صدا به متن پشتیبانی نمی‌کند.",
+voicePermission:"اجازه استفاده از میکروفون داده نشد.",
+voiceEmpty:"صدایی تشخیص داده نشد.",
+voiceDone:"متن ویس آماده شد"
 },
 
 en:{
@@ -1598,7 +1541,7 @@ support:"FOX AI Support",
 settings:"Settings",
 clearHistory:"Clear All History",
 welcomeTitle:'Welcome to <span>FOX AI</span>',
-welcomeText:"Write your question and send it.<br>You can also send images, PDF and text files.<br>Write your request to generate an image.",
+welcomeText:"Write your question and send it.<br>You can also send images, PDF and text files.<br>Tap the microphone to speak.",
 placeholder:"Write your message...",
 supportTitle:"FOX AI Support",
 supportDescription:"Choose one of the social networks below to contact us.",
@@ -1635,12 +1578,12 @@ codeCopy:"Copy",
 codeCopied:"Copied",
 fileReadError:"Failed to read the file",
 imageReadError:"Failed to read the image",
-imageCreating:"Creating image...",
-imageCreated:"Image created",
-imageError:"Image generation failed. Please try again.",
-download:"Save Image",
-openImage:"Open Image",
-imagePrompt:"Generate Image"
+voiceStart:"Listening...",
+voiceStop:"Stop recording",
+voiceUnsupported:"Your browser does not support speech recognition.",
+voicePermission:"Microphone permission was denied.",
+voiceEmpty:"No speech was detected.",
+voiceDone:"Voice text is ready"
 }
 
 };
@@ -1772,12 +1715,6 @@ settings.language=language;
 saveSettings();
 applyLanguage();
 
-showToast(
-language==="en"
-?"Language changed to English"
-:"زبان به فارسی تغییر کرد"
-);
-
 }
 
 function setTheme(theme){
@@ -1785,12 +1722,6 @@ function setTheme(theme){
 settings.theme=theme;
 saveSettings();
 applyTheme();
-
-showToast(
-theme==="light"
-?(settings.language==="en"?"Light theme enabled":"تم روشن فعال شد")
-:(settings.language==="en"?"Dark theme enabled":"تم تاریک فعال شد")
-);
 
 }
 
@@ -1806,6 +1737,234 @@ splash.classList.add("hide");
 },1600);
 
 /* =========================
+   VOICE TO TEXT
+========================= */
+
+function setupSpeechRecognition(){
+
+const SpeechRecognition=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
+
+if(!SpeechRecognition){
+
+voiceBtn.addEventListener("click",function(){
+
+showToast(t("voiceUnsupported"));
+
+});
+
+return;
+
+}
+
+recognition=new SpeechRecognition();
+
+recognition.continuous=true;
+recognition.interimResults=true;
+
+recognition.lang=
+settings.language==="en"
+?"en-US"
+:"fa-IR";
+
+recognition.onstart=function(){
+
+isListening=true;
+
+finalTranscript="";
+
+voiceBtn.classList.add("recording");
+
+voiceStatus.classList.add("show");
+
+voiceStatusText.textContent=
+t("voiceStart");
+
+};
+
+recognition.onresult=function(event){
+
+let interim="";
+
+for(
+let i=event.resultIndex;
+i<event.results.length;
+i++
+){
+
+const transcript=
+event.results[i][0].transcript;
+
+if(event.results[i].isFinal){
+
+finalTranscript+=transcript+" ";
+
+}else{
+
+interim+=transcript;
+
+}
+
+}
+
+const combined=
+(finalTranscript+interim).trim();
+
+if(combined){
+
+input.value=combined;
+autoResize();
+
+}
+
+};
+
+recognition.onerror=function(event){
+
+console.error(
+"Speech Recognition:",
+event.error
+);
+
+if(
+event.error==="not-allowed"||
+event.error==="service-not-allowed"
+){
+
+showToast(t("voicePermission"));
+
+}
+
+stopVoice(false);
+
+};
+
+recognition.onend=function(){
+
+if(isListening){
+
+stopVoice(false);
+
+if(input.value.trim()){
+
+showToast(t("voiceDone"));
+
+}
+
+}
+
+};
+
+voiceBtn.addEventListener(
+"click",
+toggleVoice
+);
+
+}
+
+function toggleVoice(){
+
+if(!recognition){
+
+showToast(t("voiceUnsupported"));
+return;
+
+}
+
+if(isListening){
+
+stopVoice(true);
+
+}else{
+
+startVoice();
+
+}
+
+}
+
+function startVoice(){
+
+try{
+
+recognition.lang=
+settings.language==="en"
+?"en-US"
+:"fa-IR";
+
+finalTranscript=input.value.trim();
+
+if(finalTranscript){
+finalTranscript+=" ";
+}
+
+recognition.start();
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+function stopVoice(manual){
+
+if(!recognition)return;
+
+isListening=false;
+
+voiceBtn.classList.remove("recording");
+
+voiceStatus.classList.remove("show");
+
+try{
+
+recognition.stop();
+
+}catch(error){}
+
+if(
+manual &&
+!input.value.trim()
+){
+
+showToast(t("voiceEmpty"));
+
+}
+
+autoResize();
+
+}
+
+/*
+اگر کاربر زبان برنامه را عوض کند،
+زبان تشخیص صدا هم تغییر می‌کند.
+*/
+
+const originalSetLanguage=setLanguage;
+
+setLanguage=function(language){
+
+settings.language=language;
+
+saveSettings();
+
+if(recognition){
+
+recognition.lang=
+language==="en"
+?"en-US"
+:"fa-IR";
+
+}
+
+applyLanguage();
+
+};
+
+/* =========================
    SETTINGS EVENTS
 ========================= */
 
@@ -1818,9 +1977,11 @@ settingsModal.classList.remove("open");
 });
 
 settingsModal.addEventListener("click",function(event){
+
 if(event.target===settingsModal){
 settingsModal.classList.remove("open");
 }
+
 });
 
 darkThemeBtn.addEventListener("click",function(){
@@ -1852,9 +2013,11 @@ supportModal.classList.remove("open");
 });
 
 supportModal.addEventListener("click",function(event){
+
 if(event.target===supportModal){
 supportModal.classList.remove("open");
 }
+
 });
 
 rubikaBtn.addEventListener("click",function(){
@@ -1911,6 +2074,7 @@ JSON.stringify(conversations)
 menuBtn.addEventListener("click",function(){
 
 renderHistory();
+
 drawer.classList.add("open");
 overlay.classList.add("open");
 
@@ -2053,6 +2217,10 @@ renderHistory();
 }
 
 function createNewChat(){
+
+if(isListening){
+stopVoice(true);
+}
 
 currentChat={
 id:String(Date.now()),
@@ -2282,111 +2450,6 @@ reader.readAsDataURL(file);
 }
 
 /* =========================
-   PDF
-========================= */
-
-let pdfReady=null;
-
-function loadPDFJS(){
-
-if(pdfReady)return pdfReady;
-
-pdfReady=new Promise(function(resolve,reject){
-
-if(window.pdfjsLib){
-
-resolve(window.pdfjsLib);
-return;
-
-}
-
-const script=document.createElement("script");
-
-script.src=
-"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
-
-script.type="module";
-
-script.onload=function(){
-
-setTimeout(function(){
-
-if(window.pdfjsLib){
-resolve(window.pdfjsLib);
-}else{
-reject(new Error("PDF.js unavailable"));
-}
-
-},500);
-
-};
-
-script.onerror=function(){
-reject(new Error("PDF.js failed"));
-};
-
-document.head.appendChild(script);
-
-});
-
-return pdfReady;
-
-}
-
-async function readPDF(file){
-
-try{
-
-const pdfjs=await loadPDFJS();
-
-if(!pdfjs||!pdfjs.getDocument){
-throw new Error("PDF engine unavailable");
-}
-
-const buffer=await file.arrayBuffer();
-
-const pdf=await pdfjs.getDocument({
-data:buffer
-}).promise;
-
-let result="";
-
-for(let page=1;page<=pdf.numPages;page++){
-
-const pdfPage=await pdf.getPage(page);
-
-const content=await pdfPage.getTextContent();
-
-const text=content.items.map(function(item){
-return item.str;
-}).join(" ");
-
-result+=
-"\n\n--- "+
-(settings.language==="en"?"Page ":"صفحه ")+
-page+
-" ---\n"+
-text;
-
-}
-
-return result;
-
-}catch(error){
-
-console.error("PDF error:",error);
-
-return(
-settings.language==="en"
-?"The PDF was selected, but its text could not be extracted in the browser."
-:"این فایل PDF انتخاب شده است، اما متن آن از داخل مرورگر قابل استخراج نبود."
-);
-
-}
-
-}
-
-/* =========================
    PROCESS FILES
 ========================= */
 
@@ -2416,13 +2479,11 @@ file.type==="application/pdf"||
 file.name.toLowerCase().endsWith(".pdf")
 ){
 
-const text=await readPDF(file);
-
 result.push({
 type:"text",
 name:file.name,
 mime:"application/pdf",
-text:text
+text:"PDF selected."
 });
 
 continue;
@@ -2504,8 +2565,6 @@ wrapper.className=
 "message "+
 (role==="user"?"user":"ai");
 
-wrapper.dataset.index=messageIndex;
-
 const content=document.createElement("div");
 content.className="message-content";
 
@@ -2517,62 +2576,18 @@ if(role==="assistant"){
 if(image){
 
 const imageWrap=document.createElement("div");
-imageWrap.className="generated-image-wrap";
+
+imageWrap.style.cssText=
+"width:min(100%,420px);border-radius:20px;overflow:hidden;border:1px solid rgba(255,115,0,.22);";
 
 const img=document.createElement("img");
 
-img.className="generated-image";
-img.src=image.url;
-img.alt=image.prompt||"FOX AI";
+img.style.cssText=
+"display:block;width:100%;height:auto;";
 
-img.addEventListener("load",function(){
-scrollBottom();
-});
+img.src=image.url;
 
 imageWrap.appendChild(img);
-
-const caption=document.createElement("div");
-
-caption.className="image-caption";
-caption.textContent=
-image.prompt||
-(settings.language==="en"
-?"Generated by FOX AI"
-:"تصویر ساخته‌شده توسط FOX AI");
-
-imageWrap.appendChild(caption);
-
-const actions=document.createElement("div");
-actions.className="image-actions";
-
-const download=document.createElement("button");
-
-download.type="button";
-download.className="image-action primary";
-download.textContent=t("download");
-
-download.addEventListener("click",function(){
-
-downloadImage(image.url);
-
-});
-
-const open=document.createElement("button");
-
-open.type="button";
-open.className="image-action";
-open.textContent=t("openImage");
-
-open.addEventListener("click",function(){
-
-window.open(image.url,"_blank");
-
-});
-
-actions.appendChild(download);
-actions.appendChild(open);
-
-imageWrap.appendChild(actions);
 
 bubble.appendChild(imageWrap);
 
@@ -2594,7 +2609,8 @@ if(attachments&&attachments.length){
 
 const box=document.createElement("div");
 
-box.className="attachments-message";
+box.style.cssText=
+"display:flex;flex-direction:column;gap:8px;margin-bottom:8px;";
 
 attachments.forEach(function(file){
 
@@ -2602,9 +2618,10 @@ if(file.type==="image"){
 
 const img=document.createElement("img");
 
-img.className="chat-image";
+img.style.cssText=
+"display:block;max-width:230px;max-height:250px;border-radius:15px;object-fit:cover;";
+
 img.src=file.dataURL;
-img.alt=file.name;
 
 box.appendChild(img);
 
@@ -2612,16 +2629,10 @@ box.appendChild(img);
 
 const item=document.createElement("div");
 
-item.className="message-file";
+item.style.cssText=
+"padding:9px 11px;border-radius:13px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.08);font-size:12px;";
 
-item.innerHTML=`
-<div class="message-file-icon">
-${escapeHTML(getExtension(file.name))}
-</div>
-<div class="message-file-name">
-${escapeHTML(file.name)}
-</div>
-`;
+item.textContent=file.name;
 
 box.appendChild(item);
 
@@ -2646,8 +2657,6 @@ bubble.appendChild(textNode);
 }
 
 content.appendChild(bubble);
-
-/* ACTIONS */
 
 if(showActions&&text){
 
@@ -2700,6 +2709,7 @@ content.appendChild(actions);
 }
 
 wrapper.appendChild(content);
+
 chat.appendChild(wrapper);
 
 if(scroll)scrollBottom();
@@ -2716,21 +2726,7 @@ async function copyMessage(text,button){
 
 try{
 
-if(navigator.clipboard){
-
 await navigator.clipboard.writeText(text);
-
-}else{
-
-const area=document.createElement("textarea");
-
-area.value=text;
-document.body.appendChild(area);
-area.select();
-document.execCommand("copy");
-area.remove();
-
-}
 
 const old=button.textContent;
 
@@ -2767,22 +2763,7 @@ showToast(t("shareCopied"));
 
 }
 
-}catch(error){
-
-if(error&&error.name==="AbortError")return;
-
-try{
-
-await navigator.clipboard.writeText(text);
-showToast(t("sharedTextCopied"));
-
-}catch(e){
-
-showToast(t("shareError"));
-
-}
-
-}
+}catch(error){}
 
 }
 
@@ -2809,8 +2790,6 @@ saveCurrentConversation();
 autoResize();
 input.focus();
 
-showToast(t("editMessage"));
-
 }
 
 /* =========================
@@ -2831,6 +2810,10 @@ async function sendMessage(){
 
 if(isGenerating)return;
 
+if(isListening){
+stopVoice(true);
+}
+
 const text=input.value.trim();
 
 if(!text&&pendingFiles.length===0){
@@ -2842,7 +2825,7 @@ return;
 
 if(
 !GROQ_API_KEY||
-GROQ_API_KEY==="کلید_GROQ_خودت_اینجا"
+GROQ_API_KEY.startsWith("کلید_")
 ){
 
 showToast(t("keyError"));
@@ -2868,20 +2851,17 @@ try{
 
 if(files.length){
 
-showToast(t("filePreparing"));
-
 processed=await processFiles(files);
 
 }
 
 }catch(error){
 
-console.error(error);
 showToast(t("fileError"));
 
 }
 
-/* اول بررسی می‌کنیم آیا کاربر درخواست ساخت تصویر داده */
+/* تصویر */
 
 if(shouldGenerateImage(text)){
 
@@ -2927,8 +2907,12 @@ return{
 type:file.type,
 name:file.name,
 mime:file.mime,
-dataURL:file.type==="image"?file.dataURL:undefined,
-text:file.type==="text"?file.text:undefined
+dataURL:file.type==="image"
+?file.dataURL
+:undefined,
+text:file.type==="text"
+?file.text
+:undefined
 };
 
 });
@@ -2950,9 +2934,7 @@ currentChat.title=text
 ?text.substring(0,45)
 :(files[0]
 ?files[0].name
-:(settings.language==="en"
-?"New Chat"
-:"چت جدید"));
+:"چت جدید");
 
 }
 
@@ -2980,15 +2962,9 @@ function shouldGenerateImage(text){
 
 if(!text)return false;
 
-const s=text
-.toLowerCase()
-.trim();
+const s=text.toLowerCase().trim();
 
-/*
-  عبارت‌های واضح ساخت تصویر
-*/
-
-const faWords=[
+const words=[
 "بساز",
 "ساخت تصویر",
 "تصویر بساز",
@@ -3005,32 +2981,18 @@ const faWords=[
 "تصویر می‌خوام",
 "عکس میخوام",
 "عکس می‌خوام",
-"تصویر برایم بساز",
-"عکس برایم بساز"
-];
-
-const enWords=[
 "generate image",
 "create image",
 "make image",
 "generate a picture",
 "create a picture",
 "make a picture",
-"draw",
-"generate photo",
-"create photo",
-"make a photo"
+"draw"
 ];
 
-if(faWords.some(function(word){
+return words.some(function(word){
 return s.includes(word);
-}))return true;
-
-if(enWords.some(function(word){
-return s.includes(word);
-}))return true;
-
-return false;
+});
 
 }
 
@@ -3051,8 +3013,28 @@ false
 );
 
 bubble.innerHTML=`
-<div class="image-loading">
-<div class="image-loader"></div>
+<div class="image-loading"
+style="
+width:min(100%,420px);
+min-height:180px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:13px;
+background:rgba(255,115,0,.08);
+border:1px solid rgba(255,115,0,.16);
+">
+<div class="image-loader"
+style="
+width:36px;
+height:36px;
+border:3px solid rgba(255,115,0,.18);
+border-top-color:var(--orange);
+border-radius:50%;
+animation:spin .8s linear infinite;
+"></div>
 <div class="image-loading-text">
 ${escapeHTML(t("imageCreating"))}
 </div>
@@ -3061,22 +3043,8 @@ ${escapeHTML(t("imageCreating"))}
 
 try{
 
-/*
-  حذف عبارت‌های دستوری تا پرامپت طبیعی‌تر شود
-*/
-
-let cleanPrompt=prompt
-.replace(
-/^(تصویر|عکس|نقاشی|پوستر|لوگو)\s*/i,
-""
-);
-
-if(!cleanPrompt.trim()){
-cleanPrompt=prompt;
-}
-
 const encodedPrompt=encodeURIComponent(
-cleanPrompt+
+prompt+
 ", high quality, detailed, cinematic, professional, sharp"
 );
 
@@ -3089,9 +3057,7 @@ await waitForImage(imageURL);
 
 const parent=bubble.closest(".message");
 
-if(parent){
-parent.remove();
-}
+if(parent)parent.remove();
 
 currentChat.messages.push({
 
@@ -3100,7 +3066,7 @@ content:"",
 attachments:[],
 image:{
 url:imageURL,
-prompt:cleanPrompt
+prompt:prompt
 }
 
 });
@@ -3111,7 +3077,7 @@ addMessageToUI(
 [],
 {
 url:imageURL,
-prompt:cleanPrompt
+prompt:prompt
 },
 true,
 currentChat.messages.length-1,
@@ -3119,22 +3085,14 @@ false
 );
 
 saveCurrentConversation();
-renderHistory();
 
 showToast(t("imageCreated"));
 
 }catch(error){
 
-console.error(
-"IMAGE GENERATION ERROR:",
-error
-);
-
 const parent=bubble.closest(".message");
 
-if(parent){
-parent.remove();
-}
+if(parent)parent.remove();
 
 addMessageToUI(
 "assistant",
@@ -3154,10 +3112,6 @@ input.focus();
 
 }
 
-/* =========================
-   WAIT FOR IMAGE
-========================= */
-
 function waitForImage(url){
 
 return new Promise(function(resolve,reject){
@@ -3171,7 +3125,7 @@ const timer=setTimeout(function(){
 if(finished)return;
 
 finished=true;
-reject(new Error("IMAGE_TIMEOUT"));
+reject();
 
 },90000);
 
@@ -3191,44 +3145,13 @@ if(finished)return;
 
 finished=true;
 clearTimeout(timer);
-reject(new Error("IMAGE_LOAD_ERROR"));
+reject();
 
 };
 
 img.src=url;
 
 });
-
-}
-
-/* =========================
-   DOWNLOAD IMAGE
-========================= */
-
-function downloadImage(url){
-
-try{
-
-const a=document.createElement("a");
-
-a.href=url;
-a.target="_blank";
-a.rel="noopener";
-
-a.download=
-"FOX-AI-"+Date.now()+".jpg";
-
-document.body.appendChild(a);
-a.click();
-a.remove();
-
-showToast(t("download"));
-
-}catch(error){
-
-window.open(url,"_blank");
-
-}
 
 }
 
@@ -3317,15 +3240,11 @@ let fileText="";
 
 textFiles.forEach(function(file){
 
-const content=
-String(file.text||"")
-.substring(0,120000);
-
 fileText+=
 "\n\n===== "+
 file.name+
 " =====\n"+
-content;
+String(file.text||"").substring(0,120000);
 
 });
 
@@ -3334,11 +3253,7 @@ let finalText=userText||"";
 if(imageText){
 
 finalText+=
-"\n\n"+
-(settings.language==="en"
-?"Image analysis:"
-:"نتیجه بررسی تصویر:")+
-"\n"+
+"\n\nنتیجه بررسی تصویر:\n"+
 imageText;
 
 }
@@ -3346,20 +3261,14 @@ imageText;
 if(fileText){
 
 finalText+=
-"\n\n"+
-(settings.language==="en"
-?"File content:"
-:"محتوای فایل:")+
+"\n\nمحتوای فایل:"+
 fileText;
 
 }
 
 if(!finalText.trim()){
 
-finalText=
-settings.language==="en"
-?"Analyze the attached file and explain the result."
-:"فایل پیوست‌شده را بررسی کن و نتیجه را توضیح بده.";
+finalText="فایل پیوست‌شده را بررسی کن و نتیجه را توضیح بده.";
 
 }
 
@@ -3396,10 +3305,8 @@ content:message.content||""
 });
 
 messages.push({
-
 role:"user",
 content:finalText
-
 });
 
 const response=await fetch(
@@ -3427,15 +3334,7 @@ stream:true
 );
 
 if(!response.ok){
-
 throw new Error("SERVER_ERROR");
-
-}
-
-if(!response.body){
-
-throw new Error("SERVER_ERROR");
-
 }
 
 const reader=response.body.getReader();
@@ -3477,12 +3376,11 @@ if(!trimmed.startsWith("data:")){
 continue;
 }
 
-const jsonText=
-trimmed.substring(5).trim();
-
 try{
 
-const data=JSON.parse(jsonText);
+const data=JSON.parse(
+trimmed.substring(5).trim()
+);
 
 const delta=
 data?.choices?.[0]?.delta?.content;
@@ -3520,9 +3418,7 @@ attachments:[]
 
 const parent=typing.closest(".message");
 
-if(parent){
-parent.remove();
-}
+if(parent)parent.remove();
 
 addMessageToUI(
 "assistant",
@@ -3535,17 +3431,14 @@ true
 );
 
 saveCurrentConversation();
-renderHistory();
 
 }catch(error){
 
-console.error("FOX AI ERROR:",error);
+console.error(error);
 
 const parent=typing.closest(".message");
 
-if(parent){
-parent.remove();
-}
+if(parent)parent.remove();
 
 addMessageToUI(
 "assistant",
@@ -3579,9 +3472,7 @@ const content=[
 type:"text",
 text:
 question||
-(settings.language==="en"
-?"Analyze this image and explain its important content."
-:"این تصویر را بررسی کن و محتوای مهم آن را توضیح بده.")
+"این تصویر را بررسی کن و محتوای مهم آن را توضیح بده."
 }
 
 ];
@@ -3632,9 +3523,7 @@ stream:false
 );
 
 if(!response.ok){
-
 throw new Error("IMAGE_CONNECTION_ERROR");
-
 }
 
 const data=await response.json();
@@ -3774,7 +3663,13 @@ toast.classList.remove("show");
 
 }
 
+/* =========================
+   START VOICE
+========================= */
+
+setupSpeechRecognition();
+
 </script>
 
 </body>
-    </html>
+   </html>
