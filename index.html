@@ -1,4 +1,4 @@
-s<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -81,7 +81,8 @@ border-bottom-color:rgba(0,0,0,.08);
 
 body.light .icon-btn,
 body.light .attach-btn,
-body.light .voice-btn{
+body.light .voice-btn,
+body.light .public-images-btn{
 background:rgba(0,0,0,.045);
 border-color:rgba(0,0,0,.08);
 color:#222;
@@ -116,7 +117,8 @@ color:#222;
 }
 
 body.light .support-box,
-body.light .settings-box{
+body.light .settings-box,
+body.light .public-images-panel{
 background:rgba(255,255,255,.97);
 }
 
@@ -566,6 +568,22 @@ color:#ff5555;
 animation:voicePulse 1s infinite;
 }
 
+.public-images-btn{
+font-size:20px;
+color:var(--orange);
+transition:.2s;
+}
+
+.public-images-btn:active{
+transform:scale(.94);
+background:rgba(255,115,0,.12);
+}
+
+.public-images-icon{
+font-size:20px;
+line-height:1;
+}
+
 @keyframes voicePulse{
 50%{
 transform:scale(1.06);
@@ -764,6 +782,143 @@ font-size:15px;
 z-index:2;
 }
 
+/* PUBLIC IMAGES */
+
+.public-images-modal{
+position:absolute;
+inset:0;
+z-index:85;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+padding:10px;
+background:rgba(0,0,0,.58);
+backdrop-filter:blur(8px);
+opacity:0;
+pointer-events:none;
+transition:.25s;
+}
+
+.public-images-modal.open{
+opacity:1;
+pointer-events:auto;
+}
+
+.public-images-panel{
+width:100%;
+max-width:680px;
+padding:14px;
+border-radius:22px;
+background:rgba(18,18,18,.97);
+border:1px solid rgba(255,115,0,.18);
+box-shadow:0 -15px 50px rgba(0,0,0,.5);
+transform:translateY(20px);
+transition:.25s;
+}
+
+.public-images-modal.open .public-images-panel{
+transform:translateY(0);
+}
+
+.public-images-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:11px;
+}
+
+.public-images-title{
+font-size:15px;
+font-weight:900;
+}
+
+.public-images-subtitle{
+font-size:10px;
+color:#777;
+margin-top:4px;
+}
+
+.public-images-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+}
+
+.public-image-card{
+position:relative;
+overflow:hidden;
+min-width:0;
+height:145px;
+border-radius:15px;
+background:#111;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.public-image-card img{
+display:block;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.public-image-overlay{
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+padding:8px;
+background:linear-gradient(
+transparent,
+rgba(0,0,0,.88)
+);
+}
+
+.public-image-name{
+font-size:10px;
+color:#fff;
+margin-bottom:6px;
+}
+
+.public-image-actions{
+display:flex;
+gap:5px;
+}
+
+.public-image-actions button{
+flex:1;
+height:29px;
+border-radius:8px;
+background:rgba(0,0,0,.72);
+border:1px solid rgba(255,255,255,.12);
+color:#fff;
+font-size:9px;
+}
+
+.public-image-actions button.save{
+color:var(--orange);
+border-color:rgba(255,115,0,.25);
+}
+
+@media(max-width:420px){
+
+.public-images-grid{
+gap:6px;
+}
+
+.public-image-card{
+height:125px;
+}
+
+.public-images-panel{
+padding:11px;
+}
+
+.public-image-actions button{
+font-size:8px;
+}
+
+}
+
 /* DRAWER */
 
 .overlay{
@@ -912,6 +1067,28 @@ display:flex;
 align-items:center;
 justify-content:center;
 gap:8px;
+}
+
+/* دکمه تصاویر داخل منوی سه خط */
+
+.public-images-menu-btn{
+width:100%;
+height:47px;
+margin-top:9px;
+border-radius:14px;
+color:#fff;
+background:rgba(255,115,0,.08);
+border:1px solid rgba(255,115,0,.18);
+font-size:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+.public-images-menu-btn .public-images-icon{
+color:var(--orange);
+font-size:20px;
 }
 
 .support-dot{
@@ -1210,6 +1387,31 @@ spellcheck="false"
 
 </div>
 
+<!-- تصاویر عمومی -->
+
+<div class="public-images-modal" id="publicImagesModal">
+
+<div class="public-images-panel">
+
+<div class="public-images-head">
+
+<div>
+<div class="public-images-title">تصاویر عمومی</div>
+<div class="public-images-subtitle">۳ تصویر آماده برای مشاهده و ذخیره</div>
+</div>
+
+<button class="close" id="publicImagesClose" type="button">
+×
+</button>
+
+</div>
+
+<div class="public-images-grid" id="publicImagesGrid"></div>
+
+</div>
+
+</div>
+
 <div class="overlay" id="overlay"></div>
 
 <aside class="drawer" id="drawer">
@@ -1237,6 +1439,11 @@ spellcheck="false"
 </div>
 
 <div id="historyList"></div>
+
+<button class="public-images-menu-btn" id="publicImagesBtn" type="button">
+<span class="public-images-icon">▧</span>
+<span>تصاویر عمومی</span>
+</button>
 
 <button class="support-btn" id="supportBtn" type="button">
 <span class="support-dot"></span>
@@ -1330,7 +1537,7 @@ spellcheck="false"
 
 <button class="setting-btn" id="persianBtn" type="button">
 <span class="setting-left">
-<span class="setting-icon">فا</span>
+<span class="setting-icon">🇮🇷</span>
 <span>فارسی</span>
 </span>
 <span class="setting-check" id="persianCheck"></span>
@@ -1338,10 +1545,34 @@ spellcheck="false"
 
 <button class="setting-btn" id="englishBtn" type="button">
 <span class="setting-left">
-<span class="setting-icon">EN</span>
+<span class="setting-icon">🇬🇧</span>
 <span>English</span>
 </span>
 <span class="setting-check" id="englishCheck"></span>
+</button>
+
+<button class="setting-btn" id="arabicBtn" type="button">
+<span class="setting-left">
+<span class="setting-icon">🇸🇦</span>
+<span>العربية</span>
+</span>
+<span class="setting-check" id="arabicCheck"></span>
+</button>
+
+<button class="setting-btn" id="turkishBtn" type="button">
+<span class="setting-left">
+<span class="setting-icon">🇹🇷</span>
+<span>Türkçe</span>
+</span>
+<span class="setting-check" id="turkishCheck"></span>
+</button>
+
+<button class="setting-btn" id="dariBtn" type="button">
+<span class="setting-left">
+<span class="setting-icon">🇦🇫</span>
+<span>دری</span>
+</span>
+<span class="setting-check" id="dariCheck"></span>
 </button>
 
 </div>
@@ -1425,13 +1656,200 @@ const darkThemeBtn=document.getElementById("darkThemeBtn");
 const lightThemeBtn=document.getElementById("lightThemeBtn");
 const persianBtn=document.getElementById("persianBtn");
 const englishBtn=document.getElementById("englishBtn");
+const arabicBtn=document.getElementById("arabicBtn");
+const turkishBtn=document.getElementById("turkishBtn");
+const dariBtn=document.getElementById("dariBtn");
 
 const darkCheck=document.getElementById("darkCheck");
 const lightCheck=document.getElementById("lightCheck");
 const persianCheck=document.getElementById("persianCheck");
 const englishCheck=document.getElementById("englishCheck");
+const arabicCheck=document.getElementById("arabicCheck");
+const turkishCheck=document.getElementById("turkishCheck");
+const dariCheck=document.getElementById("dariCheck");
 
 const toast=document.getElementById("toast");
+
+/* =========================
+   PUBLIC IMAGES
+========================= */
+
+const publicImagesBtn=document.getElementById("publicImagesBtn");
+const publicImagesModal=document.getElementById("publicImagesModal");
+const publicImagesClose=document.getElementById("publicImagesClose");
+const publicImagesGrid=document.getElementById("publicImagesGrid");
+
+const publicImages=[
+
+{
+title:"مدلینگ",
+url:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900"
+},
+
+{
+title:"طبیعت",
+url:"https://images.unsplash.com/photo-1500534623283-312aade485b7?w=900"
+},
+
+{
+title:"هنری",
+url:"https://images.unsplash.com/photo-1549490349-8643362247b5?w=900"
+}
+
+];
+
+function renderPublicImages(){
+
+publicImagesGrid.innerHTML="";
+
+publicImages.forEach(function(item){
+
+const card=document.createElement("div");
+
+card.className="public-image-card";
+
+const img=document.createElement("img");
+
+img.src=item.url;
+img.alt=item.title;
+img.loading="lazy";
+
+const overlay=document.createElement("div");
+
+overlay.className="public-image-overlay";
+
+const name=document.createElement("div");
+
+name.className="public-image-name";
+name.textContent=item.title;
+
+const actions=document.createElement("div");
+
+actions.className="public-image-actions";
+
+const openBtn=document.createElement("button");
+
+openBtn.type="button";
+openBtn.textContent="مشاهده";
+
+openBtn.addEventListener("click",function(){
+
+window.open(
+item.url,
+"_blank",
+"noopener,noreferrer"
+);
+
+});
+
+const saveBtn=document.createElement("button");
+
+saveBtn.type="button";
+saveBtn.className="save";
+saveBtn.textContent="ذخیره";
+
+saveBtn.addEventListener("click",function(){
+
+savePublicImage(
+item.url,
+item.title
+);
+
+});
+
+actions.appendChild(openBtn);
+actions.appendChild(saveBtn);
+
+overlay.appendChild(name);
+overlay.appendChild(actions);
+
+card.appendChild(img);
+card.appendChild(overlay);
+
+publicImagesGrid.appendChild(card);
+
+});
+
+}
+
+async function savePublicImage(url,name){
+
+try{
+
+const response=await fetch(url);
+
+if(!response.ok){
+throw new Error("DOWNLOAD_ERROR");
+}
+
+const blob=await response.blob();
+
+const objectURL=
+URL.createObjectURL(blob);
+
+const link=document.createElement("a");
+
+link.href=objectURL;
+
+link.download=
+(name||"FOX-AI-image")+
+".jpg";
+
+document.body.appendChild(link);
+
+link.click();
+
+link.remove();
+
+setTimeout(function(){
+
+URL.revokeObjectURL(objectURL);
+
+},1000);
+
+showToast("تصویر ذخیره شد");
+
+}catch(error){
+
+window.open(
+url,
+"_blank",
+"noopener,noreferrer"
+);
+
+showToast(
+"تصویر باز شد؛ از منوی مرورگر ذخیره کنید"
+);
+
+}
+
+}
+
+publicImagesBtn.addEventListener("click",function(){
+
+if(isGenerating)return;
+
+renderPublicImages();
+
+publicImagesModal.classList.add("open");
+
+});
+
+publicImagesClose.addEventListener("click",function(){
+
+publicImagesModal.classList.remove("open");
+
+});
+
+publicImagesModal.addEventListener("click",function(event){
+
+if(event.target===publicImagesModal){
+
+publicImagesModal.classList.remove("open");
+
+}
+
+});
 
 /* =========================
    STATE
@@ -1584,6 +2002,186 @@ voiceUnsupported:"Your browser does not support speech recognition.",
 voicePermission:"Microphone permission was denied.",
 voiceEmpty:"No speech was detected.",
 voiceDone:"Voice text is ready"
+},
+
+ar:{
+dir:"rtl",
+drawerTitle:"سجل المحادثات",
+newChat:"+ محادثة جديدة",
+historyTitle:"المحادثات السابقة",
+emptyHistory:"لا توجد محادثات محفوظة بعد",
+support:"دعم FOX AI",
+settings:"الإعدادات",
+clearHistory:"مسح كل السجل",
+welcomeTitle:'مرحباً بك في <span>FOX AI</span>',
+welcomeText:"اكتب سؤالك وأرسله.<br>يمكنك أيضاً إرسال الصور وملفات PDF والملفات النصية.<br>اضغط على الميكروفون للتحدث.",
+placeholder:"اكتب رسالتك...",
+supportTitle:"دعم FOX AI",
+supportDescription:"اختر إحدى شبكات التواصل الاجتماعي أدناه للتواصل معنا.",
+rubika:"روبيكا",
+instagram:"إنستغرام",
+close:"إغلاق",
+settingsTitle:"الإعدادات",
+settingsDescription:"اختر اللغة ومظهر FOX AI.",
+theme:"المظهر",
+darkTheme:"الوضع الداكن",
+lightTheme:"الوضع الفاتح",
+language:"اللغة",
+copy:"نسخ",
+copied:"تم النسخ",
+edit:"تعديل",
+share:"مشاركة",
+opened:"تم فتح المحادثة",
+emptyHistoryToast:"السجل فارغ",
+historyDeleted:"تم حذف السجل",
+confirmClear:"هل تريد حذف سجل المحادثات بالكامل؟",
+messageOrFile:"أدخل رسالة أو اختر ملفاً",
+filePreparing:"جارٍ تجهيز الملف...",
+fileError:"حدث خطأ أثناء تجهيز الملف",
+unsupported:"نوع الملف غير مدعوم",
+tooLarge:"أكبر من 20MB",
+copyError:"فشل النسخ",
+shareCopied:"تم نسخ النص للمشاركة",
+sharedTextCopied:"تم نسخ النص",
+shareError:"فشلت المشاركة",
+keyError:"أضف مفتاح Groq داخل الكود",
+connection:"اتصال الإنترنت أو VPN غير متاح. يرجى تشغيله والمحاولة مرة أخرى.",
+noAnswer:"لم يتم استلام رد من النموذج.",
+codeCopy:"نسخ",
+codeCopied:"تم النسخ",
+fileReadError:"فشل في قراءة الملف",
+imageReadError:"تعذر قراءة الصورة",
+imageCreating:"جارٍ إنشاء الصورة...",
+imageCreated:"تم إنشاء الصورة",
+imageError:"تعذر إنشاء الصورة. حاول مرة أخرى.",
+download:"حفظ الصورة",
+openImage:"فتح الصورة",
+voiceStart:"جارٍ الاستماع...",
+voiceStop:"إيقاف التسجيل",
+voiceUnsupported:"متصفحك لا يدعم تحويل الصوت إلى نص.",
+voicePermission:"تم رفض إذن استخدام الميكروفون.",
+voiceEmpty:"لم يتم اكتشاف صوت.",
+voiceDone:"النص الصوتي جاهز"
+},
+
+tr:{
+dir:"ltr",
+drawerTitle:"Sohbet Geçmişi",
+newChat:"+ Yeni Sohbet",
+historyTitle:"Önceki Konuşmalar",
+emptyHistory:"Henüz kayıtlı konuşma yok",
+support:"FOX AI Destek",
+settings:"Ayarlar",
+clearHistory:"Tüm Geçmişi Temizle",
+welcomeTitle:'<span>FOX AI</span> uygulamasına hoş geldiniz',
+welcomeText:"Sorunuzu yazıp gönderin.<br>Resim, PDF ve metin dosyaları da gönderebilirsiniz.<br>Konuşmak için mikrofona dokunun.",
+placeholder:"Mesajınızı yazın...",
+supportTitle:"FOX AI Destek",
+supportDescription:"Bizimle iletişime geçmek için aşağıdaki sosyal ağlardan birini seçin.",
+rubika:"Rubika",
+instagram:"Instagram",
+close:"Kapat",
+settingsTitle:"Ayarlar",
+settingsDescription:"FOX AI dilini ve görünümünü seçin.",
+theme:"Tema",
+darkTheme:"Koyu Tema",
+lightTheme:"Açık Tema",
+language:"Dil",
+copy:"Kopyala",
+copied:"Kopyalandı",
+edit:"Düzenle",
+share:"Paylaş",
+opened:"Konuşma açıldı",
+emptyHistoryToast:"Geçmiş boş",
+historyDeleted:"Geçmiş silindi",
+confirmClear:"Tüm sohbet geçmişi silinsin mi?",
+messageOrFile:"Bir mesaj yazın veya dosya seçin",
+filePreparing:"Dosya hazırlanıyor...",
+fileError:"Dosya hazırlanırken hata oluştu",
+unsupported:"Desteklenmeyen dosya türü",
+tooLarge:"20MB'dan büyük",
+copyError:"Kopyalama başarısız",
+shareCopied:"Metin paylaşım için kopyalandı",
+sharedTextCopied:"Metin kopyalandı",
+shareError:"Paylaşım başarısız",
+keyError:"Groq anahtarınızı koda ekleyin",
+connection:"İnternet veya VPN bağlantınız kapalı. Lütfen açıp tekrar deneyin.",
+noAnswer:"Modelden yanıt alınamadı.",
+codeCopy:"Kopyala",
+codeCopied:"Kopyalandı",
+fileReadError:"Dosya okunamadı",
+imageReadError:"Resim okunamadı",
+imageCreating:"Resim oluşturuluyor...",
+imageCreated:"Resim oluşturuldu",
+imageError:"Resim oluşturulamadı. Tekrar deneyin.",
+download:"Resmi kaydet",
+openImage:"Resmi aç",
+voiceStart:"Dinleniyor...",
+voiceStop:"Ses kaydını durdur",
+voiceUnsupported:"Tarayıcınız konuşmayı metne dönüştürmeyi desteklemiyor.",
+voicePermission:"Mikrofon izni verilmedi.",
+voiceEmpty:"Konuşma algılanmadı.",
+voiceDone:"Ses metni hazır"
+},
+
+dari:{
+dir:"rtl",
+drawerTitle:"تاریخچه چت",
+newChat:"+ چت جدید",
+historyTitle:"گفتگوهای قبلی",
+emptyHistory:"هنوز هیچ گفتگویی ذخیره نشده است",
+support:"پشتیبانی FOX AI",
+settings:"تنظیمات",
+clearHistory:"پاک کردن تمام تاریخچه",
+welcomeTitle:'به <span>FOX AI</span> خوش آمدید',
+welcomeText:"سوال تان را بنویسید و ارسال کنید.<br>عکس، PDF و فایل متنی نیز می‌توانید ارسال کنید.<br>برای صحبت کردن روی میکروفون بزنید.",
+placeholder:"پیام تان را بنویسید...",
+supportTitle:"پشتیبانی FOX AI",
+supportDescription:"برای ارتباط با ما یکی از شبکه‌های اجتماعی زیر را انتخاب کنید.",
+rubika:"روبیکا",
+instagram:"اینستاگرام",
+close:"بستن",
+settingsTitle:"تنظیمات",
+settingsDescription:"زبان و ظاهر FOX AI را انتخاب کنید.",
+theme:"تم",
+darkTheme:"تم تاریک",
+lightTheme:"تم روشن",
+language:"زبان",
+copy:"کاپی",
+copied:"کاپی شد",
+edit:"ویرایش",
+share:"اشتراک‌گذاری",
+opened:"گفتگو باز شد",
+emptyHistoryToast:"تاریخچه خالی است",
+historyDeleted:"تاریخچه پاک شد",
+confirmClear:"همه تاریخچه چت پاک شود؟",
+messageOrFile:"پیام یا فایل را وارد کنید",
+filePreparing:"در حال آماده‌سازی فایل...",
+fileError:"خطا در آماده‌سازی فایل",
+unsupported:"نوع فایل پشتیبانی نمی‌شود",
+tooLarge:"بیشتر از 20MB است",
+copyError:"کاپی انجام نشد",
+shareCopied:"متن برای اشتراک‌گذاری کاپی شد",
+sharedTextCopied:"متن کاپی شد",
+shareError:"اشتراک‌گذاری انجام نشد",
+keyError:"کلید Groq را داخل کد قرار دهید",
+connection:"اینترنت یا VPN شما خاموش است. لطفاً آن را روشن کرده و دوباره تلاش کنید.",
+noAnswer:"پاسخی از مدل دریافت نشد.",
+codeCopy:"کاپی",
+codeCopied:"کاپی شد",
+fileReadError:"خواندن فایل ناموفق بود",
+imageReadError:"تصویر خوانده نشد",
+imageCreating:"در حال ساخت تصویر...",
+imageCreated:"تصویر ساخته شد",
+imageError:"ساخت تصویر انجام نشد. دوباره تلاش کنید.",
+download:"ذخیره تصویر",
+openImage:"باز کردن تصویر",
+voiceStart:"در حال گوش دادن...",
+voiceStop:"توقف ضبط صدا",
+voiceUnsupported:"مرورگر شما از تبدیل صدا به متن پشتیبانی نمی‌کند.",
+voicePermission:"اجازه استفاده از میکروفون داده نشد.",
+voiceEmpty:"صدایی تشخیص داده نشد.",
+voiceDone:"متن ویس آماده شد"
 }
 
 };
@@ -1700,9 +2298,15 @@ document.getElementById("settingsCloseText").textContent=lang.close;
 
 persianBtn.classList.toggle("active",settings.language==="fa");
 englishBtn.classList.toggle("active",settings.language==="en");
+arabicBtn.classList.toggle("active",settings.language==="ar");
+turkishBtn.classList.toggle("active",settings.language==="tr");
+dariBtn.classList.toggle("active",settings.language==="dari");
 
 persianCheck.textContent=settings.language==="fa"?"✓":"";
 englishCheck.textContent=settings.language==="en"?"✓":"";
+arabicCheck.textContent=settings.language==="ar"?"✓":"";
+turkishCheck.textContent=settings.language==="tr"?"✓":"";
+dariCheck.textContent=settings.language==="dari"?"✓":"";
 
 renderHistory();
 renderMessages();
@@ -1766,6 +2370,12 @@ recognition.interimResults=true;
 recognition.lang=
 settings.language==="en"
 ?"en-US"
+:settings.language==="ar"
+?"ar-SA"
+:settings.language==="tr"
+?"tr-TR"
+:settings.language==="dari"
+?"fa-AF"
 :"fa-IR";
 
 recognition.onstart=function(){
@@ -1891,6 +2501,12 @@ try{
 recognition.lang=
 settings.language==="en"
 ?"en-US"
+:settings.language==="ar"
+?"ar-SA"
+:settings.language==="tr"
+?"tr-TR"
+:settings.language==="dari"
+?"fa-AF"
 :"fa-IR";
 
 finalTranscript=input.value.trim();
@@ -1938,11 +2554,6 @@ autoResize();
 
 }
 
-/*
-اگر کاربر زبان برنامه را عوض کند،
-زبان تشخیص صدا هم تغییر می‌کند.
-*/
-
 const originalSetLanguage=setLanguage;
 
 setLanguage=function(language){
@@ -1956,6 +2567,12 @@ if(recognition){
 recognition.lang=
 language==="en"
 ?"en-US"
+:language==="ar"
+?"ar-SA"
+:language==="tr"
+?"tr-TR"
+:language==="dari"
+?"fa-AF"
 :"fa-IR";
 
 }
@@ -1998,6 +2615,18 @@ setLanguage("fa");
 
 englishBtn.addEventListener("click",function(){
 setLanguage("en");
+});
+
+arabicBtn.addEventListener("click",function(){
+setLanguage("ar");
+});
+
+turkishBtn.addEventListener("click",function(){
+setLanguage("tr");
+});
+
+dariBtn.addEventListener("click",function(){
+setLanguage("dari");
 });
 
 /* =========================
@@ -3280,6 +3909,12 @@ content:
 "You are FOX AI, a helpful, fast and accurate AI assistant. "+
 (settings.language==="en"
 ?"Answer in English unless the user asks for another language. "
+:settings.language==="ar"
+?"أجب باللغة العربية ما لم يطلب المستخدم لغة أخرى. "
+:settings.language==="tr"
+?"Kullanıcı başka bir dil istemediği sürece Türkçe cevap ver. "
+:settings.language==="dari"
+?"اگر کاربر به دری می‌نویسد، به دری پاسخ بده. "
 :"اگر کاربر فارسی می‌نویسد، به فارسی پاسخ بده. ")+
 "Analyze attached file contents carefully. "+
 "Do not use emojis unless specifically requested."
