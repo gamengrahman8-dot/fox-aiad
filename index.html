@@ -16,15 +16,19 @@ padding:0;
 
 :root{
 --bg:#070707;
+--surface:#0c0c0c;
+--surface2:#141414;
 --orange:#ff7300;
 --text:#f5f5f5;
+--muted:#888;
+--border:rgba(255,255,255,.07);
 }
 
 html,body{
 width:100%;
 height:100%;
 overflow:hidden;
-background:#070707;
+background:var(--bg);
 color:var(--text);
 font-family:Tahoma,Arial,sans-serif;
 }
@@ -52,7 +56,112 @@ position:relative;
 overflow:hidden;
 background:
 radial-gradient(circle at 50% -10%,rgba(255,115,0,.13),transparent 38%),
-#070707;
+var(--bg);
+}
+
+body.light{
+--bg:#f4f4f4;
+--surface:#fff;
+--surface2:#eee;
+--text:#171717;
+--muted:#666;
+--border:rgba(0,0,0,.10);
+}
+
+body.light .app{
+background:
+radial-gradient(circle at 50% -10%,rgba(255,115,0,.12),transparent 38%),
+#f4f4f4;
+}
+
+body.light .header{
+background:rgba(255,255,255,.88);
+border-bottom-color:rgba(0,0,0,.08);
+}
+
+body.light .icon-btn{
+background:rgba(0,0,0,.045);
+border-color:rgba(0,0,0,.08);
+color:#222;
+}
+
+body.light .menu-lines span{
+background:#222;
+}
+
+body.light .composer{
+background:rgba(255,255,255,.94);
+border-color:rgba(0,0,0,.09);
+box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+body.light .input{
+color:#111;
+}
+
+body.light .input::placeholder{
+color:#888;
+}
+
+body.light .drawer{
+background:#fff;
+}
+
+body.light .history-item{
+background:rgba(0,0,0,.035);
+border-color:rgba(0,0,0,.06);
+color:#222;
+}
+
+body.light .support-box,
+body.light .settings-box{
+background:rgba(255,255,255,.97);
+}
+
+body.light .social-btn,
+body.light .setting-btn,
+body.light .support-close,
+body.light .settings-close{
+background:rgba(0,0,0,.04);
+border-color:rgba(0,0,0,.08);
+color:#222;
+}
+
+body.light .toast{
+background:#fff;
+color:#222;
+}
+
+body.light .code-wrap{
+background:#f7f7f7;
+border-color:rgba(0,0,0,.10);
+}
+
+body.light .code-head{
+background:#eaeaea;
+}
+
+body.light .code-body{
+color:#222;
+}
+
+body.light .selected-file{
+background:#eee;
+}
+
+body.light .message-file{
+background:rgba(0,0,0,.04);
+border-color:rgba(0,0,0,.08);
+}
+
+body.light .message-file-name{
+color:#333;
+}
+
+body.light .message-action{
+background:rgba(0,0,0,.04);
+border-color:rgba(0,0,0,.08);
+color:#666;
 }
 
 /* SPLASH */
@@ -65,7 +174,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 flex-direction:column;
-background:#070707;
+background:var(--bg);
 transition:.5s ease;
 }
 
@@ -246,10 +355,12 @@ font-size:25px;
 
 .welcome p{
 margin-top:10px;
-color:#888;
+color:var(--muted);
 font-size:13px;
 line-height:1.9;
 }
+
+/* MESSAGES */
 
 .message{
 width:100%;
@@ -316,11 +427,11 @@ border:none;
 text-align:right;
 }
 
-.ai .bubble.error{
-color:#ff7777;
+body.light .ai .bubble{
+color:#222;
 }
 
-/* MESSAGE ACTIONS */
+/* ACTIONS */
 
 .message-actions{
 display:flex;
@@ -351,30 +462,12 @@ display:flex;
 align-items:center;
 justify-content:center;
 gap:4px;
-transition:.15s ease;
 }
 
 .message-action:active{
 transform:scale(.94);
 background:rgba(255,115,0,.10);
 color:var(--orange);
-}
-
-.message-action:hover{
-color:#fff;
-border-color:rgba(255,115,0,.20);
-}
-
-.message-action.copy-action{
-color:#ccc;
-}
-
-.message-action.edit-action{
-color:#aaa;
-}
-
-.message-action.share-action{
-color:#aaa;
 }
 
 /* TYPING */
@@ -454,6 +547,91 @@ color:#eee;
 font:12px/1.7 Consolas,monospace;
 }
 
+/* IMAGE GENERATION */
+
+.generated-image-wrap{
+width:min(100%,420px);
+margin-top:8px;
+border-radius:20px;
+overflow:hidden;
+border:1px solid rgba(255,115,0,.22);
+background:rgba(255,255,255,.025);
+box-shadow:0 15px 45px rgba(0,0,0,.30);
+}
+
+.generated-image{
+display:block;
+width:100%;
+height:auto;
+min-height:180px;
+object-fit:cover;
+background:#111;
+}
+
+.image-caption{
+padding:10px 12px;
+font-size:11px;
+color:#999;
+line-height:1.7;
+}
+
+.image-actions{
+display:flex;
+gap:7px;
+padding:0 10px 10px;
+}
+
+.image-action{
+flex:1;
+height:38px;
+border-radius:11px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.07);
+color:#ddd;
+font-size:11px;
+}
+
+.image-action.primary{
+background:rgba(255,115,0,.12);
+border-color:rgba(255,115,0,.25);
+color:var(--orange);
+}
+
+.image-loading{
+width:min(100%,420px);
+min-height:180px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:13px;
+background:linear-gradient(
+135deg,
+rgba(255,115,0,.08),
+rgba(255,255,255,.025)
+);
+border:1px solid rgba(255,115,0,.16);
+}
+
+.image-loader{
+width:36px;
+height:36px;
+border:3px solid rgba(255,115,0,.18);
+border-top-color:var(--orange);
+border-radius:50%;
+animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+.image-loading-text{
+font-size:12px;
+color:#999;
+}
+
 /* COMPOSER */
 
 .file-input{
@@ -489,7 +667,6 @@ border:1px solid rgba(255,255,255,.07);
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:22px;
 }
 
 .clip{
@@ -542,7 +719,6 @@ align-items:center;
 justify-content:center;
 font-size:22px;
 font-weight:bold;
-touch-action:manipulation;
 }
 
 .send:disabled{
@@ -800,9 +976,8 @@ color:#ff7777;
 background:rgba(255,60,60,.07);
 }
 
-/* SUPPORT */
-
-.support-btn{
+.support-btn,
+.settings-btn{
 width:100%;
 height:47px;
 margin-top:9px;
@@ -817,10 +992,6 @@ justify-content:center;
 gap:8px;
 }
 
-.support-btn:active{
-transform:scale(.98);
-}
-
 .support-dot{
 width:9px;
 height:9px;
@@ -829,9 +1000,15 @@ background:var(--orange);
 box-shadow:0 0 10px rgba(255,115,0,.5);
 }
 
-/* SUPPORT MODAL */
+.settings-icon{
+font-size:17px;
+color:var(--orange);
+}
 
-.support-modal{
+/* MODALS */
+
+.support-modal,
+.settings-modal{
 position:absolute;
 inset:0;
 z-index:90;
@@ -846,12 +1023,14 @@ pointer-events:none;
 transition:.25s;
 }
 
-.support-modal.open{
+.support-modal.open,
+.settings-modal.open{
 opacity:1;
 pointer-events:auto;
 }
 
-.support-box{
+.support-box,
+.settings-box{
 width:100%;
 max-width:360px;
 padding:22px;
@@ -864,16 +1043,19 @@ transform:translateY(15px) scale(.96);
 transition:.25s;
 }
 
-.support-modal.open .support-box{
+.support-modal.open .support-box,
+.settings-modal.open .settings-box{
 transform:translateY(0) scale(1);
 }
 
-.support-box h2{
+.support-box h2,
+.settings-box h2{
 font-size:20px;
 margin-bottom:7px;
 }
 
-.support-box p{
+.support-box p,
+.settings-box p{
 font-size:12px;
 color:#888;
 margin-bottom:20px;
@@ -898,11 +1080,6 @@ font-size:13px;
 font-weight:bold;
 background:rgba(255,255,255,.045);
 border:1px solid rgba(255,255,255,.08);
-transition:.18s;
-}
-
-.social-btn:active{
-transform:scale(.95);
 }
 
 .social-icon{
@@ -918,15 +1095,14 @@ font-weight:900;
 
 .rubika-icon{
 background:#1787e8;
-color:#fff;
 }
 
 .instagram-icon{
 background:linear-gradient(135deg,#feda75,#d62976,#962fbf,#4f5bd5);
-color:#fff;
 }
 
-.support-close{
+.support-close,
+.settings-close{
 width:100%;
 height:44px;
 margin-top:14px;
@@ -935,6 +1111,64 @@ background:rgba(255,255,255,.05);
 border:1px solid rgba(255,255,255,.07);
 color:#aaa;
 font-size:13px;
+}
+
+/* SETTINGS */
+
+.settings-options{
+display:flex;
+flex-direction:column;
+gap:10px;
+text-align:right;
+}
+
+.settings-section{
+color:#777;
+font-size:11px;
+margin:4px 4px 0;
+}
+
+.setting-btn{
+width:100%;
+min-height:48px;
+border-radius:14px;
+padding:0 14px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.07);
+color:#ddd;
+font-size:13px;
+}
+
+.setting-btn.active{
+border-color:rgba(255,115,0,.35);
+background:rgba(255,115,0,.10);
+}
+
+.setting-left{
+display:flex;
+align-items:center;
+gap:9px;
+}
+
+.setting-icon{
+width:32px;
+height:32px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,115,0,.10);
+color:var(--orange);
+font-size:15px;
+}
+
+.setting-check{
+color:var(--orange);
+font-size:18px;
+font-weight:bold;
 }
 
 /* TOAST */
@@ -1002,13 +1236,14 @@ FOX <span>AI</span>
 
 <div class="welcome-logo">F</div>
 
-<h1>
+<h1 id="welcomeTitle">
 به <span>FOX AI</span> خوش آمدید
 </h1>
 
-<p>
+<p id="welcomeText">
 سوالت را بنویس و ارسال کن.<br>
-عکس، PDF و فایل متنی هم می‌توانی ارسال کنی.
+عکس، PDF و فایل متنی هم می‌توانی ارسال کنی.<br>
+برای ساخت تصویر، درخواستت را بنویس.
 </p>
 
 </div>
@@ -1050,13 +1285,11 @@ spellcheck="false"
 
 <div class="drawer-head">
 
-<div class="drawer-title">
+<div class="drawer-title" id="drawerTitle">
 تاریخچه چت
 </div>
 
-<button class="close" id="closeMenu" type="button">
-×
-</button>
+<button class="close" id="closeMenu" type="button">×</button>
 
 </div>
 
@@ -1066,7 +1299,7 @@ spellcheck="false"
 + چت جدید
 </button>
 
-<div class="history-title">
+<div class="history-title" id="historyTitle">
 گفتگوهای قبلی
 </div>
 
@@ -1074,7 +1307,12 @@ spellcheck="false"
 
 <button class="support-btn" id="supportBtn" type="button">
 <span class="support-dot"></span>
-پشتیبانی FOX AI
+<span id="supportText">پشتیبانی FOX AI</span>
+</button>
+
+<button class="settings-btn" id="settingsBtn" type="button">
+<span class="settings-icon">⚙</span>
+<span id="settingsText">تنظیمات</span>
 </button>
 
 </div>
@@ -1089,15 +1327,15 @@ spellcheck="false"
 
 </aside>
 
-<!-- SUPPORT MODAL -->
+<!-- SUPPORT -->
 
 <div class="support-modal" id="supportModal">
 
 <div class="support-box">
 
-<h2>پشتیبانی FOX AI</h2>
+<h2 id="supportTitle">پشتیبانی FOX AI</h2>
 
-<p>
+<p id="supportDescription">
 برای ارتباط با ما یکی از شبکه‌های اجتماعی زیر را انتخاب کنید.
 </p>
 
@@ -1105,18 +1343,78 @@ spellcheck="false"
 
 <button class="social-btn" id="rubikaBtn" type="button">
 <div class="social-icon rubika-icon">R</div>
-<span>روبیکا</span>
+<span id="rubikaText">روبیکا</span>
 </button>
 
 <button class="social-btn" id="instagramBtn" type="button">
 <div class="social-icon instagram-icon">◎</div>
-<span>اینستاگرام</span>
+<span id="instagramText">اینستاگرام</span>
 </button>
 
 </div>
 
 <button class="support-close" id="supportClose" type="button">
-بستن
+<span id="supportCloseText">بستن</span>
+</button>
+
+</div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="settings-modal" id="settingsModal">
+
+<div class="settings-box">
+
+<h2 id="settingsTitle">تنظیمات</h2>
+
+<p id="settingsDescription">
+زبان و ظاهر FOX AI را انتخاب کنید.
+</p>
+
+<div class="settings-options">
+
+<div class="settings-section" id="themeLabel">تم</div>
+
+<button class="setting-btn" id="darkThemeBtn" type="button">
+<span class="setting-left">
+<span class="setting-icon">◐</span>
+<span id="darkThemeText">تم تاریک</span>
+</span>
+<span class="setting-check" id="darkCheck"></span>
+</button>
+
+<button class="setting-btn" id="lightThemeBtn" type="button">
+<span class="setting-left">
+<span class="setting-icon">☼</span>
+<span id="lightThemeText">تم روشن</span>
+</span>
+<span class="setting-check" id="lightCheck"></span>
+</button>
+
+<div class="settings-section" id="languageLabel">زبان</div>
+
+<button class="setting-btn" id="persianBtn" type="button">
+<span class="setting-left">
+<span class="setting-icon">فا</span>
+<span>فارسی</span>
+</span>
+<span class="setting-check" id="persianCheck"></span>
+</button>
+
+<button class="setting-btn" id="englishBtn" type="button">
+<span class="setting-left">
+<span class="setting-icon">EN</span>
+<span>English</span>
+</span>
+<span class="setting-check" id="englishCheck"></span>
+</button>
+
+</div>
+
+<button class="settings-close" id="settingsClose" type="button">
+<span id="settingsCloseText">بستن</span>
 </button>
 
 </div>
@@ -1129,7 +1427,9 @@ spellcheck="false"
 
 <script>
 
-/* CONFIG */
+/* =========================
+   CONFIG
+========================= */
 
 const GROQ_API_KEY =
 "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";
@@ -1143,10 +1443,22 @@ const IMAGE_MODEL =
 const API_URL =
 "https://api.groq.com/openai/v1/chat/completions";
 
+/*
+  سرویس عمومی ساخت تصویر
+  برای تولید تصویر کلید جداگانه لازم نیست.
+*/
+const IMAGE_GENERATION_URL =
+"https://image.pollinations.ai/prompt/";
+
 const STORAGE_KEY =
 "fox_ai_history_final";
 
-/* ELEMENTS */
+const SETTINGS_KEY =
+"fox_ai_settings";
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const splash=document.getElementById("splash");
 const chat=document.getElementById("chat");
@@ -1156,23 +1468,42 @@ const sendBtn=document.getElementById("sendBtn");
 const attachBtn=document.getElementById("attachBtn");
 const fileInput=document.getElementById("fileInput");
 const selectedFiles=document.getElementById("selectedFiles");
+
 const menuBtn=document.getElementById("menuBtn");
 const closeMenu=document.getElementById("closeMenu");
 const overlay=document.getElementById("overlay");
 const drawer=document.getElementById("drawer");
+
 const newChatBtn=document.getElementById("newChatBtn");
 const drawerNewChat=document.getElementById("drawerNewChat");
 const historyList=document.getElementById("historyList");
 const clearHistory=document.getElementById("clearHistory");
-const supportBtn=document.getElementById("supportBtn");
-const toast=document.getElementById("toast");
 
+const supportBtn=document.getElementById("supportBtn");
 const supportModal=document.getElementById("supportModal");
 const supportClose=document.getElementById("supportClose");
 const rubikaBtn=document.getElementById("rubikaBtn");
 const instagramBtn=document.getElementById("instagramBtn");
 
-/* STATE */
+const settingsBtn=document.getElementById("settingsBtn");
+const settingsModal=document.getElementById("settingsModal");
+const settingsClose=document.getElementById("settingsClose");
+
+const darkThemeBtn=document.getElementById("darkThemeBtn");
+const lightThemeBtn=document.getElementById("lightThemeBtn");
+const persianBtn=document.getElementById("persianBtn");
+const englishBtn=document.getElementById("englishBtn");
+
+const darkCheck=document.getElementById("darkCheck");
+const lightCheck=document.getElementById("lightCheck");
+const persianCheck=document.getElementById("persianCheck");
+const englishCheck=document.getElementById("englishCheck");
+
+const toast=document.getElementById("toast");
+
+/* =========================
+   STATE
+========================= */
 
 let conversations=loadHistory();
 
@@ -1186,16 +1517,331 @@ let pendingFiles=[];
 let isGenerating=false;
 let toastTimer;
 
-/* START */
+let settings=loadSettings();
+
+if(!settings.language){
+settings.language="fa";
+}
+
+if(!settings.theme){
+settings.theme="dark";
+}
+
+/* =========================
+   TRANSLATIONS
+========================= */
+
+const translations={
+
+fa:{
+dir:"rtl",
+drawerTitle:"تاریخچه چت",
+newChat:"+ چت جدید",
+historyTitle:"گفتگوهای قبلی",
+emptyHistory:"هنوز گفتگویی ذخیره نشده است",
+support:"پشتیبانی FOX AI",
+settings:"تنظیمات",
+clearHistory:"پاک کردن همه تاریخچه",
+welcomeTitle:'به <span>FOX AI</span> خوش آمدید',
+welcomeText:"سوالت را بنویس و ارسال کن.<br>عکس، PDF و فایل متنی هم می‌توانی ارسال کنی.<br>برای ساخت تصویر، درخواستت را بنویس.",
+placeholder:"پیامت را بنویس...",
+supportTitle:"پشتیبانی FOX AI",
+supportDescription:"برای ارتباط با ما یکی از شبکه‌های اجتماعی زیر را انتخاب کنید.",
+rubika:"روبیکا",
+instagram:"اینستاگرام",
+close:"بستن",
+settingsTitle:"تنظیمات",
+settingsDescription:"زبان و ظاهر FOX AI را انتخاب کنید.",
+theme:"تم",
+darkTheme:"تم تاریک",
+lightTheme:"تم روشن",
+language:"زبان",
+copy:"کپی",
+copied:"کپی شد",
+edit:"ویرایش",
+share:"اشتراک‌گذاری",
+opened:"گفتگو باز شد",
+emptyHistoryToast:"تاریخچه خالی است",
+historyDeleted:"تاریخچه پاک شد",
+confirmClear:"همه تاریخچه چت پاک شود؟",
+messageOrFile:"پیام یا فایل را وارد کن",
+filePreparing:"در حال آماده‌سازی فایل...",
+fileError:"خطا در آماده‌سازی فایل",
+unsupported:"نوع فایل پشتیبانی نمی‌شود",
+tooLarge:"بیشتر از 20MB است",
+copyError:"کپی انجام نشد",
+shareCopied:"متن برای اشتراک‌گذاری کپی شد",
+sharedTextCopied:"متن کپی شد",
+shareError:"اشتراک‌گذاری انجام نشد",
+keyError:"کلید Groq را داخل کد قرار بده",
+connection:"اینترنت یا VPN شما خاموش است. لطفاً آن را روشن کرده و سپس دوباره تلاش کنید.",
+noAnswer:"پاسخی از مدل دریافت نشد.",
+codeCopy:"کپی",
+codeCopied:"کپی شد",
+fileReadError:"خواندن فایل ناموفق بود",
+imageReadError:"تصویر خوانده نشد",
+imageCreating:"در حال ساخت تصویر...",
+imageCreated:"تصویر ساخته شد",
+imageError:"ساخت تصویر انجام نشد. دوباره تلاش کنید.",
+download:"ذخیره تصویر",
+openImage:"باز کردن تصویر",
+imagePrompt:"ساخت تصویر"
+},
+
+en:{
+dir:"ltr",
+drawerTitle:"Chat History",
+newChat:"+ New Chat",
+historyTitle:"Previous Conversations",
+emptyHistory:"No conversations saved yet",
+support:"FOX AI Support",
+settings:"Settings",
+clearHistory:"Clear All History",
+welcomeTitle:'Welcome to <span>FOX AI</span>',
+welcomeText:"Write your question and send it.<br>You can also send images, PDF and text files.<br>Write your request to generate an image.",
+placeholder:"Write your message...",
+supportTitle:"FOX AI Support",
+supportDescription:"Choose one of the social networks below to contact us.",
+rubika:"Rubika",
+instagram:"Instagram",
+close:"Close",
+settingsTitle:"Settings",
+settingsDescription:"Choose the language and appearance of FOX AI.",
+theme:"Theme",
+darkTheme:"Dark Theme",
+lightTheme:"Light Theme",
+language:"Language",
+copy:"Copy",
+copied:"Copied",
+edit:"Edit",
+share:"Share",
+opened:"Conversation opened",
+emptyHistoryToast:"History is empty",
+historyDeleted:"History deleted",
+confirmClear:"Delete all chat history?",
+messageOrFile:"Enter a message or select a file",
+filePreparing:"Preparing file...",
+fileError:"File preparation failed",
+unsupported:"Unsupported file type",
+tooLarge:"is larger than 20MB",
+copyError:"Copy failed",
+shareCopied:"Text copied for sharing",
+sharedTextCopied:"Text copied",
+shareError:"Sharing failed",
+keyError:"Add your Groq key to the code",
+connection:"Your internet connection or VPN is off. Please turn it on and try again.",
+noAnswer:"No response was received from the model.",
+codeCopy:"Copy",
+codeCopied:"Copied",
+fileReadError:"Failed to read the file",
+imageReadError:"Failed to read the image",
+imageCreating:"Creating image...",
+imageCreated:"Image created",
+imageError:"Image generation failed. Please try again.",
+download:"Save Image",
+openImage:"Open Image",
+imagePrompt:"Generate Image"
+}
+
+};
+
+function t(key){
+
+return translations[settings.language][key]||
+translations.fa[key]||
+key;
+
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+function loadSettings(){
+
+try{
+
+const data=localStorage.getItem(SETTINGS_KEY);
+
+if(!data)return{};
+
+const parsed=JSON.parse(data);
+
+return parsed&&typeof parsed==="object"
+?parsed
+:{};
+
+}catch(error){
+
+return{};
+
+}
+
+}
+
+function saveSettings(){
+
+try{
+
+localStorage.setItem(
+SETTINGS_KEY,
+JSON.stringify(settings)
+);
+
+}catch(error){}
+
+}
+
+function applyTheme(){
+
+if(settings.theme==="light"){
+document.body.classList.add("light");
+}else{
+document.body.classList.remove("light");
+}
+
+darkThemeBtn.classList.toggle(
+"active",
+settings.theme==="dark"
+);
+
+lightThemeBtn.classList.toggle(
+"active",
+settings.theme==="light"
+);
+
+darkCheck.textContent=
+settings.theme==="dark"?"✓":"";
+
+lightCheck.textContent=
+settings.theme==="light"?"✓":"";
+
+document.querySelector('meta[name="theme-color"]')
+.setAttribute(
+"content",
+settings.theme==="light"?"#f4f4f4":"#070707"
+);
+
+}
+
+function applyLanguage(){
+
+const lang=translations[settings.language];
+
+document.documentElement.lang=settings.language;
+document.documentElement.dir=lang.dir;
+
+document.getElementById("drawerTitle").textContent=lang.drawerTitle;
+document.getElementById("drawerNewChat").textContent=lang.newChat;
+document.getElementById("historyTitle").textContent=lang.historyTitle;
+document.getElementById("supportText").textContent=lang.support;
+document.getElementById("settingsText").textContent=lang.settings;
+document.getElementById("clearHistory").textContent=lang.clearHistory;
+document.getElementById("welcomeTitle").innerHTML=lang.welcomeTitle;
+document.getElementById("welcomeText").innerHTML=lang.welcomeText;
+input.placeholder=lang.placeholder;
+
+document.getElementById("supportTitle").textContent=lang.supportTitle;
+document.getElementById("supportDescription").textContent=lang.supportDescription;
+document.getElementById("rubikaText").textContent=lang.rubika;
+document.getElementById("instagramText").textContent=lang.instagram;
+document.getElementById("supportCloseText").textContent=lang.close;
+
+document.getElementById("settingsTitle").textContent=lang.settingsTitle;
+document.getElementById("settingsDescription").textContent=lang.settingsDescription;
+document.getElementById("themeLabel").textContent=lang.theme;
+document.getElementById("darkThemeText").textContent=lang.darkTheme;
+document.getElementById("lightThemeText").textContent=lang.lightTheme;
+document.getElementById("languageLabel").textContent=lang.language;
+document.getElementById("settingsCloseText").textContent=lang.close;
+
+persianBtn.classList.toggle("active",settings.language==="fa");
+englishBtn.classList.toggle("active",settings.language==="en");
+
+persianCheck.textContent=settings.language==="fa"?"✓":"";
+englishCheck.textContent=settings.language==="en"?"✓":"";
+
+renderHistory();
+renderMessages();
+
+}
+
+function setLanguage(language){
+
+settings.language=language;
+saveSettings();
+applyLanguage();
+
+showToast(
+language==="en"
+?"Language changed to English"
+:"زبان به فارسی تغییر کرد"
+);
+
+}
+
+function setTheme(theme){
+
+settings.theme=theme;
+saveSettings();
+applyTheme();
+
+showToast(
+theme==="light"
+?(settings.language==="en"?"Light theme enabled":"تم روشن فعال شد")
+:(settings.language==="en"?"Dark theme enabled":"تم تاریک فعال شد")
+);
+
+}
+
+/* =========================
+   START
+========================= */
+
+applyTheme();
+applyLanguage();
 
 setTimeout(function(){
 splash.classList.add("hide");
 },1600);
 
-renderHistory();
-renderMessages();
+/* =========================
+   SETTINGS EVENTS
+========================= */
 
-/* SUPPORT */
+settingsBtn.addEventListener("click",function(){
+settingsModal.classList.add("open");
+});
+
+settingsClose.addEventListener("click",function(){
+settingsModal.classList.remove("open");
+});
+
+settingsModal.addEventListener("click",function(event){
+if(event.target===settingsModal){
+settingsModal.classList.remove("open");
+}
+});
+
+darkThemeBtn.addEventListener("click",function(){
+setTheme("dark");
+});
+
+lightThemeBtn.addEventListener("click",function(){
+setTheme("light");
+});
+
+persianBtn.addEventListener("click",function(){
+setLanguage("fa");
+});
+
+englishBtn.addEventListener("click",function(){
+setLanguage("en");
+});
+
+/* =========================
+   SUPPORT
+========================= */
 
 supportBtn.addEventListener("click",function(){
 supportModal.classList.add("open");
@@ -1211,21 +1857,23 @@ supportModal.classList.remove("open");
 }
 });
 
-/* RUBIKA */
-
 rubikaBtn.addEventListener("click",function(){
+
 window.location.href=
 "https://rubika.ir/joinc/FGDHBIBD0IEERYNDETREVTMGYKRCNYXZ";
-});
 
-/* INSTAGRAM */
+});
 
 instagramBtn.addEventListener("click",function(){
+
 window.location.href=
 "https://www.instagram.com/fox__aiad?stkn=MXN1a3h2OWswbDlzbg==";
+
 });
 
-/* LOCAL STORAGE */
+/* =========================
+   HISTORY
+========================= */
 
 function loadHistory(){
 
@@ -1233,7 +1881,7 @@ try{
 
 const data=localStorage.getItem(STORAGE_KEY);
 
-if(!data)return [];
+if(!data)return[];
 
 const parsed=JSON.parse(data);
 
@@ -1241,7 +1889,7 @@ return Array.isArray(parsed)?parsed:[];
 
 }catch(error){
 
-return [];
+return[];
 
 }
 
@@ -1256,20 +1904,13 @@ STORAGE_KEY,
 JSON.stringify(conversations)
 );
 
-}catch(error){
-
-console.error(error);
+}catch(error){}
 
 }
-
-}
-
-/* DRAWER */
 
 menuBtn.addEventListener("click",function(){
 
 renderHistory();
-
 drawer.classList.add("open");
 overlay.classList.add("open");
 
@@ -1285,8 +1926,6 @@ overlay.classList.remove("open");
 closeMenu.addEventListener("click",closeDrawer);
 overlay.addEventListener("click",closeDrawer);
 
-/* HISTORY */
-
 function renderHistory(){
 
 historyList.innerHTML="";
@@ -1300,7 +1939,7 @@ color:#666;
 padding:30px 10px;
 font-size:12px;
 ">
-هنوز گفتگویی ذخیره نشده است
+${escapeHTML(t("emptyHistory"))}
 </div>
 `;
 
@@ -1321,7 +1960,10 @@ const title=document.createElement("span");
 title.className="history-text";
 
 title.textContent=
-item.title||"گفتگوی بدون عنوان";
+item.title||
+(settings.language==="en"
+?"Untitled conversation"
+:"گفتگوی بدون عنوان");
 
 const del=document.createElement("button");
 
@@ -1332,7 +1974,6 @@ del.textContent="×";
 del.addEventListener("click",function(event){
 
 event.stopPropagation();
-
 deleteConversation(item.id);
 
 });
@@ -1341,9 +1982,7 @@ row.appendChild(title);
 row.appendChild(del);
 
 row.addEventListener("click",function(){
-
 loadConversation(item.id);
-
 });
 
 historyList.appendChild(row);
@@ -1361,19 +2000,13 @@ JSON.stringify(currentChat)
 );
 
 const index=conversations.findIndex(function(item){
-
 return item.id===currentChat.id;
-
 });
 
 if(index>=0){
-
 conversations[index]=copy;
-
 }else{
-
 conversations.push(copy);
-
 }
 
 saveHistory();
@@ -1384,9 +2017,7 @@ renderHistory();
 function loadConversation(id){
 
 const found=conversations.find(function(item){
-
 return item.id===id;
-
 });
 
 if(!found)return;
@@ -1401,37 +2032,33 @@ renderSelectedFiles();
 renderMessages();
 closeDrawer();
 
-showToast("گفتگو باز شد");
+showToast(t("opened"));
 
 }
 
 function deleteConversation(id){
 
 conversations=conversations.filter(function(item){
-
 return item.id!==id;
-
 });
 
 saveHistory();
 
 if(currentChat.id===id){
-
 createNewChat();
-
 }
 
 renderHistory();
 
 }
 
-/* NEW CHAT */
-
 function createNewChat(){
 
 currentChat={
 id:String(Date.now()),
-title:"چت جدید",
+title:settings.language==="en"
+?"New Chat"
+:"چت جدید",
 messages:[]
 };
 
@@ -1444,7 +2071,6 @@ input.value="";
 autoResize();
 
 closeDrawer();
-
 renderHistory();
 
 input.focus();
@@ -1454,29 +2080,29 @@ input.focus();
 newChatBtn.addEventListener("click",createNewChat);
 drawerNewChat.addEventListener("click",createNewChat);
 
-/* CLEAR HISTORY */
-
 clearHistory.addEventListener("click",function(){
 
 if(conversations.length===0){
 
-showToast("تاریخچه خالی است");
+showToast(t("emptyHistoryToast"));
 return;
 
 }
 
-if(!confirm("همه تاریخچه چت پاک شود؟"))return;
+if(!confirm(t("confirmClear")))return;
 
 conversations=[];
 saveHistory();
 
 createNewChat();
 
-showToast("تاریخچه پاک شد");
+showToast(t("historyDeleted"));
 
 });
 
-/* FILE SELECT */
+/* =========================
+   FILES
+========================= */
 
 attachBtn.addEventListener("click",function(){
 
@@ -1494,14 +2120,14 @@ files.forEach(function(file){
 
 if(!isAllowedFile(file)){
 
-showToast("نوع فایل پشتیبانی نمی‌شود");
+showToast(t("unsupported"));
 return;
 
 }
 
 if(file.size>20*1024*1024){
 
-showToast(file.name+" بیشتر از 20MB است");
+showToast(file.name+" "+t("tooLarge"));
 return;
 
 }
@@ -1511,7 +2137,6 @@ pendingFiles.push(file);
 });
 
 renderSelectedFiles();
-
 fileInput.value="";
 
 });
@@ -1531,14 +2156,10 @@ const extensions=[
 ];
 
 return extensions.some(function(ext){
-
 return name.endsWith(ext);
-
 });
 
 }
-
-/* FILE PREVIEW */
 
 function renderSelectedFiles(){
 
@@ -1556,7 +2177,6 @@ selectedFiles.classList.add("show");
 pendingFiles.forEach(function(file,index){
 
 const box=document.createElement("div");
-
 box.className="selected-file";
 
 const remove=document.createElement("button");
@@ -1589,12 +2209,8 @@ const doc=document.createElement("div");
 doc.className="selected-file-doc";
 
 doc.innerHTML=`
-<strong>
-${escapeHTML(getExtension(file.name))}
-</strong>
-<span>
-${escapeHTML(shortName(file.name))}
-</span>
+<strong>${escapeHTML(getExtension(file.name))}</strong>
+<span>${escapeHTML(shortName(file.name))}</span>
 `;
 
 box.appendChild(doc);
@@ -1606,8 +2222,6 @@ selectedFiles.appendChild(box);
 });
 
 }
-
-/* FILE HELPERS */
 
 function getExtension(name){
 
@@ -1627,8 +2241,6 @@ return name.substring(0,11)+"...";
 
 }
 
-/* READ TEXT */
-
 function readTextFile(file){
 
 return new Promise(function(resolve,reject){
@@ -1636,17 +2248,11 @@ return new Promise(function(resolve,reject){
 const reader=new FileReader();
 
 reader.onload=function(){
-
 resolve(reader.result||"");
-
 };
 
 reader.onerror=function(){
-
-reject(
-new Error("خواندن فایل ناموفق بود")
-);
-
+reject(new Error(t("fileReadError")));
 };
 
 reader.readAsText(file,"UTF-8");
@@ -1655,7 +2261,29 @@ reader.readAsText(file,"UTF-8");
 
 }
 
-/* PDF */
+function fileToDataURL(file){
+
+return new Promise(function(resolve,reject){
+
+const reader=new FileReader();
+
+reader.onload=function(){
+resolve(reader.result);
+};
+
+reader.onerror=function(){
+reject(new Error(t("imageReadError")));
+};
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+/* =========================
+   PDF
+========================= */
 
 let pdfReady=null;
 
@@ -1684,15 +2312,9 @@ script.onload=function(){
 setTimeout(function(){
 
 if(window.pdfjsLib){
-
 resolve(window.pdfjsLib);
-
 }else{
-
-reject(
-new Error("PDF.js در مرورگر آماده نشد")
-);
-
+reject(new Error("PDF.js unavailable"));
 }
 
 },500);
@@ -1700,11 +2322,7 @@ new Error("PDF.js در مرورگر آماده نشد")
 };
 
 script.onerror=function(){
-
-reject(
-new Error("PDF.js بارگذاری نشد")
-);
-
+reject(new Error("PDF.js failed"));
 };
 
 document.head.appendChild(script);
@@ -1722,9 +2340,7 @@ try{
 const pdfjs=await loadPDFJS();
 
 if(!pdfjs||!pdfjs.getDocument){
-
 throw new Error("PDF engine unavailable");
-
 }
 
 const buffer=await file.arrayBuffer();
@@ -1742,13 +2358,12 @@ const pdfPage=await pdf.getPage(page);
 const content=await pdfPage.getTextContent();
 
 const text=content.items.map(function(item){
-
 return item.str;
-
 }).join(" ");
 
 result+=
-"\n\n--- صفحه "+
+"\n\n--- "+
+(settings.language==="en"?"Page ":"صفحه ")+
 page+
 " ---\n"+
 text;
@@ -1762,42 +2377,18 @@ return result;
 console.error("PDF error:",error);
 
 return(
-"این فایل PDF انتخاب شده است، اما متن آن از داخل مرورگر قابل استخراج نبود."
+settings.language==="en"
+?"The PDF was selected, but its text could not be extracted in the browser."
+:"این فایل PDF انتخاب شده است، اما متن آن از داخل مرورگر قابل استخراج نبود."
 );
 
 }
 
 }
 
-/* DATA URL */
-
-function fileToDataURL(file){
-
-return new Promise(function(resolve,reject){
-
-const reader=new FileReader();
-
-reader.onload=function(){
-
-resolve(reader.result);
-
-};
-
-reader.onerror=function(){
-
-reject(
-new Error("تصویر خوانده نشد")
-);
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-/* PROCESS FILES */
+/* =========================
+   PROCESS FILES
+========================= */
 
 async function processFiles(files){
 
@@ -1853,7 +2444,9 @@ return result;
 
 }
 
-/* RENDER */
+/* =========================
+   RENDER MESSAGES
+========================= */
 
 function renderMessages(){
 
@@ -1862,7 +2455,6 @@ chat.innerHTML="";
 if(currentChat.messages.length===0){
 
 chat.appendChild(welcome);
-
 welcome.style.display="flex";
 
 return;
@@ -1877,6 +2469,7 @@ addMessageToUI(
 message.role,
 message.content||"",
 message.attachments||[],
+message.image||null,
 false,
 index
 );
@@ -1887,21 +2480,22 @@ scrollBottom();
 
 }
 
-/* ADD MESSAGE */
+/* =========================
+   ADD MESSAGE
+========================= */
 
 function addMessageToUI(
 role,
 text,
 attachments,
+image,
 scroll,
 messageIndex=-1,
 showActions=true
 ){
 
 if(welcome.parentElement===chat){
-
 welcome.style.display="none";
-
 }
 
 const wrapper=document.createElement("div");
@@ -1913,16 +2507,86 @@ wrapper.className=
 wrapper.dataset.index=messageIndex;
 
 const content=document.createElement("div");
-
 content.className="message-content";
 
 const bubble=document.createElement("div");
-
 bubble.className="bubble";
 
 if(role==="assistant"){
 
-bubble.innerHTML=formatAIText(text);
+if(image){
+
+const imageWrap=document.createElement("div");
+imageWrap.className="generated-image-wrap";
+
+const img=document.createElement("img");
+
+img.className="generated-image";
+img.src=image.url;
+img.alt=image.prompt||"FOX AI";
+
+img.addEventListener("load",function(){
+scrollBottom();
+});
+
+imageWrap.appendChild(img);
+
+const caption=document.createElement("div");
+
+caption.className="image-caption";
+caption.textContent=
+image.prompt||
+(settings.language==="en"
+?"Generated by FOX AI"
+:"تصویر ساخته‌شده توسط FOX AI");
+
+imageWrap.appendChild(caption);
+
+const actions=document.createElement("div");
+actions.className="image-actions";
+
+const download=document.createElement("button");
+
+download.type="button";
+download.className="image-action primary";
+download.textContent=t("download");
+
+download.addEventListener("click",function(){
+
+downloadImage(image.url);
+
+});
+
+const open=document.createElement("button");
+
+open.type="button";
+open.className="image-action";
+open.textContent=t("openImage");
+
+open.addEventListener("click",function(){
+
+window.open(image.url,"_blank");
+
+});
+
+actions.appendChild(download);
+actions.appendChild(open);
+
+imageWrap.appendChild(actions);
+
+bubble.appendChild(imageWrap);
+
+}
+
+if(text){
+
+const textBox=document.createElement("div");
+
+textBox.innerHTML=formatAIText(text);
+
+bubble.appendChild(textBox);
+
+}
 
 }else{
 
@@ -1983,7 +2647,9 @@ bubble.appendChild(textNode);
 
 content.appendChild(bubble);
 
-if(showActions && text){
+/* ACTIONS */
+
+if(showActions&&text){
 
 const actions=document.createElement("div");
 
@@ -1992,13 +2658,11 @@ actions.className="message-actions";
 const copyBtn=document.createElement("button");
 
 copyBtn.type="button";
-copyBtn.className="message-action copy-action";
-copyBtn.textContent="کپی";
+copyBtn.className="message-action";
+copyBtn.textContent=t("copy");
 
 copyBtn.addEventListener("click",function(){
-
 copyMessage(text,copyBtn);
-
 });
 
 actions.appendChild(copyBtn);
@@ -2008,13 +2672,11 @@ if(role==="user"){
 const editBtn=document.createElement("button");
 
 editBtn.type="button";
-editBtn.className="message-action edit-action";
-editBtn.textContent="ویرایش";
+editBtn.className="message-action";
+editBtn.textContent=t("edit");
 
 editBtn.addEventListener("click",function(){
-
 editMessage(messageIndex);
-
 });
 
 actions.appendChild(editBtn);
@@ -2024,13 +2686,11 @@ actions.appendChild(editBtn);
 const shareBtn=document.createElement("button");
 
 shareBtn.type="button";
-shareBtn.className="message-action share-action";
-shareBtn.textContent="اشتراک‌گذاری";
+shareBtn.className="message-action";
+shareBtn.textContent=t("share");
 
 shareBtn.addEventListener("click",function(){
-
 shareMessage(text);
-
 });
 
 actions.appendChild(shareBtn);
@@ -2040,7 +2700,6 @@ content.appendChild(actions);
 }
 
 wrapper.appendChild(content);
-
 chat.appendChild(wrapper);
 
 if(scroll)scrollBottom();
@@ -2049,7 +2708,9 @@ return bubble;
 
 }
 
-/* COPY MESSAGE */
+/* =========================
+   COPY / SHARE
+========================= */
 
 async function copyMessage(text,button){
 
@@ -2064,36 +2725,28 @@ await navigator.clipboard.writeText(text);
 const area=document.createElement("textarea");
 
 area.value=text;
-
 document.body.appendChild(area);
-
 area.select();
-
 document.execCommand("copy");
-
 area.remove();
 
 }
 
 const old=button.textContent;
 
-button.textContent="کپی شد";
+button.textContent=t("copied");
 
 setTimeout(function(){
-
 button.textContent=old;
-
 },1400);
 
 }catch(error){
 
-showToast("کپی انجام نشد");
+showToast(t("copyError"));
 
 }
 
 }
-
-/* SHARE MESSAGE */
 
 async function shareMessage(text){
 
@@ -2102,17 +2755,15 @@ try{
 if(navigator.share){
 
 await navigator.share({
-
 title:"FOX AI",
 text:text
-
 });
 
 }else{
 
 await navigator.clipboard.writeText(text);
 
-showToast("متن برای اشتراک‌گذاری کپی شد");
+showToast(t("shareCopied"));
 
 }
 
@@ -2123,20 +2774,17 @@ if(error&&error.name==="AbortError")return;
 try{
 
 await navigator.clipboard.writeText(text);
-
-showToast("متن کپی شد");
+showToast(t("sharedTextCopied"));
 
 }catch(e){
 
-showToast("اشتراک‌گذاری انجام نشد");
+showToast(t("shareError"));
 
 }
 
 }
 
 }
-
-/* EDIT USER MESSAGE */
 
 function editMessage(index){
 
@@ -2154,18 +2802,20 @@ currentChat.messages.slice(0,index);
 pendingFiles=[];
 
 renderSelectedFiles();
+renderMessages();
 
 saveCurrentConversation();
-renderMessages();
 
 autoResize();
 input.focus();
 
-showToast("پیام را ویرایش کن و دوباره ارسال کن");
+showToast(t("editMessage"));
 
 }
 
-/* SEND */
+/* =========================
+   SEND
+========================= */
 
 sendBtn.addEventListener("click",function(event){
 
@@ -2185,7 +2835,7 @@ const text=input.value.trim();
 
 if(!text&&pendingFiles.length===0){
 
-showToast("پیام یا فایل را وارد کن");
+showToast(t("messageOrFile"));
 return;
 
 }
@@ -2195,7 +2845,7 @@ if(
 GROQ_API_KEY==="کلید_GROQ_خودت_اینجا"
 ){
 
-showToast("کلید Groq را داخل کد قرار بده");
+showToast(t("keyError"));
 return;
 
 }
@@ -2218,7 +2868,7 @@ try{
 
 if(files.length){
 
-showToast("در حال آماده‌سازی فایل...");
+showToast(t("filePreparing"));
 
 processed=await processFiles(files);
 
@@ -2227,21 +2877,58 @@ processed=await processFiles(files);
 }catch(error){
 
 console.error(error);
-
-showToast("خطا در آماده‌سازی فایل");
+showToast(t("fileError"));
 
 }
+
+/* اول بررسی می‌کنیم آیا کاربر درخواست ساخت تصویر داده */
+
+if(shouldGenerateImage(text)){
+
+currentChat.messages.push({
+role:"user",
+content:text,
+attachments:[]
+});
+
+if(
+currentChat.title==="چت جدید"||
+currentChat.title==="New Chat"
+){
+
+currentChat.title=
+text.substring(0,45);
+
+}
+
+addMessageToUI(
+"user",
+text,
+[],
+null,
+true,
+currentChat.messages.length-1,
+true
+);
+
+saveCurrentConversation();
+
+await generateImage(text);
+
+return;
+
+}
+
+/* پیام معمولی */
 
 const historyAttachments=processed.map(function(file){
 
 return{
-
 type:file.type,
 name:file.name,
 mime:file.mime,
 dataURL:file.type==="image"?file.dataURL:undefined,
 text:file.type==="text"?file.text:undefined
-
 };
 
 });
@@ -2254,11 +2941,18 @@ attachments:historyAttachments
 
 });
 
-if(currentChat.title==="چت جدید"){
+if(
+currentChat.title==="چت جدید"||
+currentChat.title==="New Chat"
+){
 
 currentChat.title=text
 ?text.substring(0,45)
-:(files[0]?files[0].name:"چت جدید");
+:(files[0]
+?files[0].name
+:(settings.language==="en"
+?"New Chat"
+:"چت جدید"));
 
 }
 
@@ -2266,6 +2960,7 @@ addMessageToUI(
 "user",
 text,
 processed,
+null,
 true,
 currentChat.messages.length-1,
 true
@@ -2277,7 +2972,269 @@ await askGroq(text,processed);
 
 }
 
-/* ENTER */
+/* =========================
+   IMAGE DETECTION
+========================= */
+
+function shouldGenerateImage(text){
+
+if(!text)return false;
+
+const s=text
+.toLowerCase()
+.trim();
+
+/*
+  عبارت‌های واضح ساخت تصویر
+*/
+
+const faWords=[
+"بساز",
+"ساخت تصویر",
+"تصویر بساز",
+"عکس بساز",
+"عکس ایجاد کن",
+"تصویر ایجاد کن",
+"تصویر تولید کن",
+"تصویر درست کن",
+"عکس درست کن",
+"نقاشی بساز",
+"پوستر بساز",
+"لوگو بساز",
+"تصویر میخوام",
+"تصویر می‌خوام",
+"عکس میخوام",
+"عکس می‌خوام",
+"تصویر برایم بساز",
+"عکس برایم بساز"
+];
+
+const enWords=[
+"generate image",
+"create image",
+"make image",
+"generate a picture",
+"create a picture",
+"make a picture",
+"draw",
+"generate photo",
+"create photo",
+"make a photo"
+];
+
+if(faWords.some(function(word){
+return s.includes(word);
+}))return true;
+
+if(enWords.some(function(word){
+return s.includes(word);
+}))return true;
+
+return false;
+
+}
+
+/* =========================
+   IMAGE GENERATION
+========================= */
+
+async function generateImage(prompt){
+
+const bubble=addMessageToUI(
+"assistant",
+"",
+[],
+null,
+true,
+-1,
+false
+);
+
+bubble.innerHTML=`
+<div class="image-loading">
+<div class="image-loader"></div>
+<div class="image-loading-text">
+${escapeHTML(t("imageCreating"))}
+</div>
+</div>
+`;
+
+try{
+
+/*
+  حذف عبارت‌های دستوری تا پرامپت طبیعی‌تر شود
+*/
+
+let cleanPrompt=prompt
+.replace(
+/^(تصویر|عکس|نقاشی|پوستر|لوگو)\s*/i,
+""
+);
+
+if(!cleanPrompt.trim()){
+cleanPrompt=prompt;
+}
+
+const encodedPrompt=encodeURIComponent(
+cleanPrompt+
+", high quality, detailed, cinematic, professional, sharp"
+);
+
+const imageURL=
+IMAGE_GENERATION_URL+
+encodedPrompt+
+"?width=1024&height=1024&nologo=true&enhance=true";
+
+await waitForImage(imageURL);
+
+const parent=bubble.closest(".message");
+
+if(parent){
+parent.remove();
+}
+
+currentChat.messages.push({
+
+role:"assistant",
+content:"",
+attachments:[],
+image:{
+url:imageURL,
+prompt:cleanPrompt
+}
+
+});
+
+addMessageToUI(
+"assistant",
+"",
+[],
+{
+url:imageURL,
+prompt:cleanPrompt
+},
+true,
+currentChat.messages.length-1,
+false
+);
+
+saveCurrentConversation();
+renderHistory();
+
+showToast(t("imageCreated"));
+
+}catch(error){
+
+console.error(
+"IMAGE GENERATION ERROR:",
+error
+);
+
+const parent=bubble.closest(".message");
+
+if(parent){
+parent.remove();
+}
+
+addMessageToUI(
+"assistant",
+t("imageError"),
+[],
+null,
+true,
+-1,
+true
+);
+
+}
+
+isGenerating=false;
+sendBtn.disabled=false;
+input.focus();
+
+}
+
+/* =========================
+   WAIT FOR IMAGE
+========================= */
+
+function waitForImage(url){
+
+return new Promise(function(resolve,reject){
+
+const img=new Image();
+
+let finished=false;
+
+const timer=setTimeout(function(){
+
+if(finished)return;
+
+finished=true;
+reject(new Error("IMAGE_TIMEOUT"));
+
+},90000);
+
+img.onload=function(){
+
+if(finished)return;
+
+finished=true;
+clearTimeout(timer);
+resolve();
+
+};
+
+img.onerror=function(){
+
+if(finished)return;
+
+finished=true;
+clearTimeout(timer);
+reject(new Error("IMAGE_LOAD_ERROR"));
+
+};
+
+img.src=url;
+
+});
+
+}
+
+/* =========================
+   DOWNLOAD IMAGE
+========================= */
+
+function downloadImage(url){
+
+try{
+
+const a=document.createElement("a");
+
+a.href=url;
+a.target="_blank";
+a.rel="noopener";
+
+a.download=
+"FOX-AI-"+Date.now()+".jpg";
+
+document.body.appendChild(a);
+a.click();
+a.remove();
+
+showToast(t("download"));
+
+}catch(error){
+
+window.open(url,"_blank");
+
+}
+
+}
+
+/* =========================
+   ENTER
+========================= */
 
 input.addEventListener("keydown",function(event){
 
@@ -2289,16 +3246,16 @@ event.key==="Enter"&&
 event.preventDefault();
 
 if(!isGenerating){
-
 sendMessage();
-
 }
 
 }
 
 });
 
-/* RESIZE */
+/* =========================
+   RESIZE
+========================= */
 
 input.addEventListener("input",autoResize);
 
@@ -2311,7 +3268,9 @@ Math.min(input.scrollHeight,130)+"px";
 
 }
 
-/* GROQ */
+/* =========================
+   GROQ CHAT
+========================= */
 
 async function askGroq(userText,files){
 
@@ -2319,6 +3278,7 @@ const typing=addMessageToUI(
 "assistant",
 "",
 [],
+null,
 true,
 -1,
 false
@@ -2335,15 +3295,11 @@ typing.innerHTML=`
 try{
 
 const images=files.filter(function(file){
-
 return file.type==="image";
-
 });
 
 const textFiles=files.filter(function(file){
-
 return file.type==="text";
-
 });
 
 let imageText="";
@@ -2361,7 +3317,8 @@ let fileText="";
 
 textFiles.forEach(function(file){
 
-const content=String(file.text||"")
+const content=
+String(file.text||"")
 .substring(0,120000);
 
 fileText+=
@@ -2377,7 +3334,11 @@ let finalText=userText||"";
 if(imageText){
 
 finalText+=
-"\n\nنتیجه بررسی تصویر:\n"+
+"\n\n"+
+(settings.language==="en"
+?"Image analysis:"
+:"نتیجه بررسی تصویر:")+
+"\n"+
 imageText;
 
 }
@@ -2385,7 +3346,10 @@ imageText;
 if(fileText){
 
 finalText+=
-"\n\nمحتوای فایل:\n"+
+"\n\n"+
+(settings.language==="en"
+?"File content:"
+:"محتوای فایل:")+
 fileText;
 
 }
@@ -2393,7 +3357,9 @@ fileText;
 if(!finalText.trim()){
 
 finalText=
-"فایل پیوست‌شده را بررسی کن و نتیجه را توضیح بده.";
+settings.language==="en"
+?"Analyze the attached file and explain the result."
+:"فایل پیوست‌شده را بررسی کن و نتیجه را توضیح بده.";
 
 }
 
@@ -2403,7 +3369,9 @@ const messages=[
 role:"system",
 content:
 "You are FOX AI, a helpful, fast and accurate AI assistant. "+
-"If the user writes Persian, answer in Persian. "+
+(settings.language==="en"
+?"Answer in English unless the user asks for another language. "
+:"اگر کاربر فارسی می‌نویسد، به فارسی پاسخ بده. ")+
 "Analyze attached file contents carefully. "+
 "Do not use emojis unless specifically requested."
 }
@@ -2411,6 +3379,8 @@ content:
 ];
 
 currentChat.messages.slice(0,-1).forEach(function(message){
+
+if(message.image)return;
 
 messages.push({
 
@@ -2458,31 +3428,13 @@ stream:true
 
 if(!response.ok){
 
-let errorMessage="اتصال به سرویس هوش مصنوعی برقرار نشد";
-
-try{
-
-const data=await response.json();
-
-if(data?.error?.message){
-
-errorMessage=data.error.message;
-
-}
-
-}catch(error){}
-
-throw new Error(
-"SERVER_ERROR:"+errorMessage
-);
+throw new Error("SERVER_ERROR");
 
 }
 
 if(!response.body){
 
-throw new Error(
-"SERVER_ERROR:اتصال به سرویس هوش مصنوعی برقرار نشد"
-);
+throw new Error("SERVER_ERROR");
 
 }
 
@@ -2518,12 +3470,12 @@ if(
 !trimmed||
 trimmed==="data: [DONE]"
 ){
-
 continue;
-
 }
 
-if(!trimmed.startsWith("data:"))continue;
+if(!trimmed.startsWith("data:")){
+continue;
+}
 
 const jsonText=
 trimmed.substring(5).trim();
@@ -2553,9 +3505,7 @@ scrollBottom();
 }
 
 if(!answer){
-
-answer="پاسخی از مدل دریافت نشد.";
-
+answer=t("noAnswer");
 }
 
 const aiIndex=currentChat.messages.length;
@@ -2571,15 +3521,14 @@ attachments:[]
 const parent=typing.closest(".message");
 
 if(parent){
-
 parent.remove();
-
 }
 
 addMessageToUI(
 "assistant",
 answer,
 [],
+null,
 true,
 aiIndex,
 true
@@ -2590,26 +3539,19 @@ renderHistory();
 
 }catch(error){
 
-console.error(
-"FOX AI ERROR:",
-error
-);
+console.error("FOX AI ERROR:",error);
 
 const parent=typing.closest(".message");
 
 if(parent){
-
 parent.remove();
-
 }
-
-const connectionMessage=
-"اینترنت یا VPN شما خاموش است. لطفاً آن را روشن کرده و سپس دوباره تلاش کنید.";
 
 addMessageToUI(
 "assistant",
-connectionMessage,
+t("connection"),
 [],
+null,
 true,
 -1,
 true
@@ -2623,7 +3565,9 @@ input.focus();
 
 }
 
-/* IMAGE */
+/* =========================
+   IMAGE ANALYSIS
+========================= */
 
 async function analyzeImages(images,question){
 
@@ -2635,7 +3579,9 @@ const content=[
 type:"text",
 text:
 question||
-"این تصویر را بررسی کن و محتوای مهم آن را توضیح بده."
+(settings.language==="en"
+?"Analyze this image and explain its important content."
+:"این تصویر را بررسی کن و محتوای مهم آن را توضیح بده.")
 }
 
 ];
@@ -2700,7 +3646,9 @@ data?.choices?.[0]?.message?.content||
 
 }
 
-/* FORMAT */
+/* =========================
+   FORMAT AI TEXT
+========================= */
 
 function formatAIText(text){
 
@@ -2742,7 +3690,7 @@ type="button"
 onclick="copyCode(this)"
 data-code="${encodeURIComponent(block.code)}"
 >
-کپی
+${escapeHTML(t("codeCopy"))}
 </button>
 </div>
 <pre class="code-body">${escapeHTML(block.code)}</pre>
@@ -2756,8 +3704,6 @@ return safe;
 
 }
 
-/* COPY CODE */
-
 window.copyCode=async function(button){
 
 try{
@@ -2769,23 +3715,23 @@ button.dataset.code
 
 await navigator.clipboard.writeText(code);
 
-button.textContent="کپی شد";
+button.textContent=t("codeCopied");
 
 setTimeout(function(){
-
-button.textContent="کپی";
-
+button.textContent=t("codeCopy");
 },1500);
 
 }catch(error){
 
-showToast("کپی انجام نشد");
+showToast(t("copyError"));
 
 }
 
 };
 
-/* ESCAPE */
+/* =========================
+   ESCAPE
+========================= */
 
 function escapeHTML(text){
 
@@ -2798,19 +3744,21 @@ return String(text)
 
 }
 
-/* SCROLL */
+/* =========================
+   SCROLL
+========================= */
 
 function scrollBottom(){
 
 requestAnimationFrame(function(){
-
 chat.scrollTop=chat.scrollHeight;
-
 });
 
 }
 
-/* TOAST */
+/* =========================
+   TOAST
+========================= */
 
 function showToast(message){
 
@@ -2821,9 +3769,7 @@ toast.classList.add("show");
 clearTimeout(toastTimer);
 
 toastTimer=setTimeout(function(){
-
 toast.classList.remove("show");
-
 },2200);
 
 }
